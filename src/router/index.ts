@@ -24,8 +24,8 @@ const routes: Array<RouteRecordRaw> = [
         component: () => import('@/views/dashboard.vue')
       },
       {
-        path: 'tab3',
-        component: () => import('@/views/Tab3Page.vue')
+        path: 'lapor_sumber_air',
+        component: () => import('@/views/lapor_sumber_air.vue')
       }
     ]
   }

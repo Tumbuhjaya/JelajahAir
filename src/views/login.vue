@@ -120,4 +120,29 @@ export default defineComponent({
 ion-content{
   --background: #269BDF
 }
+
+ion-input.custom {
+  --background: #ECECEC;
+  --color: #000;
+  --placeholder-color: #858585;
+  --placeholder-opacity: 0.8;
+
+  --padding-bottom: 10px;
+  --padding-end: 10px;
+  --padding-start: 10px;
+  --padding-top: 10px;
+  --border-radius:15px;
+}
+
+ion-input{
+  border-bottom: 1px solid transparent;
+  --highlight-color-focused: none;
+}
+
+ion-select{
+  border-bottom: 1px solid transparent; 
+  font-family: 'Poppins', sans-serif;
+  font-weight: 500;
+  --highlight-color-focused: none;
+}
 </style>

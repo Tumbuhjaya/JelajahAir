@@ -95,7 +95,7 @@
         </ion-row>
       </ion-grid>
       <ion-fab slot="fixed" vertical="bottom" horizontal="end">
-          <ion-fab-button @click="$router.push('/login')">
+          <ion-fab-button @click="$router.push('/tabs/lapor_sumber_air')">
             <ion-icon :icon="addCircleOutline" size="large"></ion-icon>
           </ion-fab-button>
       </ion-fab>
@@ -135,8 +135,17 @@ export default defineComponent({
 });
 </script>
 <style scoped>
+ion-header{
+  box-shadow: none !important;
+  background-color: #fff;
+}
+
 ion-content{
     /* --background:purple; */
+}
+
+ion-input{
+  border-bottom: 1px solid transparent;
 }
 ion-input.custom {
   --background: #ECECEC;
@@ -153,5 +162,10 @@ ion-input.custom {
 
 .fab-vertical-bottom{
     right: 20px;
+}
+
+ion-input{
+  border-bottom: 1px solid transparent;
+  --highlight-color-focused: none;
 }
 </style>

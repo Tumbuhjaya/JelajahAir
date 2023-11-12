@@ -261,4 +261,15 @@ h1,h2,h3,h4,h5,h6{
 
 ion-header{
   box-shadow: none !important;
+  background-color: #269BDF;
+}
+
+ion-input{
+  border-bottom: 1px solid black;
+}
+
+ion-select{
+  border-bottom: 1px solid black; 
+  font-family: 'Poppins', sans-serif;
+  font-weight: 500;
 }
