@@ -1,6 +1,6 @@
 <template>
   <ion-page>
-    <ion-content >
+    <ion-content :fullscreen="true">
       <ion-grid style="width: 100%;height: 100vh;background-image: url('/assets/bg_ilustrasi.png');background-repeat: no-repeat;background-color: ;background-size: 100%;background-position: center;">
         <ion-row>
           <ion-col size="12">
