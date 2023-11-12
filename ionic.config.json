@@ -1,0 +1,7 @@
+{
+  "name": "jelajahAir",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "vue-vite"
+}
