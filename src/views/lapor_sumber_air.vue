@@ -84,9 +84,9 @@
 </template>
 
 <script>
-import { IonPage, IonHeader, IonContent, IonGrid, IonRow, IonCol, IonIcon, IonFab, IonFabButton, IonImg, IonInput  } from '@ionic/vue';
+import { IonPage, IonHeader, IonContent, IonGrid, IonRow, IonCol, IonIcon, IonButton, IonImg, IonInput  } from '@ionic/vue';
 import { defineComponent } from 'vue';
-import { addCircleOutline, arrowBackCircleOutline  } from 'ionicons/icons';
+import { arrowBackCircleOutline  } from 'ionicons/icons';
 export default defineComponent({
     components: {
         IonPage,
@@ -96,13 +96,12 @@ export default defineComponent({
         IonRow,
         IonCol,
         IonIcon,
-        IonFab,
-        IonFabButton,
+        IonButton,
         IonImg,
         IonInput
     },
     setup() {
-        return { addCircleOutline, arrowBackCircleOutline };
+        return { arrowBackCircleOutline };
     },
     data() {
         return {
@@ -115,9 +114,6 @@ export default defineComponent({
 });
 </script>
 <style scoped>
-ion-content{
-    /* --background:purple; */
-}
 ion-input.custom {
   --background: #ECECEC;
   --color: #000;
@@ -129,10 +125,6 @@ ion-input.custom {
   --padding-start: 10px;
   --padding-top: 10px;
   --border-radius:15px;
-}
-
-.fab-vertical-bottom{
-    right: 20px;
 }
 
 </style>

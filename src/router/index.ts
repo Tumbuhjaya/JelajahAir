@@ -26,6 +26,32 @@ const routes: Array<RouteRecordRaw> = [
       {
         path: 'lapor_sumber_air',
         component: () => import('@/views/lapor_sumber_air.vue')
+      },
+      {
+        path: 'data_lapor_sumber_air',
+        component: () => import('@/views/data_lapor_sumber_air.vue')
+      },
+
+      {
+        path: 'statistik',
+        component: () => import('@/views/statistik.vue')
+      },
+
+      {
+        path: 'penanganan_air_bersih',
+        component: () => import('@/views/penanganan_air_bersih.vue')
+      },
+      {
+        path: 'jejaring_air_bersih',
+        component: () => import('@/views/jejaring_air_bersih.vue')
+      },
+      {
+        path: 'sumber_air_sekitar',
+        component: () => import('@/views/sumber_air_sekitar.vue')
+      },
+      {
+        path: 'sumber_air_sekitar/detail',
+        component: () => import('@/views/detail_sumber_air.vue')
       }
     ]
   }
