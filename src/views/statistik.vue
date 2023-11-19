@@ -53,6 +53,10 @@
 import { IonPage, IonHeader, IonContent, IonGrid, IonRow, IonCol } from '@ionic/vue';
 import { defineComponent } from 'vue';
 import { arrowBackCircleOutline  } from 'ionicons/icons';
+import axios from "axios";
+import { ip_server } from "@/ip-config.js";
+import moment from "moment";
+moment.locale("id");
 import VueApexCharts from "vue3-apexcharts";
 export default defineComponent({
     components: {
@@ -69,6 +73,7 @@ export default defineComponent({
     },
     data() {
         return {
+            jumlah_terlayani:0,
             series: [{
                 data: [{
                 x: 'category A',
@@ -203,8 +208,25 @@ export default defineComponent({
         };
     },
     methods: {
-        
+        async  get_terlayani(){
+        let vm = this
+        let api = await axios({
+        method: "post",
+            url: ip_server + `api/data_jelajah_air/list`,
+            data:{trlyni_50:1 , group:'kabupaten'}
+        })
+        for (let i = 0; i < api.data.data.length; i++) {
+            api.data.data[i].y= Number(api.data.data[i].y)
+            api.data.data[i].x=api.data.data[i].label
+            this.jumlah_terlayani+=Number(api.data.data[i].y)
+        }
+
+            vm.series[0].data = api.data.data
+        },
     },
+    async ionViewDidEnter() {
+       await this.get_terlayani()
+    }
 });
 </script>
 <style scoped>
