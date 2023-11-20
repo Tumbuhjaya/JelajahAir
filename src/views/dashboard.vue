@@ -8,7 +8,8 @@
             </div>
             <div style="width: 25%;height: 60px;background-color: ;display: flex;justify-content: center;align-items: center;">
                 <div style="width:50px;height: 50px;background-color: #0086CF;border-radius: 100%;overflow: hidden;">
-                    <ion-icon :icon="peopleCircleOutline" color="light" style="font-size: 50px;" @click="$router.push('/login')"></ion-icon>
+                    <ion-icon v-if="login" :icon="peopleCircleOutline" color="light" style="font-size: 50px;" @click="logoff"></ion-icon>
+                    <ion-icon v-else :icon="peopleCircleOutline" color="light" style="font-size: 50px;" @click="$router.push('/login')"></ion-icon>
                 </div>
             </div>
         </div>
@@ -106,6 +107,11 @@
 <script>
 import { IonPage, IonHeader, IonContent, IonGrid, IonRow, IonCol, IonIcon, IonFab, IonFabButton, IonImg, IonInput  } from '@ionic/vue';
 import { defineComponent } from 'vue';
+import { Preferences } from '@capacitor/preferences';
+// import axios from "axios";
+// import { ip_server } from "@/ip-config.js";
+import moment from "moment";
+moment.locale("id");
 import { addCircleOutline, peopleCircleOutline  } from 'ionicons/icons';
 export default defineComponent({
     components: {
@@ -126,11 +132,22 @@ export default defineComponent({
     },
     data() {
         return {
-        
+            login:0
         };
     },
     methods: {
-        
+        async logoff(){
+            await Preferences.clear()
+            this.login = 0
+        }
+    },
+    async ionViewWillEnter() {
+        const ret = await Preferences.get({ key: 'token' });
+        if (ret) {
+            this.login = 1
+        }else{
+            this.login = 0
+        }
     },
 });
 </script>

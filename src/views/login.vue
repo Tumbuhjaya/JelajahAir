@@ -36,12 +36,12 @@
                         <h6 style="font-size: 24px;font-weight: 700;color: #000">Log In</h6>
                         <h6 style="font-size: 14px;font-weight: 500;color: #000;margin-top: 10px !important;">Akses akun Anda dengan masuk di bawah ini.</h6>
 
-                        <ion-input class="custom" placeholder="Email" style="margin: 30px 0 15px 0;"></ion-input>
+                        <ion-input class="custom" placeholder="Email" v-model="email" style="margin: 30px 0 15px 0;"></ion-input>
 
-                        <ion-input  class="custom" placeholder="Password" type="password" ></ion-input>
+                        <ion-input  class="custom" placeholder="Password" type="password" v-model="pwd" ></ion-input>
 
                         <div style="width: 100%;display: flex;justify-content: center;align-items: center;margin-top: 15px;padding: 0 60px;">
-                            <ion-button style="text-transform: capitalize;border-radius: 20px;width: 100%;" color="primary" size="large"  @click="$router.push('/tabs/dashboard')">Masuk</ion-button>
+                            <ion-button style="text-transform: capitalize;border-radius: 20px;width: 100%;" color="primary" size="large"  @click="submit_login">Masuk</ion-button>
                         </div>
                             
                     </ion-col>
@@ -53,18 +53,18 @@
                             <h6 style="font-size: 24px;font-weight: 700;color: #000">Daftar</h6>
                             <h6 style="font-size: 14px;font-weight: 500;color: #000;margin-top: 10px !important;margin-bottom: 10px !important;">Jika Anda belum memiliki akun, silahkan daftarkan diri anda  di bawah ini.</h6>
 
-                            <ion-input class="custom" placeholder="Nama"  style="margin: 15px 0;"></ion-input>
-                            <ion-input  class="custom" placeholder="Alamat"  style="margin: 15px 0;"></ion-input>
-                            <ion-input  class="custom" placeholder="Desa/Kel."  style="margin: 15px 0;"></ion-input>
-                            <ion-input  class="custom" placeholder="No. KTP"  style="margin: 15px 0;"></ion-input>
-                            <ion-input  class="custom" placeholder="No. HP" style="margin: 15px 0;"></ion-input>
-                            <ion-input  class="custom" placeholder="Ket. Lain" style="margin: 15px 0;"></ion-input>
-                            <ion-input  class="custom" placeholder="Jabatan" style="margin: 15px 0;"></ion-input>
-                            <ion-input  class="custom" placeholder="Email"  style="margin: 15px 0;"></ion-input>
-                            <ion-input  class="custom" placeholder="Password" type="password" style="margin: 15px 0;"></ion-input>
+                            <ion-input class="custom" placeholder="Nama" v-model="fullname" style="margin: 15px 0;"></ion-input>
+                            <ion-input  class="custom" placeholder="Alamat" v-model="alamat"  style="margin: 15px 0;"></ion-input>
+                            <ion-input  class="custom" placeholder="Desa/Kel." v-model="desa"  style="margin: 15px 0;"></ion-input>
+                            <ion-input  class="custom" placeholder="No. KTP" v-model="ktp" style="margin: 15px 0;"></ion-input>
+                            <ion-input  class="custom" placeholder="No. HP" v-model="hp" style="margin: 15px 0;"></ion-input>
+                            <ion-input  class="custom" placeholder="Ket. Lain" v-model="keterangan" style="margin: 15px 0;"></ion-input>
+                            <ion-input  class="custom" placeholder="Jabatan" v-model="jabatan" style="margin: 15px 0;"></ion-input>
+                            <ion-input  class="custom" placeholder="Email" v-model="email"  style="margin: 15px 0;"></ion-input>
+                            <ion-input  class="custom" placeholder="Password" v-model="pwd" type="password" style="margin: 15px 0;"></ion-input>
 
                             <div style="width: 100%;display: flex;justify-content: center;align-items: center;margin-top: 15px;padding: 0 60px;">
-                                <ion-button style="text-transform: capitalize;border-radius: 20px;width: 100%;" color="primary" size="large">Daftar</ion-button>
+                                <ion-button style="text-transform: capitalize;border-radius: 20px;width: 100%;" color="primary" size="large" @click="submit_register">Daftar</ion-button>
                             </div>
                         </div>
                     </ion-col>
@@ -81,6 +81,12 @@
 <script>
 import { IonPage, IonContent, IonGrid, IonRow, IonCol, IonButton, IonInput, IonLabel, IonSegment, IonSegmentButton, IonImg } from '@ionic/vue';
 import { defineComponent } from 'vue';
+import axios from "axios";
+import { ip_server } from "@/ip-config.js";
+import moment from "moment";
+moment.locale("id");
+import { Preferences } from '@capacitor/preferences';
+
 export default defineComponent({
     components: {
       IonPage,
@@ -101,6 +107,15 @@ export default defineComponent({
     data() {
         return {
             segment: "data1",
+            fullname:'',
+            pwd:'',
+            desa:'',
+            ktp:'',
+            hp:'',
+            keterangan:'',
+            jabatan:'',
+            alamat:'',
+            email:'',
         };
     },
     methods: {
@@ -113,6 +128,52 @@ export default defineComponent({
                 this.loading = false;
             }, 1000);
         },
+       async submit_register(){
+        let post ={
+            fullname:this.fullname,
+            username:this.email,
+            pwd:this.pwd,
+            desa:this.desa,
+            ktp:this.ktp,
+            hp:this.hp,
+            keterangan:this.keterangan,
+            jabatan:this.jabatan,
+            alamat:this.alamat,
+            email:this.email,
+        }
+          await axios.post(ip_server+'user/insert',post).then(async function (data) {
+            this.fullname='';
+            this.pwd='';
+            this.desa='';
+            this.ktp='';
+            this.hp='';
+            this.keterangan='';
+            this.jabatan='';
+            this.alamat='';
+            this.email='';
+            alert(data.data.message)
+          })
+        },
+        async submit_login(){
+          let vm = this
+          try {
+          await axios.post(ip_server+'autentifikasi/login_mobile',{username:this.email,password:this.pwd}).then(async function (res) {
+                  await Preferences.set({
+                      key: "token",
+                      value: res.data.token,
+                  });
+                  await Preferences.set({
+                      key: "id_user",
+                      value: String(res.data.id_user),
+                  });
+              
+                        vm.loading = false;
+                            vm.$router.push('/tabs/dashboard');
+                            
+          })} catch (error) {
+            alert('Data Tidak Sesuai')
+          }
+      }
     },
 });
 </script>

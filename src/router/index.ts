@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from '@ionic/vue-router';
 import { RouteRecordRaw } from 'vue-router';
 import TabsPage from '../views/TabsPage.vue'
+import { Preferences } from '@capacitor/preferences';
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -26,6 +27,9 @@ const routes: Array<RouteRecordRaw> = [
       {
         path: 'lapor_sumber_air',
         component: () => import('@/views/lapor_sumber_air.vue')
+        ,meta: {
+          requiresAuth: true,
+        }
       },
       {
         path: 'data_lapor_sumber_air',
@@ -62,4 +66,31 @@ const router = createRouter({
   routes
 })
 
+router.beforeEach(async (to, from, next) => {
+  if (to.name !='Login') {
+  if (to.matched.some(record => record.meta.requiresAuth)) {    
+    const ret = await Preferences.get({ key: 'token' });
+    if (ret) {
+      if (!ret.value) {
+        next({
+          path: '/login',
+          query: { redirect: to.fullPath }
+        })
+      } else {
+        next()
+      }
+    } else {
+      next({
+        path: '/login',
+        query: { redirect: to.fullPath }
+      })
+    }
+  } else {
+    next()
+  }
+  
+}else {
+  next()
+}
+})
 export default router
