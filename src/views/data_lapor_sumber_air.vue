@@ -23,7 +23,7 @@
                         <ion-img v-else src="https://placehold.co/100?text=No Image Available" style="width:100%;height:140px;object-fit: cover;"></ion-img>
                     </div>
                     <div style="width:60%;margin-left: 15px;height: 140px;display: flex;justify-content: center;align-items: flex-start;flex-direction: column;">
-                        <h6 style="font-size: 16px;color:#1c47bc"><strong>{{ list.nama_pelapor }}</strong></h6>
+                        <h6 style="font-size: 16px;color:#1c47bc"><strong>{{ list.nama_sumber_air }}</strong></h6>
                         <div style="display: table;margin-top: 5px;">
                             <div style="display: table-row;">
                                 <div style="display: table-cell;width: 80px;">
@@ -35,13 +35,13 @@
                                 </div>
 
                                 <div style="display: table-cell;">
-                                    <h6 style="font-size: 12px;">{{ list.lokasi }}</h6>
+                                    <h6 style="font-size: 12px;">{{ list.alamat }}</h6>
                                 </div>
                             </div>
 
                             <div style="display: table-row;">
                                 <div style="display: table-cell;width: 80px;">
-                                    <h6 style="font-size: 12px;">Kabupaten</h6>
+                                    <h6 style="font-size: 12px;">Desa</h6>
                                 </div>
 
                                 <div style="display: table-cell;width: 10px;">
@@ -49,7 +49,7 @@
                                 </div>
 
                                 <div style="display: table-cell;">
-                                    <h6 style="font-size: 12px;">{{ list.kabupaten }}</h6>
+                                    <h6 style="font-size: 12px;">{{ list.desa }}</h6>
                                 </div>
                             </div>
 
@@ -63,7 +63,7 @@
                                 </div>
 
                                 <div style="display: table-cell;">
-                                    <h6 style="font-size: 12px;">-</h6>
+                                    <h6 style="font-size: 12px;">{{ list.pengelola }}</h6>
                                 </div>
                             </div>
 
@@ -77,7 +77,7 @@
                                 </div>
 
                                 <div style="display: table-cell;">
-                                    <h6 style="font-size: 12px;">-</h6>
+                                    <h6 style="font-size: 12px;">{{ list.debit }}</h6>
                                 </div>
                             </div>
 
@@ -91,7 +91,7 @@
                                 </div>
 
                                 <div style="display: table-cell;">
-                                    <h6 style="font-size: 12px;">-</h6>
+                                    <h6 style="font-size: 12px;">{{ list.jumlah_KK_terlayani }}</h6>
                                 </div>
                             </div> 
                         </div>
@@ -116,7 +116,7 @@
 </template>
 
 <script>
-import { IonPage,IonRefresher,IonRefresherContent, IonHeader, IonContent, IonGrid, IonRow, IonCol } from '@ionic/vue';
+import {IonIcon,IonImg, IonPage,IonRefresher,IonRefresherContent, IonHeader, IonContent, IonGrid, IonRow, IonCol } from '@ionic/vue';
 import { defineComponent } from 'vue';
 import axios from "axios";
 import { ip_server } from "@/ip-config.js";
@@ -127,6 +127,7 @@ import { chevronDownCircleOutline } from "ionicons/icons";
 import { arrowBackCircleOutline  } from 'ionicons/icons';
 export default defineComponent({
     components: {
+        IonIcon,IonImg,
         IonPage,
         IonHeader,
         IonContent,

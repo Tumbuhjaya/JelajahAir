@@ -50,7 +50,7 @@
 </template>
 
 <script>
-import { IonPage, IonHeader, IonContent, IonGrid, IonRow, IonCol } from '@ionic/vue';
+import { IonIcon,IonImg,IonPage, IonHeader, IonContent, IonGrid, IonRow, IonCol } from '@ionic/vue';
 import { defineComponent } from 'vue';
 import { arrowBackCircleOutline  } from 'ionicons/icons';
 import axios from "axios";
@@ -60,6 +60,7 @@ moment.locale("id");
 import VueApexCharts from "vue3-apexcharts";
 export default defineComponent({
     components: {
+        IonIcon,IonImg,
         IonPage,
         IonHeader,
         IonContent,

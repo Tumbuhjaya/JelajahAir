@@ -105,7 +105,7 @@
 </template>
 
 <script>
-import { IonPage, IonHeader, IonContent, IonGrid, IonRow, IonCol } from '@ionic/vue';
+import {IonIcon,IonImg, IonPage, IonHeader, IonContent, IonGrid, IonRow, IonCol } from '@ionic/vue';
 import { defineComponent } from 'vue';
 import axios from "axios";
 import { ip_server } from "@/ip-config.js";
@@ -114,6 +114,7 @@ moment.locale("id");
 import { arrowBackCircleOutline  } from 'ionicons/icons';
 export default defineComponent({
     components: {
+        IonIcon,IonImg,
         IonPage,
         IonHeader,
         IonContent,
