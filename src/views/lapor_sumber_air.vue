@@ -17,7 +17,51 @@
       <ion-grid style="padding: 15px 20px;">
         <ion-row>
             <ion-col size="12">
+                <ion-input label="Nama Pelapor" labelPlacement="stacked" placeholder=""></ion-input>
+            </ion-col>
+
+            <ion-col size="12">
+                <ion-input label="Alamat Pelapor" labelPlacement="stacked" placeholder=""></ion-input>
+            </ion-col>
+
+            <ion-col size="12">
+                <ion-input label="Email Pelapor" labelPlacement="stacked" placeholder=""></ion-input>
+            </ion-col>
+
+            <ion-col size="12" style="margin-top: 30px;">
+              <h4><strong>INFO SUMBER AIR</strong></h4>
+            </ion-col>
+
+            <ion-col size="12">
+              <ion-select label="Jenis" label-placement="stacked">
+                <ion-select-option value="Mata Air">Mata Air</ion-select-option>
+                <ion-select-option value="Sumur">Sumur</ion-select-option>
+                <ion-select-option value="Embung">Embung</ion-select-option>
+                <ion-select-option value="Waduk">Waduk</ion-select-option>
+                <ion-select-option value="Lainnya">Lainnya</ion-select-option>
+              </ion-select>
+            </ion-col>
+
+            <ion-col size="12">
                 <ion-input label="Nama Sumber Air" v-model="nama_sumber_air" labelPlacement="stacked" placeholder=""></ion-input>
+            </ion-col>
+
+            <ion-col size="12">
+              <ion-select label="Kabupaten/Kota" label-placement="stacked">
+                
+              </ion-select>
+            </ion-col>
+
+            <ion-col size="12">
+              <ion-select label="Kecamatan" label-placement="stacked">
+                
+              </ion-select>
+            </ion-col>
+
+            <ion-col size="12">
+              <ion-select label="Kelurahan/Desa" label-placement="stacked">
+                
+              </ion-select>
             </ion-col>
 
             <ion-col size="12">
@@ -29,60 +73,21 @@
             </ion-col>
 
             <ion-col size="12">
-                <ion-input label="Alamat" labelPlacement="stacked" v-model="alamat" placeholder=""></ion-input>
+              <ion-textarea label="Deskripsi" labelPlacement="stacked" placeholder=""></ion-textarea>
             </ion-col>
 
             <ion-col size="12">
-                <ion-input label="Desa/Kelurahan" labelPlacement="stacked" v-model="desa" placeholder=""></ion-input>
-            </ion-col>
-
-            <ion-col size="12">
-                <ion-input label="Pengelola" labelPlacement="stacked" v-model="pengelola" placeholder=""></ion-input>
-            </ion-col>
-
-            <ion-col size="12">
-                <ion-input label="No. Hp Pengelola" labelPlacement="stacked" v-model="no_hp_pengelola" placeholder=""></ion-input>
-            </ion-col>
-
-            <ion-col size="12">
-                <ion-input label="Keterangan Lainnya" labelPlacement="stacked" v-model="deskiripsi" placeholder=""></ion-input>
-            </ion-col>
-
-            <ion-col size="12">
-                <ion-input label="Debit" labelPlacement="stacked" v-model="debit" placeholder=""></ion-input>
-            </ion-col>
-
-            <ion-col size="12">
-                <ion-input label="Jumlah KK Terlayani" labelPlacement="stacked" v-model="jumlah_KK_terlayani" placeholder=""></ion-input>
-            </ion-col>
-
-            <ion-col size="6">
                 <div class="w-100-flex" style="justify-content: center;align-items: center;background-color: ;flex-direction: column;">
                     <h6 style="font-size: 12px;font-weight: normal;margin-bottom: 15px;">Foto Sumber Air</h6>
                     <ion-img src="/assets/alt-photo.svg" v-if="!foto_1"
-                        @click="takePicture('foto_1')" style="width: 75%;"></ion-img>
+                        @click="takePicture('foto_1')" style="width: 30%;"></ion-img>
                         <ion-img v-else :src="foto_1"
                         @click="takePicture('foto_1')"
-                         style="width: 75%;"></ion-img>
+                         style="width: 30%;"></ion-img>
                     <!-- untuk load data -->
                     <!-- <ion-img src="https://via.placeholder.com/100" style="width: 75%;object-fit: cover;"></ion-img> -->
                 </div>
             </ion-col>
-
-            <ion-col size="6">
-                <div class="w-100-flex" style="justify-content: center;align-items: center;background-color: ;flex-direction: column;">
-                    <h6 style="font-size: 12px;font-weight: normal;margin-bottom: 15px;">Foto Sumber Air</h6>
-                    <!-- <ion-img src="/assets/alt-photo.svg" style="width: 75%;"></ion-img> -->
-                    <ion-img src="/assets/alt-photo.svg" v-if="!foto_2"
-                        @click="takePicture('foto_2')" style="width: 75%;"></ion-img>
-                        <ion-img v-else :src="foto_2"
-                        @click="takePicture('foto_2')"
-                         style="width: 75%;"></ion-img>
-                    <!-- untuk load data -->
-                    <!-- <ion-img src="https://via.placeholder.com/100" style="width: 75%;object-fit: cover;"></ion-img> -->
-                </div>
-            </ion-col>
-
             <ion-col size="12" style="margin-top: 15px;">
                 <ion-button color="primary" expand="block" @click="submitForm">Simpan</ion-button>
             </ion-col>
@@ -93,7 +98,7 @@
 </template>
 
 <script>
-import {  IonLoading,alertController ,loadingController , IonPage, IonHeader, IonContent, IonGrid, IonRow, IonCol, IonIcon, IonButton, IonImg, IonInput  } from '@ionic/vue';
+import {  IonLoading,alertController ,loadingController , IonPage, IonHeader, IonContent, IonGrid, IonRow, IonCol, IonIcon, IonButton, IonImg, IonInput, IonTextarea  } from '@ionic/vue';
 import { defineComponent } from 'vue';
 import axios from "axios";
 import { ip_server } from "@/ip-config.js";
@@ -116,7 +121,8 @@ export default defineComponent({
         IonIcon,
         IonButton,
         IonImg,
-        IonInput
+        IonInput,
+        IonTextarea
     },
     setup() {
         return { arrowBackCircleOutline };

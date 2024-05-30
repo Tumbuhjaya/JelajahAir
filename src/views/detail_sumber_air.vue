@@ -24,8 +24,8 @@
                 <h2 style="text-align: center;"><strong>Sumber Air Pringkung</strong></h2>
                 <div style="display: table;margin-top: 15px;">
                     <div style="display: table-row;">
-                        <div style="display: table-cell;width: 100px;">
-                            <h6 style="font-size: 16px;">Alamat</h6>
+                        <div style="display: table-cell;width: 130px;">
+                            <h6 style="font-size: 16px;">Jenis</h6>
                         </div>
 
                         <div style="display: table-cell;width: 10px;">
@@ -38,11 +38,11 @@
                     </div>
 
                     <div style="display: table-row;">
-                        <div style="display: table-cell;width: 100px;">
-                            <h6 style="font-size: 16px;">Desa/Kel.</h6>
+                        <div style="display: table-cell;">
+                            <h6 style="font-size: 16px;">Kabupaten/Kota</h6>
                         </div>
 
-                        <div style="display: table-cell;width: 10px;">
+                        <div style="display: table-cell;">
                             <h6 style="font-size: 16px;">:</h6>
                         </div>
 
@@ -52,11 +52,11 @@
                     </div>
 
                     <div style="display: table-row;">
-                        <div style="display: table-cell;width: 100px;">
-                            <h6 style="font-size: 16px;">Pengelola</h6>
+                        <div style="display: table-cell;">
+                            <h6 style="font-size: 16px;">Kecamatan</h6>
                         </div>
 
-                        <div style="display: table-cell;width: 10px;">
+                        <div style="display: table-cell;">
                             <h6 style="font-size: 16px;">:</h6>
                         </div>
 
@@ -66,11 +66,11 @@
                     </div>
 
                     <div style="display: table-row;">
-                        <div style="display: table-cell;width: 100px;">
-                            <h6 style="font-size: 16px;">Debit</h6>
+                        <div style="display: table-cell;">
+                            <h6 style="font-size: 16px;">Kelurahan/Desa</h6>
                         </div>
 
-                        <div style="display: table-cell;width: 10px;">
+                        <div style="display: table-cell;">
                             <h6 style="font-size: 16px;">:</h6>
                          </div>
 
@@ -81,7 +81,7 @@
 
                     <div style="display: table-row;">
                         <div style="display: table-cell;width: 100px;">
-                            <h6 style="font-size: 16px;">Jumlah KK Terlayani</h6>
+                            <h6 style="font-size: 16px;">Deskripsi</h6>
                         </div>
 
                         <div style="display: table-cell;width: 10px;">

@@ -3,7 +3,7 @@
     <ion-header>
         <div class="w-100-flex" style="padding: 0 20px;">
             <div style="width: 75%;height: 60px;background-color: ;display: flex;justify-content: center;align-items: flex-start;flex-direction: column;">
-                <h5><strong>JELAJAH AIR</strong></h5>
+                <h5 style="font-size: 22px;"><strong>JELAJAH AIR</strong></h5>
                 <h6 style="font-weight: normal;font-size: 12px;">PROVINSI JAWA TENGAH</h6>
             </div>
             <div style="width: 25%;height: 60px;background-color: ;display: flex;justify-content: center;align-items: center;">
@@ -18,8 +18,45 @@
       <ion-grid style="padding: 15px 20px;">
         <ion-row>
           <ion-col size="12">
-            <ion-input placeholder="Cari Sumber Air " class="custom"></ion-input>
+            <div style="border-radius: 10px;overflow: hidden;">
+            <ion-img src="https://via.placeholder.com/640x360" style="width: 100%;"></ion-img>
+        </div>
           </ion-col>
+        </ion-row>
+
+        <ion-row style="margin-top: 15px;">
+            <ion-col size="12">
+                <h5><strong>Layanan Populer</strong></h5>
+            </ion-col>
+        </ion-row>
+
+        <ion-row>
+            <ion-col size="4">
+                <div style="width: 100%;border-radius: 10px;box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;overflow: hidden;display: flex;justify-content: center;align-items: center;flex-direction: column;height:130px;background-color: #0086CF;padding: 0 10px;" @click="$router.push('/tabs/penanganan_air_bersih')">
+                    <div style="width:60px;height: 60px;background-color: aqua;border-radius: 100%;overflow: hidden;">
+                        <ion-img src="https://via.placeholder.com/60"></ion-img>
+                    </div>
+                    <h6 style="text-align: center;font-size: 14px;color: #fff;margin-top: 10px !important;font-weight: normal;">Penanganan Air Bersih</h6>
+                </div>
+            </ion-col>
+
+            <ion-col size="4">
+                <div style="width: 100%;border-radius: 10px;box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;overflow: hidden;display: flex;justify-content: center;align-items: center;flex-direction: column;height:130px;background-color: #0086CF;padding: 0 10px;" @click="$router.push('/tabs/jejaring_air_bersih')">
+                <div style="width:60px;height: 60px;background-color: aqua;border-radius: 100%;overflow: hidden;">
+                    <ion-img src="https://via.placeholder.com/60"></ion-img>
+                </div>
+                <h6 style="text-align: center;font-size: 14px;color: #fff;margin-top: 10px !important;font-weight: normal;">Jejaring Air Bersih</h6>
+                </div>
+            </ion-col>
+
+            <ion-col size="4">
+                <div style="width: 100%;border-radius: 10px;box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;overflow: hidden;display: flex;justify-content: center;align-items: center;flex-direction: column;height:130px;background-color: #0086CF;padding: 0 10px;" @click="$router.push('/tabs/sumber_air_sekitar')">
+                <div style="width:60px;height: 60px;background-color: aqua;border-radius: 100%;overflow:hidden;">
+                    <ion-img src="https://via.placeholder.com/60"></ion-img>
+                </div>
+                <h6 style="text-align: center;font-size: 14px;color: #fff;margin-top: 10px !important;font-weight: normal;">Cari Sumber Air Bersih</h6>
+                </div>
+            </ion-col>
         </ion-row>
 
         <ion-row style="margin-top: 15px;">
@@ -60,40 +97,7 @@
             </ion-col>
         </ion-row>
 
-        <ion-row style="margin-top: 15px;">
-            <ion-col size="12">
-                <h5><strong>Layanan Populer</strong></h5>
-            </ion-col>
-        </ion-row>
-
-        <ion-row>
-            <ion-col size="4">
-                <div style="width: 100%;border-radius: 10px;box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;overflow: hidden;display: flex;justify-content: center;align-items: center;flex-direction: column;height:130px;background-color: #0086CF;padding: 0 10px;" @click="$router.push('/tabs/penanganan_air_bersih')">
-                    <div style="width:60px;height: 60px;background-color: aqua;border-radius: 100%;overflow: hidden;">
-                        <ion-img src="https://via.placeholder.com/60"></ion-img>
-                    </div>
-                    <h6 style="text-align: center;font-size: 14px;color: #fff;margin-top: 10px !important;font-weight: normal;">Penanganan Air Bersih</h6>
-                </div>
-            </ion-col>
-
-            <ion-col size="4">
-                <div style="width: 100%;border-radius: 10px;box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;overflow: hidden;display: flex;justify-content: center;align-items: center;flex-direction: column;height:130px;background-color: #0086CF;padding: 0 10px;" @click="$router.push('/tabs/jejaring_air_bersih')">
-                <div style="width:60px;height: 60px;background-color: aqua;border-radius: 100%;overflow: hidden;">
-                    <ion-img src="https://via.placeholder.com/60"></ion-img>
-                </div>
-                <h6 style="text-align: center;font-size: 14px;color: #fff;margin-top: 10px !important;font-weight: normal;">Jejaring Air Bersih</h6>
-                </div>
-            </ion-col>
-
-            <ion-col size="4">
-                <div style="width: 100%;border-radius: 10px;box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;overflow: hidden;display: flex;justify-content: center;align-items: center;flex-direction: column;height:130px;background-color: #0086CF;padding: 0 10px;">
-                <div style="width:60px;height: 60px;background-color: aqua;border-radius: 100%;overflow:hidden;">
-                    <ion-img src="https://via.placeholder.com/60"></ion-img>
-                </div>
-                <h6 style="text-align: center;font-size: 14px;color: #fff;margin-top: 10px !important;font-weight: normal;">Cari Sumber Air Bersih</h6>
-                </div>
-            </ion-col>
-        </ion-row>
+        
       </ion-grid>
       <ion-fab slot="fixed" vertical="bottom" horizontal="end">
           <ion-fab-button @click="$router.push('/tabs/lapor_sumber_air')">

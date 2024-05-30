@@ -273,3 +273,7 @@ ion-select{
   font-family: 'Poppins', sans-serif;
   font-weight: 500;
 }
+
+ion-textarea{
+  border-bottom: 1px solid black;
+}
