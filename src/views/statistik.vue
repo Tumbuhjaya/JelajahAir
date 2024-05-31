@@ -75,88 +75,17 @@ export default defineComponent({
     data() {
         return {
             jumlah_terlayani:0,
-            series: [{
-                data: [{
-                x: 'category A',
-                y: 10
-                }, {
-                x: 'category B',
-                y: 18
-                }, {
-                x: 'category C',
-                y: 13
+            series: [
+                {
+                data: [1.4, 2, 2.5, 1.5, 2.5, 2.8, 3.8, 4.6]
                 },
                 {
-                x: 'category A',
-                y: 10
-                }, {
-                x: 'category B',
-                y: 18
-                }, {
-                x: 'category C',
-                y: 13
+                data: [20, 29, 37, 36, 44, 45, 50, 58]
                 },
                 {
-                x: 'category A',
-                y: 10
-                }, {
-                x: 'category B',
-                y: 18
-                }, {
-                x: 'category C',
-                y: 13
-                },
-                {
-                x: 'category A',
-                y: 10
-                }, {
-                x: 'category B',
-                y: 18
-                }, {
-                x: 'category C',
-                y: 13
-                },
-                {
-                x: 'category A',
-                y: 10
-                }, {
-                x: 'category B',
-                y: 18
-                }, {
-                x: 'category C',
-                y: 13
-                },
-                {
-                x: 'category A',
-                y: 10
-                }, {
-                x: 'category B',
-                y: 18
-                }, {
-                x: 'category C',
-                y: 13
-                },
-                {
-                x: 'category A',
-                y: 10
-                }, {
-                x: 'category B',
-                y: 18
-                }, {
-                x: 'category C',
-                y: 13
-                },
-                {
-                x: 'category A',
-                y: 10
-                }, {
-                x: 'category B',
-                y: 18
-                }, {
-                x: 'category C',
-                y: 13
-                }]
-            }],
+                data: [20, 29, 37, 36, 44, 45, 50, 58]
+                }
+            ],
             chartOptions: {
                 chart: {
                 type: "bar",
@@ -178,6 +107,7 @@ export default defineComponent({
                 },
                 },
                 labels: [],
+                datasets: [ { data: [40, 20, 12] } ],
                 colors: [
                 "#298FFA",
                 "#15E597",
@@ -213,16 +143,30 @@ export default defineComponent({
         let vm = this
         let api = await axios({
         method: "post",
-            url: ip_server + `api/data_jelajah_air/list`,
-            data:{trlyni_50:1 , group:'kabupaten'}
+            // url: ip_server + `api/data_jelajah_air/list`,
+            url: ip_server + `jelajah_air/cakupan_desa`,
+            // data:{trlyni_50:1 , group:'kabupaten'}
         })
-        for (let i = 0; i < api.data.data.length; i++) {
-            api.data.data[i].y= Number(api.data.data[i].y)
-            api.data.data[i].x=api.data.data[i].label
-            this.jumlah_terlayani+=Number(api.data.data[i].y)
-        }
+        // for (let i = 0; i < api.data.data.length; i++) {
+        //     api.data.data[i].y= Number(api.data.data[i].y)
+        //     api.data.data[i].x=api.data.data[i].label
+        //     this.jumlah_terlayani+=Number(api.data.data[i].y)
+        // }
+            console.log(vm.series);
+            vm.series[0].data =[]
+            vm.series[1].data =[]
+            vm.series[2].data =[]
+            console.log(vm.chartOptions.labels);
 
-            vm.series[0].data = api.data.data
+            for (let i = 0; i < api.data.lebih.length; i++) {
+                vm.series[0].data.push(api.data.lebih[i].y)
+                vm.series[1].data.push(api.data.kurang[i].y)
+                vm.series[2].data.push(api.data.belum[i].y)
+                vm.chartOptions.labels.push(api.data.belum[i].label)
+            }
+            console.log(vm.chartOptions.labels);
+            // console.log(vm.series[0].data);
+
         },
     },
     async ionViewDidEnter() {

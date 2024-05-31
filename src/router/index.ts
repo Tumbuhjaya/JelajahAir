@@ -54,7 +54,7 @@ const routes: Array<RouteRecordRaw> = [
         component: () => import('@/views/sumber_air_sekitar.vue')
       },
       {
-        path: 'sumber_air_sekitar/detail',
+        path: 'sumber_air_sekitar/detail/:id',
         component: () => import('@/views/detail_sumber_air.vue')
       }
     ]

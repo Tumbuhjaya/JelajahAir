@@ -17,7 +17,8 @@
       <ion-grid style="padding: 15px 20px;">
         <ion-row>
             <ion-col size="12">
-                <ion-img src="https://via.placeholder.com/640x360" style="width: 100%;"></ion-img>
+                <ion-img v-if="sumber_air.foto_1" :src="sumber_air.src" style="width: 100%;"></ion-img>
+                <ion-img v-else src="https://via.placeholder.com/640x360" style="width: 100%;"></ion-img>
             </ion-col>
 
             <ion-col size="12">
@@ -33,7 +34,7 @@
                         </div>
 
                         <div style="display: table-cell;">
-                            <h6 style="font-size: 16px;">-</h6>
+                            <h6 style="font-size: 16px;font-weight: normal;">{{ sumber_air.jenis }}</h6>
                         </div>
                     </div>
 
@@ -47,7 +48,7 @@
                         </div>
 
                         <div style="display: table-cell;">
-                            <h6 style="font-size: 16px;font-weight: normal;">-</h6>
+                            <h6 style="font-size: 16px;font-weight: normal;">{{ sumber_air.kab_kot }}</h6>
                         </div>
                     </div>
 
@@ -61,7 +62,7 @@
                         </div>
 
                         <div style="display: table-cell;">
-                            <h6 style="font-size: 16px;font-weight: normal;">-</h6>
+                            <h6 style="font-size: 16px;font-weight: normal;">{{ sumber_air.kecamatan }}</h6>
                         </div>
                     </div>
 
@@ -75,11 +76,11 @@
                          </div>
 
                         <div style="display: table-cell;">
-                            <h6 style="font-size: 16px;font-weight: normal;">-</h6>
+                            <h6 style="font-size: 16px;font-weight: normal;">{{ sumber_air.desa_kel }}</h6>
                         </div>
                     </div>
 
-                    <div style="display: table-row;">
+                    <!-- <div style="display: table-row;">
                         <div style="display: table-cell;width: 100px;">
                             <h6 style="font-size: 16px;">Deskripsi</h6>
                         </div>
@@ -89,9 +90,9 @@
                         </div>
 
                         <div style="display: table-cell;">
-                            <h6 style="font-size: 16px;font-weight: normal;">-</h6>
+                            <h6 style="font-size: 16px;font-weight: normal;">{{ sumber_air.foto_1 }}</h6>
                         </div>
-                    </div> 
+                    </div>  -->
                 </div>
             </ion-col>
         </ion-row>
@@ -102,8 +103,11 @@
 
 <script>
 import { IonIcon,IonImg,IonPage, IonHeader, IonContent, IonGrid, IonRow, IonCol } from '@ionic/vue';
-import { defineComponent } from 'vue';
+import { defineComponent} from 'vue';
 import { arrowBackCircleOutline  } from 'ionicons/icons';
+import axios from "axios";
+import { ip_server } from "@/ip-config.js";
+import { useRoute } from 'vue-router';
 export default defineComponent({
     components: {
         IonIcon,IonImg,
@@ -117,13 +121,30 @@ export default defineComponent({
     setup() {
         return { arrowBackCircleOutline };
     },
+    async ionViewDidEnter() {
+        this.get_sumber_air()
+    },
     data() {
         return {
-        
+            route:useRoute(),
+            id : 0,
+            sumber_air:[]
         };
     },
     methods: {
-        
+        async get_sumber_air(){
+        let vm = this
+        vm.id = vm.route.params.id;
+        let list_sumber_air = await axios({
+        method: "post",
+        data:{OGR_FID:vm.id,desa:1},
+            url: ip_server + `sumber_air/list`,
+        })
+            vm.sumber_air = []
+            vm.sumber_air = list_sumber_air.data.data[0]
+            console.log(vm.sumber_air);
+            vm.sumber_air.src=ip_server+'foto/'+  vm.sumber_air.foto_1 
+    },
     },
 });
 </script>
