@@ -160,7 +160,7 @@ export default defineComponent({
             for (let i = 0; i <  vm.sumber_air.length; i++) {
                 vm.sumber_air[i].src=ip_server+'foto/'+  vm.sumber_air[i].foto_1 
             }
-            console.log(vm.sumber_air);
+            console.log(vm.sumber_air,'sumber_air');
     },
     async get_banner(){
         let vm = this
@@ -173,6 +173,7 @@ export default defineComponent({
             for (let i = 0; i <  vm.banner.length; i++) {
                 vm.banner[i].src=ip_server+'foto/'+  vm.banner[i].foto_1 
             }
+            console.log(vm.banner,'banner');
     },
         async logoff(){
             await Preferences.clear()
