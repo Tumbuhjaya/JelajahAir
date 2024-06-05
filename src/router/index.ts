@@ -57,10 +57,15 @@ const routes: Array<RouteRecordRaw> = [
         path: 'sumber_air_sekitar',
         component: () => import('@/views/sumber_air_sekitar.vue')
       },
+ 
       {
         path: 'sumber_air_sekitar/detail/:id',
         component: () => import('@/views/detail_sumber_air.vue')
-      }
+      },
+      {
+        path: 'spam_provinsi',
+        component: () => import('@/views/spam_provinsi.vue')
+      },
     ]
   }
 ]

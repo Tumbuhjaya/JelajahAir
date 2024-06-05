@@ -6,7 +6,7 @@
                 <ion-icon :icon="arrowBackCircleOutline" color="light" size="large" @click="$router.push('/tabs/dashboard')"></ion-icon>
             </div>
             <div style="width: 70%;height: 60px;background-color: ;display: flex;justify-content: center;align-items: center;flex-direction: column;">
-                <h5 style="color: #fff;font-weight: bold;">Sumber Air Sekitar</h5>
+                <h5 style="color: #fff;font-weight: bold;">Spam Provinsi</h5>
             </div>
             <div style="width: 15%;height: 60px;background-color: ;display: flex;justify-content: center;align-items: flex-start;flex-direction: column;">
                 
@@ -48,7 +48,7 @@
 </template>
 
 <script>
-import { IonPage, IonHeader,IonInput,IonLoading,IonInfiniteScroll,IonIcon,IonButton,IonImg,IonInfiniteScrollContent, IonContent, IonGrid, IonRow, IonCol } from '@ionic/vue';
+import { IonPage, IonHeader,IonInput, IonContent,IonLoading,IonImg,IonButton,IonIcon,IonInfiniteScroll,IonInfiniteScrollContent, IonGrid, IonRow, IonCol } from '@ionic/vue';
 import { defineComponent } from 'vue';
 import axios from "axios";
 import { ip_server } from "@/ip-config.js";
@@ -100,7 +100,12 @@ export default defineComponent({
         async get_sumber_air(){
         let vm = this
         vm.loading = true
+
+        console.log(vm.cari ,  vm.nama );
+
        vm.cari =  vm.nama 
+       console.log(vm.cari ,  vm.nama );
+
         vm.page = 1
         let list_sumber_air = await axios({
         method: "post",
@@ -114,6 +119,7 @@ export default defineComponent({
                 console.log(vm.sumber_air[i]);
             }
             vm.loading = false
+
     },
     },
 });

@@ -14,7 +14,9 @@
             </div>
         </div>
     </ion-header>
-    <ion-content >
+    <ion-loading class="custom-loading" message="Loading..." v-if="loading" spinner="circles"></ion-loading>
+
+    <ion-content v-else>
       <ion-grid style="padding: 15px 20px;">
         <ion-row>
           <ion-col size="12">
@@ -23,56 +25,19 @@
         </div>
           </ion-col>
         </ion-row>
-<!-- 
-        <ion-row style="margin-top: 15px;">
-            <ion-col size="12">
-                <h5><strong>Layanan Populer</strong></h5>
-            </ion-col>
-        </ion-row>
-
-        <ion-row>
-            <ion-col size="4">
-                <div style="width: 100%;border-radius: 10px;box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;overflow: hidden;display: flex;justify-content: center;align-items: center;flex-direction: column;height:130px;background-color: #0086CF;padding: 0 10px;" @click="$router.push('/tabs/penanganan_air_bersih')">
-                    <div style="width:60px;height: 60px;background-color: aqua;border-radius: 100%;overflow: hidden;">
-                        <ion-img src="https://via.placeholder.com/60"></ion-img>
-                    </div>
-                    <h6 style="text-align: center;font-size: 14px;color: #fff;margin-top: 10px !important;font-weight: normal;">Penanganan Air Bersih</h6>
-                </div>
-            </ion-col>
-
-            <ion-col size="4">
-                <div style="width: 100%;border-radius: 10px;box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;overflow: hidden;display: flex;justify-content: center;align-items: center;flex-direction: column;height:130px;background-color: #0086CF;padding: 0 10px;" @click="$router.push('/tabs/jejaring_air_bersih')">
-                <div style="width:60px;height: 60px;background-color: aqua;border-radius: 100%;overflow: hidden;">
-                    <ion-img src="https://via.placeholder.com/60"></ion-img>
-                </div>
-                <h6 style="text-align: center;font-size: 14px;color: #fff;margin-top: 10px !important;font-weight: normal;">Jejaring Air Bersih</h6>
-                </div>
-            </ion-col>
-
-            <ion-col size="4">
-                <div style="width: 100%;border-radius: 10px;box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;overflow: hidden;display: flex;justify-content: center;align-items: center;flex-direction: column;height:130px;background-color: #0086CF;padding: 0 10px;" @click="$router.push('/tabs/sumber_air_sekitar')">
-                <div style="width:60px;height: 60px;background-color: aqua;border-radius: 100%;overflow:hidden;">
-                    <ion-img src="https://via.placeholder.com/60"></ion-img>
-                </div>
-                <h6 style="text-align: center;font-size: 14px;color: #fff;margin-top: 10px !important;font-weight: normal;">Cari Sumber Air Bersih</h6>
-                </div>
-            </ion-col>
-        </ion-row> -->
-
         <ion-row style="margin-top: 15px;">
             <ion-col size="8">
-                <h5><strong>Sumber Air Sekitar Anda</strong></h5>
+                <h5><strong>Spam Provinsi</strong></h5>
             </ion-col>
 
             <ion-col size="4">
-                <h5 style="color: grey;text-align: right;" @click="$router.push('/tabs/sumber_air_sekitar')">Lainnya</h5>
+                <h5 style="color: grey;text-align: right;" @click="$router.push('/tabs/spam_provinsi')">Lainnya</h5>
             </ion-col>
         </ion-row>
-
         <ion-row >
-            <ion-col size="6"  v-for="(sumber_air, i) in sumber_air" :key="i">
-                <div style="width: 100%;position: relative;border-radius: 10px;overflow: hidden;" @click="$router.push('/tabs/sumber_air_sekitar/detail/'+sumber_air.OGR_FID)">
-                    <ion-img v-if="sumber_air.foto_1" :src="sumber_air.src" style="width: 100%;height: 240px;object-fit: cover;"></ion-img>
+            <ion-col size="6"  v-for="(spam_desa, i) in spam_desa" :key="i">
+                <div style="width: 100%;position: relative;border-radius: 10px;overflow: hidden;" @click="$router.push('/tabs/spam_desa_sekitar/detail/'+spam_desa.OGR_FID)">
+                    <ion-img v-if="spam_desa.foto_1" :src="spam_desa.src" style="width: 100%;height: 240px;object-fit: cover;"></ion-img>
                     <ion-img v-else src="https://via.placeholder.com/240" style="width: 100%;height: 240px;object-fit: cover;"></ion-img>
 
                     <div style="width: 100%;height: 100%;position: absolute;left:0;right: 0;top:0;bottom:0;background-color: rgba(0, 0, 0, 0.19);"></div>
@@ -97,6 +62,31 @@
                 </div>
             </ion-col> -->
         </ion-row>
+   
+        <ion-row style="margin-top: 15px;">
+            <ion-col size="8">
+                <h5><strong>Sumber Air Sekitar Anda</strong></h5>
+            </ion-col>
+
+            <ion-col size="4">
+                <h5 style="color: grey;text-align: right;" @click="$router.push('/tabs/sumber_air_sekitar')">Lainnya</h5>
+            </ion-col>
+        </ion-row>
+        <ion-row >
+            <ion-col size="6"  v-for="(sumber_air, i) in sumber_air" :key="i">
+                <div style="width: 100%;position: relative;border-radius: 10px;overflow: hidden;" @click="$router.push('/tabs/sumber_air_sekitar/detail/'+sumber_air.OGR_FID)">
+                    <ion-img v-if="sumber_air.foto_1" :src="sumber_air.src" style="width: 100%;height: 240px;object-fit: cover;"></ion-img>
+                    <ion-img v-else src="https://via.placeholder.com/240" style="width: 100%;height: 240px;object-fit: cover;"></ion-img>
+
+                    <div style="width: 100%;height: 100%;position: absolute;left:0;right: 0;top:0;bottom:0;background-color: rgba(0, 0, 0, 0.19);"></div>
+                    <div style="position: absolute;left:0;right: 0;bottom: 0;padding: 10px;">
+                        <h5 style="color: #fff;font-weight: bold;font-size: 14px;">{{sumber_air.nama}}</h5>
+                        <h6 style="color: #fff;font-size: 10px;font-weight: normal;margin-top: 5px !important;">{{sumber_air.kab_kot}},{{sumber_air.kecamatan}},{{sumber_air.desa_kel}}</h6>
+                    </div>
+                </div>
+            </ion-col>
+        </ion-row>
+   
 
         
       </ion-grid>
@@ -110,7 +100,7 @@
 </template>
 
 <script>
-import { IonPage, IonHeader, IonContent, IonGrid, IonRow, IonCol, IonIcon, IonFab, IonFabButton, IonImg, IonInput  } from '@ionic/vue';
+import { IonPage, IonHeader, IonContent, IonGrid,IonLoading, IonRow, IonCol, IonIcon, IonFab, IonFabButton, IonImg, IonInput  } from '@ionic/vue';
 import { defineComponent } from 'vue';
 import { Preferences } from '@capacitor/preferences';
 import axios from "axios";
@@ -120,7 +110,7 @@ moment.locale("id");
 import { addCircleOutline, peopleCircleOutline  } from 'ionicons/icons';
 export default defineComponent({
     components: {
-        IonPage,
+        IonPage,IonLoading,
         IonHeader,
         IonContent,
         IonGrid,
@@ -135,21 +125,44 @@ export default defineComponent({
     setup() {
         return { addCircleOutline, peopleCircleOutline };
     },
-    async ionViewDidEnter() {
-        this.get_banner()
-        this.get_sumber_air()
-    },
+
     data() {
         return {
             login:0,
             banner :[],
-            sumber_air :[]
-
+            sumber_air :[],
+            spam_desa :[],
+            loading :false
         };
     },
+    async ionViewDidEnter() {
+        this.get_banner()
+        this.get_sumber_air()
+        this.get_spam_desa()
+    },
     methods: {
+        async get_spam_desa(){
+        let vm = this
+        vm.loading = true
+        let list_spam_desa = await axios({
+        method: "post",
+        data:{limit:4,desa:1},
+            url: ip_server + `spam_desa/list`,
+        })
+            vm.spam_desa = []
+            console.log(list_spam_desa);
+            vm.spam_desa = list_spam_desa.data.data
+            for (let i = 0; i <  vm.spam_desa.length; i++) {
+                vm.spam_desa[i].src=ip_server+'foto/'+  vm.spam_desa[i].foto_1 
+            }
+            console.log(vm.spam_desa,'spam_desa');
+            vm.loading = false
+
+    },
         async get_sumber_air(){
         let vm = this
+        vm.loading = true
+
         let list_sumber_air = await axios({
         method: "post",
         data:{limit:2,desa:1},
@@ -161,9 +174,13 @@ export default defineComponent({
                 vm.sumber_air[i].src=ip_server+'foto/'+  vm.sumber_air[i].foto_1 
             }
             console.log(vm.sumber_air,'sumber_air');
+            vm.loading = false
+
     },
     async get_banner(){
         let vm = this
+        vm.loading = true
+
         let lapor = await axios({
         method: "post",
             url: ip_server + `banner/list`,
@@ -174,6 +191,8 @@ export default defineComponent({
                 vm.banner[i].src=ip_server+'foto/'+  vm.banner[i].foto_1 
             }
             console.log(vm.banner,'banner');
+            vm.loading = false
+
     },
         async logoff(){
             await Preferences.clear()
@@ -219,7 +238,12 @@ ion-input.custom {
 .fab-vertical-bottom{
     right: 20px;
 }
+ion-loading.custom-loading {
+    --background: #e3edff;
+    --spinner-color: #1c6dff;
 
+    color: #1c6dff;
+  }
 ion-input{
   border-bottom: 1px solid transparent;
   --highlight-color-focused: none;
