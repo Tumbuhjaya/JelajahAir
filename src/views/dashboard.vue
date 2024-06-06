@@ -20,9 +20,26 @@
       <ion-grid style="padding: 15px 20px;">
         <ion-row>
           <ion-col size="12">
-            <div style="border-radius: 10px;overflow: hidden;"  v-for="(banner, i) in banner" :key="i">
-            <ion-img  :src="banner.src" style="width: 100%;"></ion-img>
-        </div>
+            <!-- <div style="border-radius: 10px;overflow: hidden;"  v-for="(banner, i) in banner" :key="i">
+                <ion-img  :src="banner.src" style="width: 100%;"></ion-img>
+            </div> -->
+
+            <swiper 
+            :autoplay="{
+            delay: 2500,
+            disableOnInteraction: false,
+            }"
+            :pagination="{
+            clickable: true,
+            }"
+            :navigation="true"
+            :modules="modules"
+            class="mySwiper"
+            >
+                <swiper-slide  v-for="(banner, i) in banner" :key="i">
+                    <ion-img  :src="banner.src" style="width: 100%;"></ion-img>
+                </swiper-slide>
+            </swiper>
           </ion-col>
         </ion-row>
         <ion-row style="margin-top: 15px;">
@@ -108,6 +125,13 @@ import { ip_server } from "@/ip-config.js";
 import moment from "moment";
 moment.locale("id");
 import { addCircleOutline, peopleCircleOutline  } from 'ionicons/icons';
+import { Swiper, SwiperSlide } from 'swiper/vue';
+import { Autoplay, Pagination, Navigation } from 'swiper/modules';
+
+import 'swiper/css';
+import 'swiper/css/pagination';
+  import 'swiper/css/navigation';
+import '@ionic/vue/css/ionic-swiper.css';
 export default defineComponent({
     components: {
         IonPage,IonLoading,
@@ -120,10 +144,12 @@ export default defineComponent({
         IonFab,
         IonFabButton,
         IonImg,
-        IonInput
+        IonInput,
+        Swiper,
+        SwiperSlide,
     },
     setup() {
-        return { addCircleOutline, peopleCircleOutline };
+        return { modules: [Autoplay, Pagination, Navigation], addCircleOutline, peopleCircleOutline };
     },
 
     data() {

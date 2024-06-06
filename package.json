@@ -26,6 +26,7 @@
     "chart.js": "^4.4.3",
     "ionicons": "^7.0.0",
     "moment": "^2.29.4",
+    "swiper": "^11.1.4",
     "vue": "^3.2.45",
     "vue-apexcharts": "^1.6.2",
     "vue-chartjs": "^5.3.1",
