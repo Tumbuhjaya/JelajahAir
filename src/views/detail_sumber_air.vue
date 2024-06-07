@@ -142,8 +142,12 @@ export default defineComponent({
         })
             vm.sumber_air = []
             vm.sumber_air = list_sumber_air.data.data[0]
-            console.log(vm.sumber_air);
-            vm.sumber_air.src=ip_server+'foto/'+  vm.sumber_air.foto_1 
+            if(vm.sumber_air.foto_1.substring(0,4) == 'http' ){
+                    vm.sumber_air.src =  vm.sumber_air.foto_1 
+                }else if(vm.sumber_air.foto_1){
+                    vm.sumber_air.src=ip_server+'foto/'+  vm.sumber_air.foto_1 
+
+                }
     },
     },
 });

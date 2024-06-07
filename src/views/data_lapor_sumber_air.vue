@@ -156,7 +156,13 @@ export default defineComponent({
             vm.data = []
             vm.data = lapor.data.data
             for (let i = 0; i <  vm.data.length; i++) {
-                vm.data[i].src=ip_server+'foto/'+  vm.data[i].foto_1 
+                if(vm.data[i].foto_1){
+                if(vm.data[i].foto_1.substring(0,4) == 'http' ){
+                    vm.data[i].src =  vm.data[i].foto_1 
+                }else if(vm.data[i].foto_1){
+                    vm.data[i].src=ip_server+'foto/'+  vm.data[i].foto_1 
+                }
+                }
             }
         },
         async getList(e){
@@ -170,7 +176,6 @@ export default defineComponent({
                 lapor.data.data[i].src = ip_server+'foto/'+  lapor.data.data[i].foto_1
                 vm.data.push(lapor.data.data[i])
             }
-            console.log(lapor.data.data);
             if (e) {
                 e.target.complete();
             }
