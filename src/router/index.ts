@@ -2,7 +2,8 @@ import { createRouter, createWebHistory } from '@ionic/vue-router';
 import { RouteRecordRaw } from 'vue-router';
 import TabsPage from '../views/TabsPage.vue'
 import { Preferences } from '@capacitor/preferences';
-
+import axios from "axios";
+import { ip_server } from "@/ip-config.js";
 const routes: Array<RouteRecordRaw> = [
   {
     path: '/',
@@ -86,7 +87,19 @@ router.beforeEach(async (to, from, next) => {
           query: { redirect: to.fullPath }
         })
       } else {
-        next()
+        await axios.post(ip_server+'autentifikasi/decode',{token:ret.value}).then(function (hsl:object) {
+          console.log(hsl);
+          
+          if (hsl.status=='200') {
+                    next()
+          }else{
+            next({
+              path: '/login',
+              query: { redirect: to.fullPath }
+            })
+          }
+        })
+        // next()
       }
     } else {
       next({

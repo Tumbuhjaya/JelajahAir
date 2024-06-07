@@ -151,7 +151,7 @@ export default defineComponent({
     setup() {
         return { modules: [Autoplay, Pagination, Navigation], addCircleOutline, peopleCircleOutline };
     },
-
+    
     data() {
         return {
             login:0,

@@ -158,7 +158,7 @@ export default defineComponent({
           let vm = this
           try {
           await axios.post(ip_server+'autentifikasi/login_mobile',{username:this.email,password:this.pwd}).then(async function (res) {
-                  await Preferences.set({
+            await Preferences.set({
                       key: "token",
                       value: res.data.token,
                   });
