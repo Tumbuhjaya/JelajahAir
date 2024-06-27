@@ -181,7 +181,6 @@ export default defineComponent({
             for (let i = 0; i <  vm.spam_desa.length; i++) {
                 vm.spam_desa[i].src=ip_server+'foto/'+  vm.spam_desa[i].foto_1 
             }
-            console.log(vm.spam_desa,'spam_desa');
             vm.loading = false
 
     },

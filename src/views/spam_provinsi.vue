@@ -20,19 +20,19 @@
         <ion-row>
           <ion-col size="12">
             <ion-input type="text" v-model="nama" placeholder="Cari Sumber Air " class="custom"></ion-input>
-            <ion-button @click="get_sumber_air">Cari</ion-button>
+            <ion-button @click="get_spam_desa">Cari</ion-button>
           </ion-col>
         </ion-row>
         <ion-row style="margin-top: 15px;">
-            <ion-col size="6"  v-for="(sumber_air, i) in sumber_air" :key="i">
-                <div style="width: 100%;position: relative;border-radius: 10px;overflow: hidden;" @click="$router.push('/tabs/sumber_air_sekitar/detail/'+sumber_air.OGR_FID)">
-                    <ion-img v-if="sumber_air.foto_1" :src="sumber_air.src" style="width: 100%;height: 240px;object-fit: cover;"></ion-img>
+            <ion-col size="6"  v-for="(spam_desa, i) in spam_desa" :key="i">
+                <div style="width: 100%;position: relative;border-radius: 10px;overflow: hidden;" @click="$router.push('/tabs/spam_desa/detail/'+spam_desa.id+'/'+spam_desa.table)">
+                    <ion-img v-if="spam_desa.foto_1" :src="spam_desa.src" style="width: 100%;height: 240px;object-fit: cover;"></ion-img>
                     <ion-img v-else src="https://via.placeholder.com/240" style="width: 100%;height: 240px;object-fit: cover;"></ion-img>
 
                     <div style="width: 100%;height: 100%;position: absolute;left:0;right: 0;top:0;bottom:0;background-color: rgba(0, 0, 0, 0.19);"></div>
                     <div style="position: absolute;left:0;right: 0;bottom: 0;padding: 10px;">
-                        <h5 style="color: #fff;font-weight: bold;font-size: 14px;">{{sumber_air.nama?sumber_air.nama:''}}</h5>
-                        <h6 style="color: #fff;font-size: 10px;font-weight: normal;margin-top: 5px !important;">{{sumber_air.kab_kot?sumber_air.kab_kot:''}},{{sumber_air.kecamatan?sumber_air.kecamatan:''}},{{sumber_air.desa_kel?sumber_air.desa_kel:''}}</h6>
+                        <h5 style="color: #fff;font-weight: bold;font-size: 14px;">{{spam_desa.nama?spam_desa.nama:''}}</h5>
+                        <h6 style="color: #fff;font-size: 10px;font-weight: normal;margin-top: 5px !important;">{{spam_desa.kab_kot?spam_desa.kab_kot:''}},{{spam_desa.kecamatan?spam_desa.kecamatan:''}},{{spam_desa.desa_kel?spam_desa.desa_kel:''}}</h6>
                     </div>
                 </div>
             </ion-col>
@@ -68,11 +68,11 @@ export default defineComponent({
         return { arrowBackCircleOutline };
     },
     async ionViewDidEnter() {
-        this.get_sumber_air()
+        this.get_spam_desa()
     },
     data() {
         return {
-            sumber_air :[],
+            spam_desa :[],
             page:1,
             nama:'',
             cari:'',
@@ -83,14 +83,23 @@ export default defineComponent({
         async  loadData(ev){
           let vm = this
           vm.page++ 
-        let list_sumber_air = await axios({
+        let list_spam_desa = await axios({
         method: "post",
-        data:{desa:1 , limit: 10 , offset:10*(vm.page-1) , nama:vm.cari},
-            url: ip_server + `sumber_air/list`,
+        data:{desa:1 , limit: 5 , offset:5*(vm.page-1) , nama:vm.cari},
+            url: ip_server + `spam_desa/list`,
         })
-            let data = list_sumber_air.data.data
+        let list_spam_desa2 = await axios({
+        method: "post",
+        data:{desa:1 , limit: 5 , offset:5*(vm.page-1) , nama:vm.cari},
+            url: ip_server + `bpksp_spam/list`,
+        })
+        let data2 = list_spam_desa2.data.data
+
+            let data = list_spam_desa.data.data
           setTimeout(function () {
             for (let i = 0; i <  data.length; i++) {
+              data[i].id = data[i].spam_desa_id
+
               if(data[i].foto_1){
                   if(data[i].foto_1.substring(0,4) == 'http' ){
                       data[i].src =  data[i].foto_1 
@@ -98,32 +107,68 @@ export default defineComponent({
                       data[i].src=ip_server+'foto/'+  data[i].foto_1 
                   }
                 }
-                vm.sumber_air.push(data[i])
-            }       
+                data[i].table = 1
+                vm.spam_desa.push(data[i])
+            }
+            for (let i = 0; i <  data2.length; i++) {
+              data2[i].id = data2[i].bpksp_spam_id
+
+              if(data2[i].foto_1){
+                  if(data2[i].foto_1.substring(0,4) == 'http' ){
+                      data2[i].src =  data2[i].foto_1 
+                  }else if(data2[i].foto_1){
+                      data2[i].src=ip_server+'foto/'+  data2[i].foto_1 
+                  }
+                }
+                data2[i].table = 2
+                vm.spam_desa.push(data2[i])
+            }
           ev.target.complete();
         },setTimeout(5000))
         },
-        async get_sumber_air(){
+        async get_spam_desa(){
         let vm = this
         vm.loading = true
        vm.cari =  vm.nama 
         vm.page = 1
-        let list_sumber_air = await axios({
+        let list_spam_desa = await axios({
         method: "post",
-        data:{desa:1 , limit: 10 , offset:10*(vm.page-1) , nama:vm.cari},
-            url: ip_server + `sumber_air/list`,
+        data:{desa:1 , limit: 5 , offset:5*(vm.page-1) , nama:vm.cari},
+            url: ip_server + `spam_desa/list`,
         })
-            vm.sumber_air = []
-            vm.sumber_air = list_sumber_air.data.data
-            for (let i = 0; i <  vm.sumber_air.length; i++) {
-                vm.sumber_air[i].src=ip_server+'foto/'+  vm.sumber_air[i].foto_1 
-                if(vm.sumber_air[i].foto_1){
-                  if(vm.sumber_air[i].foto_1.substring(0,4) == 'http' ){
-                      vm.sumber_air[i].src =  vm.sumber_air[i].foto_1 
-                  }else if(vm.sumber_air[i].foto_1){
-                      vm.sumber_air[i].src=ip_server+'foto/'+  vm.sumber_air[i].foto_1 
+        let list_spam_desa2 = await axios({
+        method: "post",
+        data:{desa:1 , limit: 5 , offset:5*(vm.page-1) , nama:vm.cari},
+            url: ip_server + `bpksp_spam/list`,
+        })
+        let data2 = list_spam_desa2.data.data
+
+            vm.spam_desa = []
+            vm.spam_desa = list_spam_desa.data.data
+            for (let i = 0; i <  vm.spam_desa.length; i++) {
+              vm.spam_desa[i].id = vm.spam_desa[i].spam_desa_id
+              vm.spam_desa[i].table = 1
+
+                vm.spam_desa[i].src=ip_server+'foto/'+  vm.spam_desa[i].foto_1 
+                if(vm.spam_desa[i].foto_1){
+                  if(vm.spam_desa[i].foto_1.substring(0,4) == 'http' ){
+                      vm.spam_desa[i].src =  vm.spam_desa[i].foto_1 
+                  }else if(vm.spam_desa[i].foto_1){
+                      vm.spam_desa[i].src=ip_server+'foto/'+  vm.spam_desa[i].foto_1 
                   }
                 }
+            }
+            for (let i = 0; i <  data2.length; i++) {
+              if(data2[i].foto_1){
+                  if(data2[i].foto_1.substring(0,4) == 'http' ){
+                      data2[i].src =  data2[i].foto_1 
+                  }else if(data2[i].foto_1){
+                      data2[i].src=ip_server+'foto/'+  data2[i].foto_1 
+                  }
+                }
+                data2[i].table = 2
+                data2[i].id = data2[i].bpksp_spam_id
+                vm.spam_desa.push(data2[i])
             }
             vm.loading = false
 
