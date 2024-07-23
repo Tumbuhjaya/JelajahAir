@@ -41,8 +41,8 @@
                         <ion-input  class="custom" placeholder="Password" type="password" v-model="pwd" ></ion-input>
 
                         <div style="width: 100%;display: flex;justify-content: center;align-items: center;margin-top: 15px;padding: 0 60px;">
-                            <ion-button style="text-transform: capitalize;border-radius: 20px;width: 100%;" color="primary" size="large" @click="submit_register">Daftar</ion-button>
-                            <ion-button style="text-transform: capitalize;border-radius: 20px;width: 100%;" color="primary" size="large" @click="login_google">Google</ion-button>
+                          <ion-button style="text-transform: capitalize;border-radius: 20px;width: 100%;" color="primary" size="large"  @click="submit_login">Masuk</ion-button>
+                          <ion-button style="text-transform: capitalize;border-radius: 20px;width: 100%;" color="primary" size="large" @click="login_google">Google</ion-button>
                           </div>
                             
                     </ion-col>
