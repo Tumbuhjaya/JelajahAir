@@ -1,56 +1,185 @@
 <template>
-  <ion-page >
+  <ion-page>
     <ion-header>
-        <div class="w-100-flex" style="padding: 0 20px;">
-            <div style="width: 15%;height: 60px;background-color: ;display: flex;justify-content: center;align-items: center;flex-direction: column;">
-                <ion-icon :icon="arrowBackCircleOutline" color="light" size="large" @click="$router.push('/tabs/dashboard')"></ion-icon>
-            </div>
-            <div style="width: 70%;height: 60px;background-color: ;display: flex;justify-content: center;align-items: center;flex-direction: column;">
-                <h5 style="color: #fff;font-weight: bold;">Statistik</h5>
-            </div>
-            <div style="width: 15%;height: 60px;background-color: ;display: flex;justify-content: center;align-items: flex-start;flex-direction: column;">
-                
-            </div>
-        </div>
+        <ion-toolbar>
+            <ion-grid style="padding-left: 10px;padding-right: 10px;">
+                <ion-row>
+                    <ion-col size="2">
+                        <div style="width: 100%;height: 30px;background-color: ;display: flex;justify-content: flex-start;align-items: center;">
+                            <ion-icon :icon="arrowBackCircleOutline" color="light" @click="$router.push('/tabs/dashboard')" style="font-size: 26px;"></ion-icon>
+                        </div>
+                    </ion-col>
+                    <ion-col size="8">
+                        <div style="width: 100%;height: 30px;background-color: ;display: flex;justify-content: center;align-items: center;">
+                            <ion-text class="ion-text-center">
+                                <h6 class="fz-18 fc-white">Statistik</h6>
+                            </ion-text>
+                        </div>
+                        
+                    </ion-col>
+                    <ion-col size="2"></ion-col>
+                </ion-row>
+            </ion-grid>
+        </ion-toolbar>
     </ion-header>
-    <ion-content >
-      <ion-grid style="padding: 15px 20px;">
-        <ion-row>
-            <ion-col size="6">
-                <ion-img src="/assets/js.png" style="width: 100%;"></ion-img>
-            </ion-col>
+    <ion-content :fullscreen="true">
+        <ion-grid style="padding: 0 10px;margin-top:15px;">
+            <ion-row>
+                <ion-col size="12">
+                    <ion-text class="ion-text-center">
+                        <h6><strong>Informasi Sumber Air Baku</strong></h6>
+                    </ion-text>
+                    <ion-text class="ion-text-center">
+                        <h6>Provinsi Jawa Tengah</h6>
+                    </ion-text>
+                </ion-col>
+            </ion-row>
+            <ion-row style="margin-top: 5px;">
+                <ion-col size="6">
+                    <div style="width: 100%;height: 100px;background-color: #9747FF;border-radius: 8px;box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;display: flex;justify-content: center;align-items: flex-start;flex-direction: column;padding: 0 15px;">
+                        <ion-text>
+                            <h6 class="fz-14 fc-white">Jumlah<br/>Sumur Dalam</h6>
+                        </ion-text>
+                        <div style="width: 100%;height: 2px;background-color: #e0e0e0;margin: 5px 0;"></div>
+                        <ion-text>
+                            <h6 class="fz-20 fc-white" style="font-weight: bold;">0000</h6>
+                        </ion-text>
+                    </div>
+                </ion-col>
 
-            <ion-col size="6">
-                <ion-img src="/assets/jt.png" style="width: 100%;"></ion-img>
-            </ion-col>
-        </ion-row>
-        <ion-row>
-            <ion-col size="6">
-                <ion-img src="/assets/jl.png" style="width: 100%;"></ion-img>
-            </ion-col>
+                <ion-col size="6">
+                    <div style="width: 100%;height: 100px;background-color: #ffc107;border-radius: 8px;box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;display: flex;justify-content: center;align-items: flex-start;flex-direction: column;padding: 0 15px;">
+                        <ion-text>
+                            <h6 class="fz-14 fc-white">Jumlah<br/>Mata Air</h6>
+                        </ion-text>
+                        <div style="width: 100%;height: 2px;background-color: #e0e0e0;margin: 5px 0;"></div>
+                        <ion-text>
+                            <h6 class="fz-20 fc-white" style="font-weight: bold;">0000</h6>
+                        </ion-text>
+                    </div>
+                </ion-col>
+            </ion-row>
 
-            <ion-col size="6">
-                <ion-img src="/assets/jtj.png" style="width: 100%;"></ion-img>
-            </ion-col>
-        </ion-row>
-        <ion-row>
-            <ion-col size="12">
-                <apexchart
-                  width="100%"
-                  type="bar"
-                  height="300"
-                  :options="chartOptions"
-                  :series="series"
-                ></apexchart>
-            </ion-col>
-        </ion-row>
-      </ion-grid>
+            <ion-row>
+                <ion-col size="4">
+                    <div style="width: 100%;height: 100px;background-color: #2770DE;border-radius: 8px;box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;display: flex;justify-content: center;align-items: flex-start;flex-direction: column;padding: 0 15px;">
+                        <ion-text>
+                            <h6 class="fz-14 fc-white">Jumlah<br/>Danau</h6>
+                        </ion-text>
+                        <div style="width: 100%;height: 2px;background-color: #e0e0e0;margin: 5px 0;"></div>
+                        <ion-text>
+                            <h6 class="fz-20 fc-white" style="font-weight: bold;">0000</h6>
+                        </ion-text>
+                    </div>
+                </ion-col>
+
+                <ion-col size="4">
+                    <div style="width: 100%;height: 100px;background-color: #FF6666;border-radius: 8px;box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;display: flex;justify-content: center;align-items: flex-start;flex-direction: column;padding: 0 15px;">
+                        <ion-text>
+                            <h6 class="fz-14 fc-white">Jumlah<br/>Waduk</h6>
+                        </ion-text>
+                        <div style="width: 100%;height: 2px;background-color: #e0e0e0;margin: 5px 0;"></div>
+                        <ion-text>
+                            <h6 class="fz-20 fc-white" style="font-weight: bold;">0000</h6>
+                        </ion-text>
+                    </div>
+                </ion-col>
+
+                <ion-col size="4">
+                    <div style="width: 100%;height: 100px;background-color: #42BD53;border-radius: 8px;box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;display: flex;justify-content: center;align-items: flex-start;flex-direction: column;padding: 0 15px;">
+                        <ion-text>
+                            <h6 class="fz-14 fc-white">Jumlah<br/>Embung</h6>
+                        </ion-text>
+                        <div style="width: 100%;height: 2px;background-color: #e0e0e0;margin: 5px 0;"></div>
+                        <ion-text>
+                            <h6 class="fz-20 fc-white" style="font-weight: bold;">0000</h6>
+                        </ion-text>
+                    </div>
+                </ion-col>
+            </ion-row>
+        </ion-grid>
+
+        <ion-grid style="padding: 0 10px;margin-top:15px;">
+            <ion-row>
+                <ion-col size="12">
+                    <ion-text class="ion-text-center">
+                        <h6><strong>Informasi Profil SPAM</strong></h6>
+                    </ion-text>
+                    <ion-text class="ion-text-center">
+                        <h6>Provinsi Jawa Tengah</h6>
+                    </ion-text>
+                </ion-col>
+            </ion-row>
+            <!-- <ion-row style="margin-top: 5px;">
+                <ion-col size="6">
+                    <div style="width: 100%;height: 100px;background-color: ;border-radius: 8px;box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;display: flex;justify-content: center;align-items: flex-start;flex-direction: column;padding: 0 15px;">
+                        <ion-text>
+                            <h6 class="fz-16">Jumlah<br/>Sumur Dalam</h6>
+                        </ion-text>
+                        <div style="width: 100%;height: 1px;background-color: black;margin: 5px 0;"></div>
+                        <ion-text>
+                            <h6 class="fz-20" style="font-weight: bold;">0000</h6>
+                        </ion-text>
+                    </div>
+                </ion-col>
+
+                <ion-col size="6">
+                    <div style="width: 100%;height: 100px;background-color: ;border-radius: 8px;box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;display: flex;justify-content: center;align-items: flex-start;flex-direction: column;padding: 0 15px;">
+                        <ion-text>
+                            <h6 class="fz-16">Jumlah<br/>Mata Air</h6>
+                        </ion-text>
+                        <div style="width: 100%;height: 1px;background-color: black;margin: 5px 0;"></div>
+                        <ion-text>
+                            <h6 class="fz-20" style="font-weight: bold;">0000</h6>
+                        </ion-text>
+                    </div>
+                </ion-col>
+            </ion-row> -->
+
+            <ion-row>
+                <ion-col size="6">
+                    <div style="width: 100%;height: 100px;background-color:#42BD53 ;border-radius: 8px;box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;display: flex;justify-content: center;align-items: flex-start;flex-direction: column;padding: 0 15px;">
+                        <ion-text>
+                            <h6 class="fz-14 fc-white">Desa Terlayani SPAM</h6>
+                        </ion-text>
+                        <div style="width: 100%;height: 2px;background-color: #e0e0e0;margin: 5px 0;"></div>
+                        <ion-text>
+                            <h6 class="fz-20 fc-white" style="font-weight: bold;">0000</h6>
+                        </ion-text>
+                    </div>
+                </ion-col>
+
+                <ion-col size="6">
+                    <div style="width: 100%;height: 100px;background-color: #9747FF;border-radius: 8px;box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;display: flex;justify-content: center;align-items: flex-start;flex-direction: column;padding: 0 15px;">
+                        <ion-text>
+                            <h6 class="fz-14 fc-white">Desa Belum Terlayani SPAM</h6>
+                        </ion-text>
+                        <div style="width: 100%;height: 2px;background-color: #e0e0e0;margin: 5px 0;"></div>
+                        <ion-text>
+                            <h6 class="fz-20 fc-white" style="font-weight: bold;">0000</h6>
+                        </ion-text>
+                    </div>
+                </ion-col>
+
+                <ion-col size="12">
+                    <div style="width: 100%;height: 100px;background-color:#2770DE ;border-radius: 8px;box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;display: flex;justify-content: center;align-items: flex-start;flex-direction: column;padding: 0 15px;">
+                        <ion-text>
+                            <h6 class="fz-14 fc-white">Prosentasi Desa Terlayani SPAM</h6>
+                        </ion-text>
+                        <div style="width: 100%;height: 2px;background-color: #e0e0e0;margin: 5px 0;"></div>
+                        <ion-text>
+                            <h6 class="fz-20 fc-white" style="font-weight: bold;">0000</h6>
+                        </ion-text>
+                    </div>
+                </ion-col>
+            </ion-row>
+        </ion-grid>
     </ion-content>
   </ion-page>
 </template>
 
 <script>
-import { IonIcon,IonImg,IonPage, IonHeader, IonContent, IonGrid, IonRow, IonCol } from '@ionic/vue';
+import { IonPage, IonHeader, IonToolbar, IonContent, IonGrid, IonRow, IonCol, IonIcon, IonText, } from '@ionic/vue';
 import { defineComponent } from 'vue';
 import { arrowBackCircleOutline  } from 'ionicons/icons';
 import axios from "axios";
@@ -60,120 +189,51 @@ moment.locale("id");
 import VueApexCharts from "vue3-apexcharts";
 export default defineComponent({
     components: {
-        IonIcon,IonImg,
         IonPage,
         IonHeader,
+        IonToolbar,
         IonContent,
         IonGrid,
         IonRow,
         IonCol,
+        IonIcon,
+        IonText,
         apexchart: VueApexCharts,
     },
     setup() {
         return { arrowBackCircleOutline };
     },
-    data() {
-        return {
-            jumlah_terlayani:0,
-            series: [
-                {
-                data: [1.4, 2, 2.5, 1.5, 2.5, 2.8, 3.8, 4.6]
-                },
-                {
-                data: [20, 29, 37, 36, 44, 45, 50, 58]
-                },
-                {
-                data: [20, 29, 37, 36, 44, 45, 50, 58]
-                }
-            ],
-            chartOptions: {
-                chart: {
-                type: "bar",
-                },
-                dataLabels: {
-                style: {
-                    fontSize: "16px",
-                    fontFamily: "Helvetica, Arial, sans-serif",
-                    fontWeight: "bold",
-                    colors: ["#000"],
-                },
-                dropShadow: {
-                    enabled: false,
-                    top: 1,
-                    left: 1,
-                    blur: 0.5,
-                    color: "#ffff",
-                    opacity: 0.5,
-                },
-                },
-                labels: [],
-                datasets: [ { data: [40, 20, 12] } ],
-                colors: [
-                "#298FFA",
-                "#15E597",
-                "#FDB01A",
-                "#FC4560",
-                "#775ED0",
-                "#d400ff",
-                ],
-                plotOptions: {
-                bar: {
-                    horizontal: false
-                },
-                },
-                responsive: [
-                {
-                    breakpoint: 480,
-                    options: {
-                    chart: {
-                        width: "100%",
-                    },
-                    legend: {
-                        show: false,
-                        position: "right",
-                    },
-                    },
-                },
-                ],
-            },
-        };
-    },
-    methods: {
-        async  get_terlayani(){
-        let vm = this
-        let api = await axios({
-        method: "post",
-            // url: ip_server + `api/data_jelajah_air/list`,
-            url: ip_server + `jelajah_air/cakupan_desa`,
-            // data:{trlyni_50:1 , group:'kabupaten'}
-        })
-        // for (let i = 0; i < api.data.data.length; i++) {
-        //     api.data.data[i].y= Number(api.data.data[i].y)
-        //     api.data.data[i].x=api.data.data[i].label
-        //     this.jumlah_terlayani+=Number(api.data.data[i].y)
-        // }
-            console.log(vm.series);
-            vm.series[0].data =[]
-            vm.series[1].data =[]
-            vm.series[2].data =[]
-            console.log(vm.chartOptions.labels);
-
-            for (let i = 0; i < api.data.lebih.length; i++) {
-                vm.series[0].data.push(api.data.lebih[i].y)
-                vm.series[1].data.push(api.data.kurang[i].y)
-                vm.series[2].data.push(api.data.belum[i].y)
-                vm.chartOptions.labels.push(api.data.belum[i].label)
-            }
-            console.log(vm.chartOptions.labels);
-            // console.log(vm.series[0].data);
-
-        },
-    },
-    async ionViewDidEnter() {
-       await this.get_terlayani()
-    }
+    
 });
 </script>
 <style scoped>
+    ion-toolbar{
+        --background:#2f63c8;
+    }
+    h1,h2,h3,h4,h5,h6{
+        margin: 0;
+        padding: 0;
+    }
+    .fc-white{
+        color: #fff;
+    }
+    .fz-12{
+        font-size: 12px;
+    }
 
+    .fz-14{
+        font-size: 14px;
+    }
+
+    .fz-16{
+        font-size: 16px;
+    }
+
+    .fz-18{
+        font-size: 18px;
+    }
+
+    .fz-20{
+        font-size: 20px;
+    }
 </style>
