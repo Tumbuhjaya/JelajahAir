@@ -42,7 +42,7 @@
                         </ion-text>
                         <div style="width: 100%;height: 2px;background-color: #e0e0e0;margin: 5px 0;"></div>
                         <ion-text>
-                            <h6 class="fz-20 fc-white" style="font-weight: bold;">0000</h6>
+                            <h6 class="fz-20 fc-white" style="font-weight: bold;">{{ count_sumur_dalam }}</h6>
                         </ion-text>
                     </div>
                 </ion-col>
@@ -54,7 +54,7 @@
                         </ion-text>
                         <div style="width: 100%;height: 2px;background-color: #e0e0e0;margin: 5px 0;"></div>
                         <ion-text>
-                            <h6 class="fz-20 fc-white" style="font-weight: bold;">0000</h6>
+                            <h6 class="fz-20 fc-white" style="font-weight: bold;">{{ count_mata_air }}</h6>
                         </ion-text>
                     </div>
                 </ion-col>
@@ -68,7 +68,7 @@
                         </ion-text>
                         <div style="width: 100%;height: 2px;background-color: #e0e0e0;margin: 5px 0;"></div>
                         <ion-text>
-                            <h6 class="fz-20 fc-white" style="font-weight: bold;">0000</h6>
+                            <h6 class="fz-20 fc-white" style="font-weight: bold;">{{ count_danau }}</h6>
                         </ion-text>
                     </div>
                 </ion-col>
@@ -80,7 +80,7 @@
                         </ion-text>
                         <div style="width: 100%;height: 2px;background-color: #e0e0e0;margin: 5px 0;"></div>
                         <ion-text>
-                            <h6 class="fz-20 fc-white" style="font-weight: bold;">0000</h6>
+                            <h6 class="fz-20 fc-white" style="font-weight: bold;">{{ count_Waduk }}</h6>
                         </ion-text>
                     </div>
                 </ion-col>
@@ -92,7 +92,7 @@
                         </ion-text>
                         <div style="width: 100%;height: 2px;background-color: #e0e0e0;margin: 5px 0;"></div>
                         <ion-text>
-                            <h6 class="fz-20 fc-white" style="font-weight: bold;">0000</h6>
+                            <h6 class="fz-20 fc-white" style="font-weight: bold;">{{ count_Embung }}</h6>
                         </ion-text>
                     </div>
                 </ion-col>
@@ -203,7 +203,89 @@ export default defineComponent({
     setup() {
         return { arrowBackCircleOutline };
     },
-    
+    data() {
+        return {
+            count_sumur_dalam:0,
+            count_mata_air:0,
+            count_danau:0,
+            count_Waduk:0,
+            count_Embung:0,
+        };
+    },
+    methods: {
+        async get_count_sumur_dalam(){
+        let vm = this
+        vm.loading = true
+        vm.page = 1
+        let sumber_air = await axios({
+        method: "post",
+        data:{count:'OGR_FID',jenis:'Sumur'},
+            url: ip_server + `sumber_air/list`,
+        })
+        this.count_sumur_dalam = sumber_air.data.data[0].y
+            console.log(sumber_air);
+            vm.loading = false
+    },
+    async get_count_mata_air(){
+        let vm = this
+        vm.loading = true
+        vm.page = 1
+        let sumber_air = await axios({
+        method: "post",
+        data:{count:'OGR_FID',jenis:'Mata Air'},
+            url: ip_server + `sumber_air/list`,
+        })
+        this.count_mata_air = sumber_air.data.data[0].y
+            console.log(sumber_air);
+            vm.loading = false
+    },
+    async get_count_danau(){
+        let vm = this
+        vm.loading = true
+        vm.page = 1
+        let sumber_air = await axios({
+        method: "post",
+        data:{count:'OGR_FID',jenis:'Danau'},
+            url: ip_server + `sumber_air/list`,
+        })
+        this.count_danau = sumber_air.data.data[0].y
+            console.log(sumber_air);
+            vm.loading = false
+    },
+    async get_count_Waduk(){
+        let vm = this
+        vm.loading = true
+        vm.page = 1
+        let sumber_air = await axios({
+        method: "post",
+        data:{count:'OGR_FID',jenis:'Waduk'},
+            url: ip_server + `sumber_air/list`,
+        })
+        this.count_Waduk = sumber_air.data.data[0].y
+            console.log(sumber_air);
+            vm.loading = false
+    },
+    async get_count_Embung(){
+        let vm = this
+        vm.loading = true
+        vm.page = 1
+        let sumber_air = await axios({
+        method: "post",
+        data:{count:'OGR_FID',jenis:'Embung'},
+            url: ip_server + `sumber_air/list`,
+        })
+        this.count_Embung = sumber_air.data.data[0].y
+            console.log(sumber_air);
+            vm.loading = false
+    },
+    },
+    async ionViewDidEnter() {
+        this.get_count_sumur_dalam()
+        this.get_count_mata_air()
+        this.get_count_danau()
+        this.get_count_Waduk()
+        this.get_count_Embung()
+    },
 });
 </script>
 <style scoped>
