@@ -41,8 +41,9 @@
                         <ion-input  class="custom" placeholder="Password" type="password" v-model="pwd" ></ion-input>
 
                         <div style="width: 100%;display: flex;justify-content: center;align-items: center;margin-top: 15px;padding: 0 60px;">
-                            <ion-button style="text-transform: capitalize;border-radius: 20px;width: 100%;" color="primary" size="large"  @click="submit_login">Masuk</ion-button>
-                        </div>
+                            <ion-button style="text-transform: capitalize;border-radius: 20px;width: 100%;" color="primary" size="large" @click="submit_register">Daftar</ion-button>
+                            <ion-button style="text-transform: capitalize;border-radius: 20px;width: 100%;" color="primary" size="large" @click="login_google">Google</ion-button>
+                          </div>
                             
                     </ion-col>
                 </ion-row>
@@ -65,7 +66,8 @@
 
                             <div style="width: 100%;display: flex;justify-content: center;align-items: center;margin-top: 15px;padding: 0 60px;">
                                 <ion-button style="text-transform: capitalize;border-radius: 20px;width: 100%;" color="primary" size="large" @click="submit_register">Daftar</ion-button>
-                            </div>
+                            
+                              </div>
                         </div>
                     </ion-col>
                 </ion-row>
@@ -86,7 +88,14 @@ import { ip_server } from "@/ip-config.js";
 import moment from "moment";
 moment.locale("id");
 import { Preferences } from '@capacitor/preferences';
+import { GoogleAuth } from '@codetrix-studio/capacitor-google-auth';
 
+// use hook after platform dom ready
+GoogleAuth.initialize({
+  clientId: '576386395599-t2e4r1gpivibj70e3tsme3raeavjo4lm.apps.googleusercontent.com',
+  scopes: ['profile', 'email'],
+  grantOfflineAccess: false,
+});
 export default defineComponent({
     components: {
       IonPage,
@@ -127,6 +136,10 @@ export default defineComponent({
             setTimeout(() => {
                 this.loading = false;
             }, 1000);
+        },
+        async login_google(){
+          const response = await GoogleAuth.signIn();
+          console.log(response);
         },
        async submit_register(){
         let post ={
