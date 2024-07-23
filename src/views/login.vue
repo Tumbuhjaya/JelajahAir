@@ -139,7 +139,32 @@ export default defineComponent({
         },
         async login_google(){
           const response = await GoogleAuth.signIn();
-          console.log(response);
+          console.log([response.email,
+          response.familyName,response.givenName,
+          response.imageUrl,response.id,response.name]);
+          let vm = this
+          let post = {
+            email:response.email,
+            familyName:response.familyName,givenName:response.givenName,
+          imageUrl:response.imageUrl,id:response.id,name:response.name
+          }
+          try {
+          await axios.post(ip_server+'autentifikasi/login_google_mobile',post).then(async function (res) {
+            await Preferences.set({
+                      key: "token",
+                      value: res.data.token,
+                  });
+                  await Preferences.set({
+                      key: "id_user",
+                      value: String(res.data.id_user),
+                  });
+              
+                        vm.loading = false;
+                            vm.$router.push('/tabs/dashboard');
+                            
+          })} catch (error) {
+            alert('Data Tidak Sesuai')
+          }
         },
        async submit_register(){
         let post ={
