@@ -1,11 +1,11 @@
 <template>
   <ion-page>
     <ion-content :fullscreen="true">
-      <ion-grid style="width: 100%;height: 100vh;background-image: url('/assets/bg_ilustrasi.png');background-repeat: no-repeat;background-color: ;background-size: 100%;background-position: center;">
+      <ion-grid style="width: 100%;height: 100vh;background-image: url('/assets/bg_ilustrasi_2.png');background-repeat: no-repeat;background-color: ;background-size: 100%;background-position: center;">
         <ion-row>
           <ion-col size="12">
             <div style="width: 100%;height: 95vh;display: flex;justify-content: flex-end;align-items: flex-end;padding: 0 60px;">
-              <ion-button style="width: 100%;" size="large" @click="$router.push('/tabs/dashboard')">Lanjutkan</ion-button>
+              <ion-button style="width: 100%;text-transform: capitalize;" color="dark" @click="$router.push('/tabs/dashboard')">Mulai Jelajah Air</ion-button>
             </div>
           </ion-col>
         </ion-row>

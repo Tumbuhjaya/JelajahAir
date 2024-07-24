@@ -1,68 +1,102 @@
 <template>
   <ion-page >
     <ion-header>
-        <div class="w-100-flex" style="padding: 0 20px;">
-            <div style="width: 15%;height: 60px;background-color: ;display: flex;justify-content: center;align-items: center;flex-direction: column;">
-                <ion-icon :icon="arrowBackCircleOutline" color="light" size="large" @click="$router.push('/tabs/dashboard')"></ion-icon>
-            </div>
-            <div style="width: 70%;height: 60px;background-color: ;display: flex;justify-content: center;align-items: center;flex-direction: column;">
-                <h5 style="color: #fff;font-weight: bold;">Spam Provinsi</h5>
-            </div>
-            <div style="width: 15%;height: 60px;background-color: ;display: flex;justify-content: center;align-items: flex-start;flex-direction: column;">
-                
-            </div>
-        </div>
+      <ion-toolbar>
+        <ion-grid style="padding-left: 10px;padding-right: 10px;">
+          <ion-row>
+            <ion-col size="2">
+              <div style="width: 100%;height: 30px;background-color: ;display: flex;justify-content: flex-start;align-items: center;">
+                <ion-icon :icon="arrowBackCircleOutline" @click="$router.push('/tabs/dashboard')" style="font-size: 26px;color: #fff;"></ion-icon>
+              </div>
+            </ion-col>
+            <ion-col size="8">
+              <div style="width: 100%;height: 30px;background-color: ;display: flex;justify-content: center;align-items: center;">
+                <ion-text class="ion-text-center">
+                  <h6 class="fz-18 fc-white">Spam Provinsi</h6>
+                </ion-text>
+              </div>
+            </ion-col>
+            <ion-col size="2"></ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-toolbar>
     </ion-header>
     <ion-loading  message="Loading..." v-if="loading" spinner="circles"></ion-loading>
 
-<ion-content v-else>
-      <ion-grid style="padding: 15px 20px;">
+    <ion-content :fullscreen="true" v-else>
+      <ion-grid style="padding:0 10px;margin-top: 15px;">
         <ion-row>
           <ion-col size="12">
             <ion-input type="text" v-model="nama" placeholder="Cari Sumber Air " class="custom"></ion-input>
-            <ion-button @click="get_spam_desa">Cari</ion-button>
+            <ion-button @click="get_spam_desa" style="margin-top: 10px;text-transform: capitalize;">Cari</ion-button>
           </ion-col>
         </ion-row>
-        <ion-row style="margin-top: 15px;">
+      </ion-grid>
+      <ion-grid style="padding: 0 15px;">
+        <ion-row>
             <ion-col size="6"  v-for="(spam_desa, i) in spam_desa" :key="i">
                 <div style="width: 100%;position: relative;border-radius: 10px;overflow: hidden;" @click="$router.push('/tabs/spam_desa/detail/'+spam_desa.id+'/'+spam_desa.table)">
-                    <ion-img v-if="spam_desa.foto_1" :src="spam_desa.src" style="width: 100%;height: 240px;object-fit: cover;"></ion-img>
-                    <ion-img v-else src="https://via.placeholder.com/240" style="width: 100%;height: 240px;object-fit: cover;"></ion-img>
+                    <ion-img v-if="spam_desa.foto_1" :src="spam_desa.src" style="width: 100%;height: 200px;object-fit: cover;"></ion-img>
+                    <ion-img v-else src="https://via.placeholder.com/240" style="width: 100%;height: 200px;object-fit: cover;"></ion-img>
 
-                    <div style="width: 100%;height: 100%;position: absolute;left:0;right: 0;top:0;bottom:0;background-color: rgba(0, 0, 0, 0.19);"></div>
-                    <div style="position: absolute;left:0;right: 0;bottom: 0;padding: 10px;">
+                    <ion-badge color="primary" style="position: absolute;top:10px;right:10px;">
+                      <ion-text>
+                        <h6 class="fz-10 fc-white" style="font-weight:bold;">{{spam_desa.kab_kot?spam_desa.kab_kot:''}}</h6>
+                      </ion-text>
+                    </ion-badge>
+
+                    <div style="width:100%;padding:20px 10px;background-color: rgba(0, 0, 0, 0.8);position: absolute;left:0;right:0;bottom:0;">
+                      <ion-text>
                         <h5 style="color: #fff;font-weight: bold;font-size: 14px;">{{spam_desa.nama?spam_desa.nama:''}}</h5>
-                        <h6 style="color: #fff;font-size: 10px;font-weight: normal;margin-top: 5px !important;">{{spam_desa.kab_kot?spam_desa.kab_kot:''}},{{spam_desa.kecamatan?spam_desa.kecamatan:''}},{{spam_desa.desa_kel?spam_desa.desa_kel:''}}</h6>
+                      </ion-text>
+
+                      <div style="width:100%;height:1px;background-color:#fff;margin:5px 0;"></div>
+                            
+                      <ion-text>
+                        <h6 class="fz-10 fc-white" style="font-weight:normal;">Kec. {{spam_desa.kecamatan?spam_desa.kecamatan:''}} Kel. {{spam_desa.desa_kel?spam_desa.desa_kel:''}}</h6>
+                      </ion-text>
                     </div>
                 </div>
             </ion-col>
         </ion-row>
-        <ion-infinite-scroll threshold="10%" @ionInfinite="loadData">
-        <ion-infinite-scroll-content loading-spinner="bubbles" loading-text=" Loading more item">
-          
-        </ion-infinite-scroll-content>
-      </ion-infinite-scroll>
+        <ion-row>
+          <ion-col size="12">
+            <ion-infinite-scroll threshold="10%" @ionInfinite="loadData">
+              <ion-infinite-scroll-content loading-spinner="bubbles" loading-text=" Loading more item">
+              
+              </ion-infinite-scroll-content>
+            </ion-infinite-scroll>
+          </ion-col>
+        </ion-row>
       </ion-grid>
     </ion-content>
   </ion-page>
 </template>
 
 <script>
-import { IonPage, IonHeader,IonInput, IonContent,IonLoading,IonImg,IonButton,IonIcon,IonInfiniteScroll,IonInfiniteScrollContent, IonGrid, IonRow, IonCol } from '@ionic/vue';
+import { IonPage, IonHeader, IonToolbar, IonInput, IonContent, IonLoading, IonImg, IonButton, IonIcon, IonInfiniteScroll, IonInfiniteScrollContent, IonGrid, IonRow, IonCol, IonText, IonBadge } from '@ionic/vue';
 import { defineComponent } from 'vue';
 import axios from "axios";
 import { ip_server } from "@/ip-config.js";
 import { arrowBackCircleOutline  } from 'ionicons/icons';
 export default defineComponent({
     components: {
-      IonInfiniteScroll,IonInfiniteScrollContent,IonImg,IonButton,IonIcon,IonLoading,
+        IonInfiniteScroll,
+        IonInfiniteScrollContent,
+        IonImg,
+        IonButton,
+        IonIcon,
+        IonLoading,
         IonInput,
         IonPage,
         IonHeader,
+        IonToolbar,
         IonContent,
         IonGrid,
         IonRow,
-        IonCol
+        IonCol, 
+        IonText,
+        IonBadge
     },
     setup() {
         return { arrowBackCircleOutline };

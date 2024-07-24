@@ -6,7 +6,7 @@
                 <ion-row>
                     <ion-col size="2">
                         <div style="width: 100%;height: 30px;background-color: ;display: flex;justify-content: flex-start;align-items: center;">
-                            <ion-icon :icon="arrowBackCircleOutline" color="light" @click="$router.push('/tabs/dashboard')" style="font-size: 26px;"></ion-icon>
+                            <ion-icon :icon="arrowBackCircleOutline" @click="$router.push('/tabs/dashboard')" style="font-size: 26px;color:#fff"></ion-icon>
                         </div>
                     </ion-col>
                     <ion-col size="8">
@@ -27,10 +27,10 @@
             <ion-row>
                 <ion-col size="12">
                     <ion-text class="ion-text-center">
-                        <h6><strong>Informasi Sumber Air Baku</strong></h6>
+                        <h6 class="fz-16 fc-black"><strong>Informasi Sumber Air Baku</strong></h6>
                     </ion-text>
                     <ion-text class="ion-text-center">
-                        <h6>Provinsi Jawa Tengah</h6>
+                        <h6 class="fz-16 fc-black">Provinsi Jawa Tengah</h6>
                     </ion-text>
                 </ion-col>
             </ion-row>
@@ -103,10 +103,10 @@
             <ion-row>
                 <ion-col size="12">
                     <ion-text class="ion-text-center">
-                        <h6><strong>Informasi Profil SPAM</strong></h6>
+                        <h6 class="fz-16 fc-black"><strong>Informasi Profil SPAM</strong></h6>
                     </ion-text>
                     <ion-text class="ion-text-center">
-                        <h6>Provinsi Jawa Tengah</h6>
+                        <h6 class="fz-16 fc-black">Provinsi Jawa Tengah</h6>
                     </ion-text>
                 </ion-col>
             </ion-row>
@@ -321,33 +321,5 @@ await this.get_count_penduduk()
 });
 </script>
 <style scoped>
-    ion-toolbar{
-        --background:#2f63c8;
-    }
-    h1,h2,h3,h4,h5,h6{
-        margin: 0;
-        padding: 0;
-    }
-    .fc-white{
-        color: #fff;
-    }
-    .fz-12{
-        font-size: 12px;
-    }
-
-    .fz-14{
-        font-size: 14px;
-    }
-
-    .fz-16{
-        font-size: 16px;
-    }
-
-    .fz-18{
-        font-size: 18px;
-    }
-
-    .fz-20{
-        font-size: 20px;
-    }
+    
 </style>

@@ -1,99 +1,78 @@
 <template>
   <ion-page >
     <ion-header>
-        <div class="w-100-flex" style="padding: 0 20px;">
-            <div style="width: 15%;height: 60px;background-color: ;display: flex;justify-content: center;align-items: center;flex-direction: column;">
-                <ion-icon :icon="arrowBackCircleOutline" color="light" size="large" @click="$router.push('/tabs/dashboard')"></ion-icon>
-            </div>
-            <div style="width: 70%;height: 60px;background-color: ;display: flex;justify-content: center;align-items: center;flex-direction: column;">
-                <h5 style="color: #fff;font-weight: bold;">Detail Sumber Air Bersih</h5>
-            </div>
-            <div style="width: 15%;height: 60px;background-color: ;display: flex;justify-content: center;align-items: flex-start;flex-direction: column;">
-                
-            </div>
-        </div>
+        <ion-toolbar>
+            <ion-grid style="padding-left: 10px;padding-right: 10px;">
+                <ion-row>
+                    <ion-col size="2">
+                    <div style="width: 100%;height: 30px;background-color: ;display: flex;justify-content: flex-start;align-items: center;">
+                        <ion-icon :icon="arrowBackCircleOutline" @click="$router.push('/tabs/dashboard')" style="font-size: 26px;color:#fff"></ion-icon>
+                    </div>
+                    </ion-col>
+                    <ion-col size="8">
+                    <div style="width: 100%;height: 30px;background-color: ;display: flex;justify-content: center;align-items: center;">
+                        <ion-text class="ion-text-center">
+                        <h6 class="fz-18 fc-white">Detail Sumber Air</h6>
+                        </ion-text>
+                    </div>
+                    </ion-col>
+                    <ion-col size="2"></ion-col>
+                </ion-row>
+            </ion-grid>
+        </ion-toolbar>
     </ion-header>
-    <ion-content >
-      <ion-grid style="padding: 15px 20px;">
+    <ion-content :fullscreen="true">
+      <ion-grid style="padding: 0 10px;margin-top:15px;">
+        <ion-row>
+            <ion-col size="12">
+                <ion-text class="ion-text-center">
+                    <h6 class="fz-20"><strong>Nama Sumber Air</strong></h6>
+                </ion-text>
+            </ion-col>
+        </ion-row>
+
         <ion-row>
             <ion-col size="12">
                 <ion-img v-if="sumber_air.foto_1" :src="sumber_air.src" style="width: 100%;"></ion-img>
                 <ion-img v-else src="https://via.placeholder.com/640x360" style="width: 100%;"></ion-img>
             </ion-col>
+        </ion-row>
+
+        <ion-row>
+            <ion-col size="12">
+                <ion-text>
+                    <h6 class="fz-16 fc-black"><strong>Jenis</strong></h6>
+                </ion-text>
+                <ion-text>
+                    <h6 class="fz-14 ">{{ sumber_air.jenis }}</h6>
+                </ion-text>
+            </ion-col>
 
             <ion-col size="12">
-                <h2 style="text-align: center;"><strong>Sumber Air Pringkung</strong></h2>
-                <div style="display: table;margin-top: 15px;">
-                    <div style="display: table-row;">
-                        <div style="display: table-cell;width: 130px;">
-                            <h6 style="font-size: 16px;">Jenis</h6>
-                        </div>
+                <ion-text>
+                    <h6 class="fz-16 fc-black"><strong>Kabupaten/Kota</strong></h6>
+                </ion-text>
+                <ion-text>
+                    <h6 class="fz-14 fc-black">{{ sumber_air.kab_kot }}</h6>
+                </ion-text>
+            </ion-col>
 
-                        <div style="display: table-cell;width: 10px;">
-                            <h6 style="font-size: 16px;">:</h6>
-                        </div>
+            <ion-col size="12">
+                <ion-text>
+                    <h6 class="fz-16 fc-black"><strong>Kecamatan</strong></h6>
+                </ion-text>
+                <ion-text>
+                    <h6 class="fz-14 fc-black">{{ sumber_air.kecamatan }}</h6>
+                </ion-text>
+            </ion-col>
 
-                        <div style="display: table-cell;">
-                            <h6 style="font-size: 16px;font-weight: normal;">{{ sumber_air.jenis }}</h6>
-                        </div>
-                    </div>
-
-                    <div style="display: table-row;">
-                        <div style="display: table-cell;">
-                            <h6 style="font-size: 16px;">Kabupaten/Kota</h6>
-                        </div>
-
-                        <div style="display: table-cell;">
-                            <h6 style="font-size: 16px;">:</h6>
-                        </div>
-
-                        <div style="display: table-cell;">
-                            <h6 style="font-size: 16px;font-weight: normal;">{{ sumber_air.kab_kot }}</h6>
-                        </div>
-                    </div>
-
-                    <div style="display: table-row;">
-                        <div style="display: table-cell;">
-                            <h6 style="font-size: 16px;">Kecamatan</h6>
-                        </div>
-
-                        <div style="display: table-cell;">
-                            <h6 style="font-size: 16px;">:</h6>
-                        </div>
-
-                        <div style="display: table-cell;">
-                            <h6 style="font-size: 16px;font-weight: normal;">{{ sumber_air.kecamatan }}</h6>
-                        </div>
-                    </div>
-
-                    <div style="display: table-row;">
-                        <div style="display: table-cell;">
-                            <h6 style="font-size: 16px;">Kelurahan/Desa</h6>
-                        </div>
-
-                        <div style="display: table-cell;">
-                            <h6 style="font-size: 16px;">:</h6>
-                         </div>
-
-                        <div style="display: table-cell;">
-                            <h6 style="font-size: 16px;font-weight: normal;">{{ sumber_air.desa_kel }}</h6>
-                        </div>
-                    </div>
-
-                    <!-- <div style="display: table-row;">
-                        <div style="display: table-cell;width: 100px;">
-                            <h6 style="font-size: 16px;">Deskripsi</h6>
-                        </div>
-
-                        <div style="display: table-cell;width: 10px;">
-                            <h6 style="font-size: 16px;">:</h6>
-                        </div>
-
-                        <div style="display: table-cell;">
-                            <h6 style="font-size: 16px;font-weight: normal;">{{ sumber_air.foto_1 }}</h6>
-                        </div>
-                    </div>  -->
-                </div>
+            <ion-col size="12">
+                <ion-text>
+                    <h6 class="fz-16 fc-black"><strong>Kelurahan/Desa</strong></h6>
+                </ion-text>
+                <ion-text>
+                    <h6 class="fz-14 fc-black">{{ sumber_air.desa_kel }}</h6>
+                </ion-text>
             </ion-col>
         </ion-row>
       </ion-grid>
@@ -102,7 +81,7 @@
 </template>
 
 <script>
-import { IonIcon,IonImg,IonPage, IonHeader, IonContent, IonGrid, IonRow, IonCol } from '@ionic/vue';
+import { IonIcon, IonImg, IonPage, IonHeader, IonToolbar, IonContent, IonGrid, IonRow, IonCol, IonText, IonBadge } from '@ionic/vue';
 import { defineComponent} from 'vue';
 import { arrowBackCircleOutline  } from 'ionicons/icons';
 import axios from "axios";
@@ -110,13 +89,17 @@ import { ip_server } from "@/ip-config.js";
 import { useRoute } from 'vue-router';
 export default defineComponent({
     components: {
-        IonIcon,IonImg,
+        IonIcon,
+        IonImg,
         IonPage,
         IonHeader,
+        IonToolbar,
         IonContent,
         IonGrid,
         IonRow,
-        IonCol
+        IonCol,
+        IonText,
+        IonBadge
     },
     setup() {
         return { arrowBackCircleOutline };
