@@ -20,7 +20,7 @@
 
         <ion-tab-button tab="tab4" href="/tabs/tab4">
           <ion-icon aria-hidden="true" :icon="personCircleOutline" />
-          <ion-label>Profil</ion-label>
+          <ion-label>Logout</ion-label>
         </ion-tab-button>
       </ion-tab-bar>
     </ion-tabs>

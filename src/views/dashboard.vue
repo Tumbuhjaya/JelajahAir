@@ -3,11 +3,7 @@
     <ion-header>
         <ion-toolbar>
             <ion-grid style="padding-left:10px;padding-right: 10px;">
-                <ion-row>
-        <ion-col size="12" style="padding:0">
-    <div style="width:100%;height:300px;position: relative;background-color: wheat;" id='map' ref="map"></div>
-        </ion-col>
-        </ion-row>
+                
                 <ion-row>
                     <ion-col size="12">
                         <div style="width:100%;height:40px;background-color:;display: flex;justify-content: center;align-items: flex-start">
@@ -28,9 +24,10 @@
         </ion-toolbar>
     </ion-header>
   
-    <ion-loading class="custom-loading" message="Loading..." v-if="loading" spinner="circles"></ion-loading>
-    <ion-content :fullscreen="true" v-else>
+    
+    <ion-content :fullscreen="true">
       <ion-grid style="padding: 0;">
+        
         <ion-row>
           <ion-col size="12" style="padding:0">
             <swiper 
@@ -52,8 +49,24 @@
           </ion-col>
         </ion-row>
       </ion-grid>
+
       <ion-grid style="padding:0 10px;margin-top:15px;">
-        
+        <ion-row>
+            <ion-col size="12">
+                <ion-text class="ion-text-center">
+                    <h6 class="fz-16" style="color:#000;"><strong>Sumber Air Di sekitarmu</strong></h6>
+                </ion-text>
+            </ion-col>
+        </ion-row>
+
+        <ion-row>
+            <ion-col size="12" style="padding:0">
+                <div style="width:100%;height:300px;position: relative;background-color: wheat;" id='map' ref="map"></div>
+            </ion-col>
+        </ion-row>
+      </ion-grid>
+
+      <ion-grid style="padding:0 10px;margin-top:15px;">
         <ion-row>
             <ion-col size="8">
                 <ion-text>
@@ -69,7 +82,7 @@
 
         <ion-row>
             <ion-col size="6" v-for="(spam_desa, i) in spam_desa" :key="i">
-                <div style="width: 100%;position: relative;border-radius: 10px;overflow: hidden;" @click="$router.push('/tabs/spam_desa_sekitar/detail/'+spam_desa.OGR_FID)">
+                <div style="width: 100%;position: relative;border-radius: 10px;overflow: hidden;" @click="$router.push('/tabs/spam_desa_sekitar/detail/'+spam_desa.spam_desa_id+'/1')">
                     <ion-img v-if="spam_desa.foto_1" :src="spam_desa.src" style="width: 100%;height: 200px;object-fit: cover;"></ion-img>
                     <ion-img v-else src="https://via.placeholder.com/240" style="width: 100%;height: 200px;object-fit: cover;"></ion-img>
 
@@ -137,12 +150,15 @@
             </ion-col>
         </ion-row>
       </ion-grid>
+
+      
       <ion-fab slot="fixed" vertical="bottom" horizontal="end">
           <ion-fab-button @click="$router.push('/tabs/lapor_sumber_air')" style="--background:#163891">
             <ion-icon :icon="addCircleOutline" size="large"></ion-icon>
           </ion-fab-button>
       </ion-fab>
     </ion-content>
+    <!-- <ion-loading class="custom-loading" message="Loading..." v-else spinner="circles"></ion-loading> -->
   </ion-page>
 </template>
 
