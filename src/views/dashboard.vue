@@ -14,9 +14,12 @@
             </div>
         </div>
     </ion-header>
+    <div style="width:100%;height:300px;position: relative;background-color: wheat;" id='map' ref="map"></div>
+        
     <ion-loading class="custom-loading" message="Loading..." v-if="loading" spinner="circles"></ion-loading>
 
     <ion-content v-else>
+        
       <ion-grid style="padding: 15px 20px;">
         <ion-row>
           <ion-col size="12">
@@ -42,7 +45,8 @@
             </swiper>
           </ion-col>
         </ion-row>
-        <ion-row style="margin-top: 15px;">
+      <ion-row style="margin-top: 15px;">
+           
             <ion-col size="8">
                 <h5><strong>Spam Provinsi</strong></h5>
             </ion-col>
@@ -127,11 +131,15 @@ moment.locale("id");
 import { addCircleOutline, peopleCircleOutline  } from 'ionicons/icons';
 import { Swiper, SwiperSlide } from 'swiper/vue';
 import { Autoplay, Pagination, Navigation } from 'swiper/modules';
+import mapboxgl from 'mapbox-gl';
+  import * as turf from '@turf/turf';
 
 import 'swiper/css';
 import 'swiper/css/pagination';
   import 'swiper/css/navigation';
 import '@ionic/vue/css/ionic-swiper.css';
+
+  import 'mapbox-gl/dist/mapbox-gl.css';
 export default defineComponent({
     components: {
         IonPage,IonLoading,
@@ -158,15 +166,185 @@ export default defineComponent({
             banner :[],
             sumber_air :[],
             spam_desa :[],
-            loading :false
+            loading :false,
+            radius: 1000,
+            map:null
         };
     },
     async ionViewDidEnter() {
+        this.peta()
         this.get_banner()
         this.get_sumber_air()
         this.get_spam_desa()
+     
     },
     methods: {
+        async peta(){
+  
+      let vm = this;
+      // const mapRef = document.getElementById('map');
+      mapboxgl.accessToken = 'pk.eyJ1IjoiYmhhZ2FzIiwiYSI6ImNsZnNlaXRqNjA1ZDAzY2wydzhkNndpbWEifQ.7fH0v4wHwHD9n1dJFM8gXA';
+      vm.map = new mapboxgl.Map({
+      container: vm.$refs.map, // container ID
+      style: 'mapbox://styles/mapbox/satellite-v9', // style URL
+      center: [110.416664, -6.966667], // starting position [lng, lat]
+      zoom: 9, // starting zoom
+      attributionControl: false
+      });
+    //   console.log(vm.map);
+  //     vm.map.addControl(new mapboxgl.AttributionControl({
+  // customAttribution: 'Map design by me'
+  // }));
+//   vm.map.resize();
+
+let geolocate =  new mapboxgl.GeolocateControl({
+                    positionOptions: {
+                    enableHighAccuracy: true
+                    },
+                  
+                    // When active the map will receive updates to the device's location as it changes.
+                    trackUserLocation: true,
+                    // Draw an arrow next to the location dot to indicate which direction the device is heading.
+                    showUserHeading: true,
+                    })
+                    vm.map.addControl(geolocate);
+                    vm.map.on('load', async () => {
+                      vm.map.addSource('route', {
+              'type': 'geojson',
+                  'data': {
+                      "type": "FeatureCollection",
+                      "features": []
+                      },
+                      "attribution": "Pemerintah Kota Semarang",
+                'generateId': true
+            });
+            vm.map.addLayer({
+              'id': 'route',
+              'type': 'line',
+              'source': 'route',
+              'paint': {
+                  'line-width': 8,
+                  // Use a get expression (https://docs.mapbox.com/mapbox-gl-js/style-spec/#expressions-get)
+                  // to set the line-color to a feature property value.
+                  'line-color': [
+                    'case',
+                    ['boolean',['feature-state', 'clicked'], false],
+                    'purple',
+                    ['get', 'color']
+                  ]
+                  },
+                  'filter': ['==', '$type', 'LineString']
+              });
+  
+              vm.map.addLayer({
+                  "id": "symbols",
+                  "type": "symbol",
+                  "source": "route",
+                  "layout": {
+                    "symbol-placement": "line",
+                    "text-font": ["Open Sans Semibold"],
+                    // "text-field": ['get', 'nm_ruas'],
+                    "text-field": ['get', 'nm_ruas'],
+                    "text-size": 8,
+                    "text-ignore-placement": true,
+                    "text-allow-overlap": true,
+                  },
+                  "paint":{
+                    "text-color": 'white'
+                  }
+                });
+                let id_jalan =null;
+                vm.map.on('moveend', async () => {
+// console.log(vm.map.getCenter());
+let koor = vm.map.getCenter();
+vm.long = koor.lng;
+                vm.lat = koor.lat;
+                var point1 = turf.point([vm.long,  vm.lat]);
+                var buffered = turf.buffer(point1, vm.radius, {units: 'meters'});
+                // console.log(buffered);
+                // let ip_server = await Preferences.get({ key: "get" });
+                let data = await  axios.post(`${ip_server}peta/sumber_air_radius?jarak=${vm.radius}&long=${koor.lng}&lat=${koor.lat}`,{
+                  geojsonpoint: buffered
+    });
+              if(data){
+                
+                vm.map.getSource('route').setData(data.data);
+              }
+});
+          vm.map.on('click', 'route', async (e) => {
+            
+            //ganti warna
+            
+          
+            if(e.features[0].properties.status!='JALAN LINGKUNGAN'){
+              const toast = await toastController.create({
+                  message: 'Jalan dipilih bukan Jalan Lingkungan',
+                  duration: 2000,
+                  position: 'top'
+                });
+
+                await toast.present();
+            }else{
+              vm.map.getCanvas().style.cursor = 'pointer';
+            if(e.features.length>0){
+              if(id_jalan!=null){
+                vm.map.setFeatureState({
+                  source: 'route',
+                  id: id_jalan
+                },{
+                  clicked: false
+                })
+              }
+            }
+            id_jalan = e.features[0].id;
+              vm.map.setFeatureState({
+              source:'route',
+              id: id_jalan
+                },{
+                  clicked: true
+                })
+                // console.log(e.features[0]);
+                  vm.nama_ruas = e.features[0].properties.nm_ruas;
+                  vm.kode_ruas = e.features[0].properties.kd_ruas;
+                  vm.id_jalan_dipilih = e.features[0].properties.id_jln;
+                  vm.search = e.features[0].properties.nm_ruas;
+            }
+          
+
+
+              
+            });
+// const coordinates = await Geolocation.getCurrentPosition();
+             
+        
+             
+              // let data = await  axios.get(`http://survplus.id:8848/peta/jalan_radius?jarak=100&long=${coordinates.coords.longitude}&lat=${coordinates.coords.latitude}`);
+              // if(data){
+                
+              //   vm.map.getSource('route').setData(data.data);
+              // }
+       
+    //           geolocate.on('geolocate', async function(e) {
+    //             vm.long = e.coords.longitude;
+    //             vm.lat = e.coords.latitude
+    //             var point1 = turf.point([vm.long,  vm.lat]);
+    //             var buffered = turf.buffer(point1, vm.radius, {units: 'meters'});
+    //             console.log(buffered);
+    //             let ip_server = await Preferences.get({ key: "get" });
+    //             let data = await  axios.post(`${ip_server.value}/peta/jalan_radius?jarak=${vm.radius}&long=${e.coords.longitude}&lat=${e.coords.latitude}`,{
+    //               geojsonpoint: buffered
+    // });
+    //           if(data){
+                
+    //             vm.map.getSource('route').setData(data.data);
+    //           }
+              
+    //       });
+          geolocate.trigger();
+    })
+  
+    
+        },
         async get_spam_desa(){
         let vm = this
         vm.loading = true
@@ -237,6 +415,14 @@ export default defineComponent({
             this.login = 0
         }
     },
+    ionViewDidLeave() {
+      if(this.map){
+        this.map.remove()
+      this.map = null;
+      }
+      
+      console.log('Home page did leave');
+    },
 });
 </script>
 <style scoped>
@@ -277,5 +463,8 @@ ion-loading.custom-loading {
 ion-input{
   border-bottom: 1px solid transparent;
   --highlight-color-focused: none;
+}
+.mapboxgl-ctrl-logo {
+    display: none !important;
 }
 </style>
