@@ -69,11 +69,11 @@
             </ion-col>
 
             <ion-col size="12">
-                <ion-input label="Koordinat X Sumber Air" v-model="x" labelPlacement="stacked" placeholder="110.xxx"></ion-input>
+                <ion-input label="Koordinat X Sumber Air" v-model="x" disabled labelPlacement="stacked" placeholder="110.xxx"></ion-input>
             </ion-col>
 
             <ion-col size="12">
-                <ion-input label="Koordinat Y Sumber Air" v-model="y" labelPlacement="stacked" placeholder="-6.xxx"></ion-input>
+                <ion-input label="Koordinat Y Sumber Air" v-model="y" disabled labelPlacement="stacked" placeholder="-6.xxx"></ion-input>
             </ion-col>
 
             <ion-col size="12">
@@ -108,6 +108,7 @@ import axios from "axios";
 import { ip_server } from "@/ip-config.js";
 import moment from "moment";
 moment.locale("id");
+import { Geolocation } from '@capacitor/geolocation';
 import { Preferences } from '@capacitor/preferences';
 import { Camera, CameraResultType, CameraSource } from "@capacitor/camera";
 import { arrowBackCircleOutline  } from 'ionicons/icons';
@@ -160,6 +161,9 @@ export default defineComponent({
 
     async ionViewDidEnter() {
       this.get_kabupaten()
+      let coordinates = await Geolocation.getCurrentPosition({enableHighAccuracy:true,maximumAge:Infinity});
+      this.x = coordinates.coords.longitude
+      this.y = coordinates.coords.latitude
     },
     methods: {
       async takePicture(nama) {

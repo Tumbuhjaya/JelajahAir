@@ -1,118 +1,144 @@
 <template>
   <ion-page >
     <ion-header>
-        <div class="w-100-flex" style="padding: 0 20px;">
-            <div style="width: 75%;height: 60px;background-color: ;display: flex;justify-content: center;align-items: flex-start;flex-direction: column;">
-                <h5 style="font-size: 22px;"><strong>JELAJAH AIR</strong></h5>
-                <h6 style="font-weight: normal;font-size: 12px;">PROVINSI JAWA TENGAH</h6>
-            </div>
-            <div style="width: 25%;height: 60px;background-color: ;display: flex;justify-content: center;align-items: center;">
-                <div style="width:50px;height: 50px;background-color: #0086CF;border-radius: 100%;overflow: hidden;">
-                    <ion-icon v-if="login" :icon="peopleCircleOutline" color="light" style="font-size: 50px;" @click="logoff"></ion-icon>
-                    <ion-icon v-else :icon="peopleCircleOutline" color="light" style="font-size: 50px;" @click="$router.push('/login')"></ion-icon>
-                </div>
-            </div>
-        </div>
-    </ion-header>
+        <ion-toolbar>
+            <ion-grid style="padding-left:10px;padding-right: 10px;">
+                <ion-row>
+        <ion-col size="12" style="padding:0">
     <div style="width:100%;height:300px;position: relative;background-color: wheat;" id='map' ref="map"></div>
-        
+        </ion-col>
+        </ion-row>
+                <ion-row>
+                    <ion-col size="12">
+                        <div style="width:100%;height:40px;background-color:;display: flex;justify-content: center;align-items: flex-start">
+                            <ion-img src="/assets/logo_prov_jateng.png" style="width:35px;"></ion-img>
+                            <div style="display: flex;flex-direction: column;margin-left: 10px">
+                                <ion-text>
+                                    <h6 class="fc-white fz-20" style="letter-spacing: 1.5px;"><strong>JELAJAH AIR</strong></h6>
+                                </ion-text>
+
+                                <ion-text>
+                                    <h6 class="fc-white fz-12">PROVINSI JAWA TENGAH</h6>
+                                </ion-text>
+                            </div>
+                        </div>
+                    </ion-col>
+                </ion-row>
+            </ion-grid>
+        </ion-toolbar>
+    </ion-header>
+  
     <ion-loading class="custom-loading" message="Loading..." v-if="loading" spinner="circles"></ion-loading>
-
-    <ion-content v-else>
-        
-      <ion-grid style="padding: 15px 20px;">
+    <ion-content :fullscreen="true" v-else>
+      <ion-grid style="padding: 0;">
         <ion-row>
-          <ion-col size="12">
-            <!-- <div style="border-radius: 10px;overflow: hidden;"  v-for="(banner, i) in banner" :key="i">
-                <ion-img  :src="banner.src" style="width: 100%;"></ion-img>
-            </div> -->
-
+          <ion-col size="12" style="padding:0">
             <swiper 
-            :autoplay="{
-            delay: 2500,
-            disableOnInteraction: false,
-            }"
-            :pagination="{
-            clickable: true,
-            }"
-            :navigation="true"
-            :modules="modules"
-            class="mySwiper"
-            >
+                :autoplay="{
+                delay: 2500,
+                disableOnInteraction: false,
+                }"
+                :pagination="{
+                clickable: true,
+                }"
+                :navigation="true"
+                :modules="modules"
+                class="mySwiper"
+                >
                 <swiper-slide  v-for="(banner, i) in banner" :key="i">
-                    <ion-img  :src="banner.src" style="width: 100%;"></ion-img>
+                    <ion-img  :src="banner.src" style="width: 100%;height: 200px;object-fit: fill"></ion-img>
                 </swiper-slide>
             </swiper>
           </ion-col>
         </ion-row>
-      <ion-row style="margin-top: 15px;">
-           
+      </ion-grid>
+      <ion-grid style="padding:0 10px;margin-top:15px;">
+        
+        <ion-row>
             <ion-col size="8">
-                <h5><strong>Spam Provinsi</strong></h5>
+                <ion-text>
+                    <h6 class="fz-16" style="color:#000;"><strong>Data Spam Provinsi</strong></h6>
+                </ion-text>
             </ion-col>
-
             <ion-col size="4">
-                <h5 style="color: grey;text-align: right;" @click="$router.push('/tabs/spam_provinsi')">Lainnya</h5>
+                <ion-text class="ion-text-end">
+                    <h6 class="fz-16" style="color:grey" @click="$router.push('/tabs/spam_provinsi')">Lainnya</h6>
+                </ion-text>
             </ion-col>
         </ion-row>
-        <ion-row >
-            <ion-col size="6"  v-for="(spam_desa, i) in spam_desa" :key="i">
+
+        <ion-row>
+            <ion-col size="6" v-for="(spam_desa, i) in spam_desa" :key="i">
                 <div style="width: 100%;position: relative;border-radius: 10px;overflow: hidden;" @click="$router.push('/tabs/spam_desa_sekitar/detail/'+spam_desa.OGR_FID)">
-                    <ion-img v-if="spam_desa.foto_1" :src="spam_desa.src" style="width: 100%;height: 240px;object-fit: cover;"></ion-img>
-                    <ion-img v-else src="https://via.placeholder.com/240" style="width: 100%;height: 240px;object-fit: cover;"></ion-img>
+                    <ion-img v-if="spam_desa.foto_1" :src="spam_desa.src" style="width: 100%;height: 200px;object-fit: cover;"></ion-img>
+                    <ion-img v-else src="https://via.placeholder.com/240" style="width: 100%;height: 200px;object-fit: cover;"></ion-img>
 
-                    <div style="width: 100%;height: 100%;position: absolute;left:0;right: 0;top:0;bottom:0;background-color: rgba(0, 0, 0, 0.19);"></div>
-                    <div style="position: absolute;left:0;right: 0;bottom: 0;padding: 10px;">
-                        <h5 style="color: #fff;font-weight: bold;font-size: 14px;">{{sumber_air.nama}}</h5>
-                        <h6 style="color: #fff;font-size: 10px;font-weight: normal;margin-top: 5px !important;">{{sumber_air.kab_kot}},{{sumber_air.kecamatan}},{{sumber_air.desa_kel}}</h6>
-                        <!-- <h6 style="color: #fff;font-size: 10px;font-weight: normal;">{{sumber_air.foto_1}}</h6> -->
+                    <div style="width:100%;padding:20px 10px;background-color: rgba(0, 0, 0, 0.8);position: absolute;left:0;right:0;bottom:0;">
+                        <ion-text>
+                            <h5 style="color: #fff;font-weight: bold;font-size: 14px;">{{spam_desa.nama?spam_desa.nama:''}}</h5>
+                        </ion-text>
+
+                        <div style="width:100%;height:1px;background-color:#fff;margin:5px 0;"></div>
+                            
+                        <ion-text>
+                            <h6 class="fz-10 fc-white" style="font-weight:normal;">Kec. {{spam_desa.kecamatan?spam_desa.kecamatan:''}} Kel. {{spam_desa.desa_kel?spam_desa.desa_kel:''}}</h6>
+                        </ion-text>
+                            
                     </div>
+
+                    <ion-badge color="primary" style="position: absolute;top:10px;right:10px;">
+                        <ion-text>
+                            <h6 class="fz-10 fc-white" style="font-weight:bold;">{{spam_desa.kab_kot?spam_desa.kab_kot:''}}</h6>
+                        </ion-text>
+                    </ion-badge>
                 </div>
             </ion-col>
-
-            <!-- <ion-col size="6">
-                <div style="width: 100%;position: relative;border-radius: 10px;overflow: hidden;" @click="$router.push('/tabs/sumber_air_sekitar/detail')">
-                    <ion-img src="https://via.placeholder.com/240" style="width: 100%;height: 240px;object-fit: cover;"></ion-img>
-
-                    <div style="width: 100%;height: 100%;position: absolute;left:0;right: 0;top:0;bottom:0;background-color: rgba(0, 0, 0, 0.19);"></div>
-                    <div style="position: absolute;left:0;right: 0;bottom: 0;padding: 10px;">
-                        <h5 style="color: #fff;font-weight: bold;font-size: 14px;">Sumber Air Pringkurung</h5>
-                        <h6 style="color: #fff;font-size: 10px;font-weight: normal;margin-top: 5px !important;">Kalongan Kec. Ungaran Timur</h6>
-                        <h6 style="color: #fff;font-size: 10px;font-weight: normal;">Kalongan Kec. Ungaran Timur</h6>
-                    </div>
-                </div>
-            </ion-col> -->
         </ion-row>
-   
-        <ion-row style="margin-top: 15px;">
+      </ion-grid>
+
+      <ion-grid style="padding:0 10px;margin-top:15px;">
+        <ion-row>
             <ion-col size="8">
-                <h5><strong>Sumber Air Sekitar Anda</strong></h5>
+                <ion-text>
+                    <h6 class="fz-16" style="color:#000;"><strong>Data Sumber Air</strong></h6>
+                </ion-text>
             </ion-col>
-
             <ion-col size="4">
-                <h5 style="color: grey;text-align: right;" @click="$router.push('/tabs/sumber_air_sekitar')">Lainnya</h5>
+                <ion-text class="ion-text-end">
+                    <h6 class="fz-16" style="color:grey" @click="$router.push('/tabs/sumber_air_sekitar')">Lainnya</h6>
+                </ion-text>
             </ion-col>
         </ion-row>
-        <ion-row >
+
+        <ion-row>
             <ion-col size="6"  v-for="(sumber_air, i) in sumber_air" :key="i">
                 <div style="width: 100%;position: relative;border-radius: 10px;overflow: hidden;" @click="$router.push('/tabs/sumber_air_sekitar/detail/'+sumber_air.OGR_FID)">
-                    <ion-img v-if="sumber_air.foto_1" :src="sumber_air.src" style="width: 100%;height: 240px;object-fit: cover;"></ion-img>
-                    <ion-img v-else src="https://via.placeholder.com/240" style="width: 100%;height: 240px;object-fit: cover;"></ion-img>
+                    <ion-img v-if="sumber_air.foto_1" :src="sumber_air.src" style="width: 100%;height: 200px;object-fit: cover;"></ion-img>
+                    <ion-img v-else src="https://via.placeholder.com/240" style="width: 100%;height: 200px;object-fit: cover;"></ion-img>
 
-                    <div style="width: 100%;height: 100%;position: absolute;left:0;right: 0;top:0;bottom:0;background-color: rgba(0, 0, 0, 0.19);"></div>
-                    <div style="position: absolute;left:0;right: 0;bottom: 0;padding: 10px;">
-                        <h5 style="color: #fff;font-weight: bold;font-size: 14px;">{{sumber_air.nama}}</h5>
-                        <h6 style="color: #fff;font-size: 10px;font-weight: normal;margin-top: 5px !important;">{{sumber_air.kab_kot}},{{sumber_air.kecamatan}},{{sumber_air.desa_kel}}</h6>
+                    <div style="width:100%;padding:20px 10px;background-color: rgba(0, 0, 0, 0.8);position: absolute;left:0;right:0;bottom:0;">
+                        <ion-text>
+                            <h5 style="color: #fff;font-weight: bold;font-size: 14px;">{{sumber_air.nama?sumber_air.nama:''}}</h5>
+                        </ion-text>
+
+                        <div style="width:100%;height:1px;background-color:#fff;margin:5px 0;"></div>
+
+                        <ion-text>
+                            <h6 class="fz-10 fc-white" style="font-weight:normal;">Kec. {{sumber_air.kecamatan}} Kel. {{sumber_air.desa_kel}}</h6>
+                        </ion-text>
                     </div>
+
+                    <ion-badge color="primary" style="position: absolute;top:10px;right:10px;">
+                        <ion-text>
+                            <h6 class="fz-10 fc-white" style="font-weight:bold;">{{sumber_air.kab_kot}}</h6>
+                        </ion-text>
+                    </ion-badge>
                 </div>
             </ion-col>
         </ion-row>
-   
-
-        
       </ion-grid>
       <ion-fab slot="fixed" vertical="bottom" horizontal="end">
-          <ion-fab-button @click="$router.push('/tabs/lapor_sumber_air')">
+          <ion-fab-button @click="$router.push('/tabs/lapor_sumber_air')" style="--background:#163891">
             <ion-icon :icon="addCircleOutline" size="large"></ion-icon>
           </ion-fab-button>
       </ion-fab>
@@ -121,7 +147,7 @@
 </template>
 
 <script>
-import { IonPage, IonHeader, IonContent, IonGrid,IonLoading, IonRow, IonCol, IonIcon, IonFab, IonFabButton, IonImg, IonInput  } from '@ionic/vue';
+import { IonPage, IonHeader, IonToolbar, IonContent, IonGrid,IonLoading, IonRow, IonCol, IonIcon, IonFab, IonFabButton, IonImg, IonInput, IonText, IonBadge  } from '@ionic/vue';
 import { defineComponent } from 'vue';
 import { Preferences } from '@capacitor/preferences';
 import axios from "axios";
@@ -144,6 +170,7 @@ export default defineComponent({
     components: {
         IonPage,IonLoading,
         IonHeader,
+        IonToolbar,
         IonContent,
         IonGrid,
         IonRow,
@@ -153,8 +180,10 @@ export default defineComponent({
         IonFabButton,
         IonImg,
         IonInput,
+        IonText,
+        IonBadge,
         Swiper,
-        SwiperSlide,
+        SwiperSlide
     },
     setup() {
         return { modules: [Autoplay, Pagination, Navigation], addCircleOutline, peopleCircleOutline };
@@ -254,23 +283,23 @@ let geolocate =  new mapboxgl.GeolocateControl({
                   }
                 });
                 let id_jalan =null;
-                vm.map.on('moveend', async () => {
-// console.log(vm.map.getCenter());
-let koor = vm.map.getCenter();
-vm.long = koor.lng;
-                vm.lat = koor.lat;
-                var point1 = turf.point([vm.long,  vm.lat]);
-                var buffered = turf.buffer(point1, vm.radius, {units: 'meters'});
-                // console.log(buffered);
-                // let ip_server = await Preferences.get({ key: "get" });
-                let data = await  axios.post(`${ip_server}peta/sumber_air_radius?jarak=${vm.radius}&long=${koor.lng}&lat=${koor.lat}`,{
-                  geojsonpoint: buffered
-    });
-              if(data){
+//                 vm.map.on('moveend', async () => {
+// // console.log(vm.map.getCenter());
+// let koor = vm.map.getCenter();
+// vm.long = koor.lng;
+//                 vm.lat = koor.lat;
+//                 var point1 = turf.point([vm.long,  vm.lat]);
+//                 var buffered = turf.buffer(point1, vm.radius, {units: 'meters'});
+//                 // console.log(buffered);
+//                 // let ip_server = await Preferences.get({ key: "get" });
+//                 let data = await  axios.post(`${ip_server}peta/sumber_air_radius?jarak=${vm.radius}&long=${koor.lng}&lat=${koor.lat}`,{
+//                   geojsonpoint: buffered
+//     });
+//               if(data){
                 
-                vm.map.getSource('route').setData(data.data);
-              }
-});
+//                 vm.map.getSource('route').setData(data.data);
+//               }
+// });
           vm.map.on('click', 'route', async (e) => {
             
             //ganti warna
@@ -426,14 +455,6 @@ vm.long = koor.lng;
 });
 </script>
 <style scoped>
-ion-header{
-  box-shadow: none !important;
-  background-color: #fff;
-}
-
-ion-content{
-    /* --background:purple; */
-}
 
 ion-input{
   border-bottom: 1px solid transparent;
