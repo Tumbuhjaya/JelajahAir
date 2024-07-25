@@ -253,7 +253,12 @@
                       })
                       vm.map.addControl(geolocate);
                       vm.map.on('load', async () => {
-                        vm.map.addSource('route', {
+                        vm.map.loadImage(
+            'https://docs.mapbox.com/mapbox-gl-js/assets/custom_marker.png',
+            (error, image) => {
+                if (error) throw error;
+                vm.map.addImage('custom-marker', image);
+                        vm.map.addSource('points', {
                 'type': 'geojson',
                     'data': {
                         "type": "FeatureCollection",
@@ -263,58 +268,39 @@
                   'generateId': true
               });
               vm.map.addLayer({
-                'id': 'route',
-                'type': 'line',
-                'source': 'route',
-                'paint': {
-                    'line-width': 8,
-                    // Use a get expression (https://docs.mapbox.com/mapbox-gl-js/style-spec/#expressions-get)
-                    // to set the line-color to a feature property value.
-                    'line-color': [
-                      'case',
-                      ['boolean',['feature-state', 'clicked'], false],
-                      'purple',
-                      ['get', 'color']
-                    ]
-                    },
-                    'filter': ['==', '$type', 'LineString']
-                });
-    
-                vm.map.addLayer({
-                    "id": "symbols",
-                    "type": "symbol",
-                    "source": "route",
-                    "layout": {
-                      "symbol-placement": "line",
-                      "text-font": ["Open Sans Semibold"],
-                      // "text-field": ['get', 'nm_ruas'],
-                      "text-field": ['get', 'nm_ruas'],
-                      "text-size": 8,
-                      "text-ignore-placement": true,
-                      "text-allow-overlap": true,
-                    },
-                    "paint":{
-                      "text-color": 'white'
+                    'id': 'points',
+                    'type': 'symbol',
+                    'source': 'points',
+                    'layout': {
+                        'icon-image': 'custom-marker',
+                        // get the title name from the source's "title" property
+                        'text-field': ['get', 'title'],
+                        'text-font': [
+                            'Open Sans Semibold',
+                            'Arial Unicode MS Bold'
+                        ],
+                        'text-offset': [0, 1.25],
+                        'text-anchor': 'top'
                     }
-                  });
+                });
                   let id_jalan =null;
-  //                 vm.map.on('moveend', async () => {
-  // // console.log(vm.map.getCenter());
-  // let koor = vm.map.getCenter();
-  // vm.long = koor.lng;
-  //                 vm.lat = koor.lat;
-  //                 var point1 = turf.point([vm.long,  vm.lat]);
-  //                 var buffered = turf.buffer(point1, vm.radius, {units: 'meters'});
-  //                 // console.log(buffered);
-  //                 // let ip_server = await Preferences.get({ key: "get" });
-  //                 let data = await  axios.post(`${ip_server}peta/sumber_air_radius?jarak=${vm.radius}&long=${koor.lng}&lat=${koor.lat}`,{
-  //                   geojsonpoint: buffered
-  //     });
-  //               if(data){
+//                   vm.map.on('moveend', async () => {
+//   // console.log(vm.map.getCenter());
+//   let koor = vm.map.getCenter();
+//   vm.long = koor.lng;
+//                   vm.lat = koor.lat;
+//                   var point1 = turf.point([vm.long,  vm.lat]);
+//                   var buffered = turf.buffer(point1, vm.radius, {units: 'meters'});
+//                   // console.log(buffered);
+//                   // let ip_server = await Preferences.get({ key: "get" });
+//                   let data = await  axios.post(`${ip_server}peta/sumber_air_radius?jarak=${vm.radius}&long=${koor.lng}&lat=${koor.lat}`,{
+//                     geojsonpoint: buffered
+//       });
+//                 if(data){
                   
-  //                 vm.map.getSource('route').setData(data.data);
-  //               }
-  // });
+//                   vm.map.getSource('route').setData(data.data);
+//                 }
+//   });
             vm.map.on('click', 'route', async (e) => {
               
               //ganti warna
@@ -380,11 +366,12 @@
       });
                 if(data){
                   console.log([data,'ini data']);
-                  vm.map.getSource('route').setData(data.data);
+                  vm.map.getSource('points').setData(data.data);
                 }
                 
             });
             geolocate.trigger();
+        })
       })
     
       
@@ -469,7 +456,7 @@
       },
   });
   </script>
-  <style scoped>
+  <style >
   
   ion-input{
     border-bottom: 1px solid transparent;
