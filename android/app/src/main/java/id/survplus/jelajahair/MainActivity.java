@@ -1,4 +1,4 @@
-package io.ionic.starter;
+package id.survplus.jelajahair;
 
 import com.getcapacitor.BridgeActivity;
 
