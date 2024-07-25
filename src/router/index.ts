@@ -56,6 +56,10 @@ const routes: Array<RouteRecordRaw> = [
         component: () => import('@/views/chart.vue')
       },
       {
+        path: 'data_sumber_air/:jenis',
+        component: () => import('@/views/data_sumber_air.vue')
+      },
+      {
         path: 'penanganan_air_bersih',
         component: () => import('@/views/penanganan_air_bersih.vue')
       },

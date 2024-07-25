@@ -61,7 +61,7 @@
             </ion-row>
 
             <ion-row>
-                <ion-col size="4">
+                <ion-col size="4"  @click="$router.push('/tabs/data_sumber_air/Danau')>
                     <div style="width: 100%;height: 100px;background-color: #2770DE;border-radius: 8px;box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;display: flex;justify-content: center;align-items: flex-start;flex-direction: column;padding: 0 15px;">
                         <ion-text>
                             <h6 class="fz-14 fc-white">Jumlah<br/>Danau</h6>
@@ -73,7 +73,7 @@
                     </div>
                 </ion-col>
 
-                <ion-col size="4">
+                <ion-col size="4" @click="$router.push('/tabs/data_sumber_air/Waduk')>
                     <div style="width: 100%;height: 100px;background-color: #FF6666;border-radius: 8px;box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;display: flex;justify-content: center;align-items: flex-start;flex-direction: column;padding: 0 15px;">
                         <ion-text>
                             <h6 class="fz-14 fc-white">Jumlah<br/>Waduk</h6>
@@ -85,7 +85,7 @@
                     </div>
                 </ion-col>
 
-                <ion-col size="4">
+                <ion-col size="4" @click="$router.push('/tabs/data_sumber_air/Embung')>
                     <div style="width: 100%;height: 100px;background-color: #42BD53;border-radius: 8px;box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;display: flex;justify-content: center;align-items: flex-start;flex-direction: column;padding: 0 15px;">
                         <ion-text>
                             <h6 class="fz-14 fc-white">Jumlah<br/>Embung</h6>

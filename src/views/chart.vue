@@ -80,7 +80,6 @@ export default defineComponent({
         let vm = this
         vm.loading = true
         let url =ip_server + 'sumber_air/mata_air_by_kab'
-            console.log(this.kategori);
         if (this.kategori == 'sumber_air') {
             url= ip_server + 'sumber_air/sumber_air_by_kab'
         }else if (this.kategori == 'mata_air') {
