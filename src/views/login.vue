@@ -92,6 +92,12 @@ import { GoogleAuth } from '@codetrix-studio/capacitor-google-auth';
 
 // use hook after platform dom ready
 GoogleAuth.initialize();
+
+// GoogleAuth.initialize({
+//   clientId: '576386395599-t2e4r1gpivibj70e3tsme3raeavjo4lm.apps.googleusercontent.com',
+//   scopes: ['profile', 'email'],
+//   grantOfflineAccess: false,
+// });
 export default defineComponent({
     components: {
       IonPage,
