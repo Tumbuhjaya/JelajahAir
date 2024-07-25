@@ -91,7 +91,7 @@ router.beforeEach(async (to, from, next) => {
   if (to.name !='Login') {
   if (to.matched.some(record => record.meta.requiresAuth)) {    
     const ret = await Preferences.get({ key: 'token' });
-    if(ret){
+    if(!ret.value){
       const response = await GoogleAuth.signIn();
       console.log([response.email,
       response.familyName,response.givenName,
@@ -116,6 +116,37 @@ router.beforeEach(async (to, from, next) => {
       })} catch (error) {
         alert('Data Tidak Sesuai')
       }
+    }else{
+              await axios.post(ip_server+'autentifikasi/decode',{token:ret.value}).then(async function (hsl:object) {
+                if (hsl.status=='200') {
+                  next()
+                        }else{
+                          const response = await GoogleAuth.signIn();
+      console.log([response.email,
+      response.familyName,response.givenName,
+      response.imageUrl,response.id,response.name]);
+      let vm = this
+      let post = {
+        email:response.email,
+        familyName:response.familyName,givenName:response.givenName,
+      imageUrl:response.imageUrl,id:response.id,name:response.name
+      }
+      try {
+      await axios.post(ip_server+'autentifikasi/login_google_mobile',post).then(async function (res) {
+        await Preferences.set({
+                  key: "token",
+                  value: res.data.token,
+              });
+              await Preferences.set({
+                  key: "id_user",
+                  value: String(res.data.id_user),
+              });
+          next()                          
+      })} catch (error) {
+        alert('Data Tidak Sesuai')
+      }
+                        }
+                      })
     }
 
     // if (ret) {
