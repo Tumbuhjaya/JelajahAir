@@ -18,7 +18,7 @@
           <ion-label>Statistik</ion-label>
         </ion-tab-button>
 
-        <ion-tab-button tab="tab4" href="/tabs/tab4">
+        <ion-tab-button tab="tab4" href="/tabs/tab4" @click="logout">
           <ion-icon aria-hidden="true" :icon="personCircleOutline" />
           <ion-label>Logout</ion-label>
         </ion-tab-button>
@@ -30,4 +30,11 @@
 <script setup lang="ts">
 import { IonTabBar, IonTabButton, IonTabs, IonLabel, IonIcon, IonPage, IonRouterOutlet } from '@ionic/vue';
 import { homeOutline, statsChartOutline, personCircleOutline, chatbubblesOutline } from 'ionicons/icons';
+import { Preferences } from '@capacitor/preferences';
+
+async function logout() {
+  await Preferences.remove({ key: 'token' });
+  await Preferences.remove({ key: 'id_user' });
+
+}
 </script>
