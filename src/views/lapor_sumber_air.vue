@@ -88,6 +88,11 @@
                         <ion-img v-else :src="foto_1"
                         @click="takePicture('foto_1')"
                          style="width: 30%;"></ion-img>
+                         <ion-img src="/assets/alt-photo.svg" v-if="!foto_2"
+                        @click="takePicture('foto_2')" style="width: 30%;"></ion-img>
+                        <ion-img v-else :src="foto_2"
+                        @click="takePicture('foto_2')"
+                         style="width: 30%;"></ion-img>
                     <!-- untuk load data -->
                     <!-- <ion-img src="https://via.placeholder.com/100" style="width: 75%;object-fit: cover;"></ion-img> -->
                 </div>
@@ -216,7 +221,7 @@ export default defineComponent({
               message='Minimal 1 Foto / Lampiran Wajib Di isi'
             }else{
             formData.append("foto_1", vm.afoto_1);
-            // formData.append("foto_2", vm.afoto_2);    
+            formData.append("foto_2", vm.afoto_2);    
             formData.append('nama_sumber_air',vm.nama_sumber_air)
             formData.append('nama',vm.nama)
             formData.append('alamat',vm.alamat)
