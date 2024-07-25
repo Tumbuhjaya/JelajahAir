@@ -12,7 +12,7 @@
                     <ion-col size="8">
                     <div style="width: 100%;height: 30px;background-color: ;display: flex;justify-content: center;align-items: center;">
                         <ion-text class="ion-text-center">
-                        <h6 class="fz-18 fc-white">Detail Sumber Air</h6>
+                        <h6 class="fz-18 fc-white">Detail Lapor Sumber Air</h6>
                         </ion-text>
                     </div>
                     </ion-col>
@@ -26,7 +26,7 @@
         <ion-row>
             <ion-col size="12">
                 <ion-text class="ion-text-center">
-                    <h6 class="fz-20"><strong>{{  sumber_air.nama }}</strong></h6>
+                    <h6 class="fz-20"><strong>{{ sumber_air.nama_sumber_air }}</strong></h6>
                 </ion-text>
             </ion-col>
         </ion-row>
@@ -72,6 +72,46 @@
                 </ion-text>
                 <ion-text>
                     <h6 class="fz-14 fc-black">{{ sumber_air.desa_kel }}</h6>
+                </ion-text>
+            </ion-col>
+            <ion-col size="12">
+                <ion-text>
+                    <h6 class="fz-16 fc-black"><strong>Deskripsi</strong></h6>
+                </ion-text>
+                <ion-text>
+                    <h6 class="fz-14 fc-black">{{ sumber_air.deskripsi }}</h6>
+                </ion-text>
+            </ion-col>
+            <ion-col size="12">
+                <ion-text>
+                    <h6 class="fz-16 fc-black"><strong>Pengelola</strong></h6>
+                </ion-text>
+                <ion-text>
+                    <h6 class="fz-14 fc-black">{{ sumber_air.nama }}</h6>
+                </ion-text>
+            </ion-col>
+            <ion-col size="12">
+                <ion-text>
+                    <h6 class="fz-16 fc-black"><strong>X</strong></h6>
+                </ion-text>
+                <ion-text>
+                    <h6 class="fz-14 fc-black">{{ sumber_air.x }}</h6>
+                </ion-text>
+            </ion-col>
+            <ion-col size="12">
+                <ion-text>
+                    <h6 class="fz-16 fc-black"><strong>Y</strong></h6>
+                </ion-text>
+                <ion-text>
+                    <h6 class="fz-14 fc-black">{{ sumber_air.y }}</h6>
+                </ion-text>
+            </ion-col>
+            <ion-col size="12">
+                <ion-text>
+                    <h6 class="fz-16 fc-black"><strong>Verifikasi</strong></h6>
+                </ion-text>
+                <ion-text>
+                    <h6 class="fz-14 fc-black">{{ sumber_air.verifikasi==0?'Belum Diverifikasi':sumber_air.verifikasi==1?'Sudah Diverifikasi':sumber_air.verifikasi==2?'Di Tolak':'' }}</h6>
                 </ion-text>
             </ion-col>
         </ion-row>
@@ -120,9 +160,10 @@ export default defineComponent({
         vm.id = vm.route.params.id;
         let list_sumber_air = await axios({
         method: "post",
-        data:{OGR_FID:vm.id,desa:1},
-            url: ip_server + `sumber_air/list`,
+        data:{laporan_id:vm.id,desa:1},
+            url: ip_server + `laporan/list`,
         })
+        console.log(list_sumber_air);
             vm.sumber_air = []
             vm.sumber_air = list_sumber_air.data.data[0]
             if(vm.sumber_air.foto_1.substring(0,4) == 'http' ){

@@ -26,7 +26,7 @@
         <ion-row>
             <ion-col size="12">
                 <ion-text class="ion-text-center">
-                    <h6 class="fz-20 fc-black"><strong>Nama Sumber Air</strong></h6>
+                    <h6 class="fz-20 fc-black"><strong>{{  spam_desa.nama_sumber_air }}</strong></h6>
                 </ion-text>
             </ion-col>
         </ion-row>
@@ -147,6 +147,9 @@ export default defineComponent({
         data:data,
             url: ip_server + url,
         })
+        console.log( list_spam_desa);
+
+
             vm.spam_desa = []
             vm.spam_desa = list_spam_desa.data.data[0]
             if(vm.spam_desa.foto_1.substring(0,4) == 'http' ){
@@ -165,18 +168,20 @@ export default defineComponent({
         })
             vm.spam_desa = []
             vm.spam_desa = list_spam_desa.data.data[0]
+
             if(vm.spam_desa.foto_1.substring(0,4) == 'http' ){
                 vm.spam_desa.src =  vm.spam_desa.foto_1 
             }else if(vm.spam_desa.foto_1){
                 vm.spam_desa.src=ip_server+'foto/'+  vm.spam_desa.foto_1 
 
             }
+            vm.spam_desa.nama = list_spam_desa.data.data[0].nama_sumber_air
             vm.spam_desa.nama_program= vm.spam_desa.program
         vm.spam_desa.sumber_air_baku= vm.spam_desa.jenis_sumber_air
         vm.spam_desa.tahun= vm.spam_desa.tahun_dibangun
         vm.spam_desa.kab= vm.spam_desa.kab_kot
-        console.log(  vm.spam_desa);
-        }
+        console.log( list_spam_desa);
+    }
          
 
     },

@@ -99,24 +99,18 @@
                 </div>
             </ion-col>
         </ion-row>
-        <ion-refresher slot="fixed" @ionRefresh="getList($event)">
-        <ion-refresher-content
-          :pulling-icon="chevronDownCircleOutline"
-          pulling-text="Tarik untuk reload"
-          refreshing-spinner="circles"
-          refreshing-text="Mohon Tunggu..."
-        >
-        </ion-refresher-content>
-      </ion-refresher>
-
-      
+        <ion-infinite-scroll threshold="10%" @ionInfinite="getList">
+            <ion-infinite-scroll-content loading-spinner="bubbles" loading-text=" Loading more item">
+            
+            </ion-infinite-scroll-content>
+      </ion-infinite-scroll>
       </ion-grid>
     </ion-content>
   </ion-page>
 </template>
 
 <script>
-import {IonIcon,IonImg, IonPage,IonRefresher,IonRefresherContent, IonHeader, IonContent, IonGrid, IonRow, IonCol } from '@ionic/vue';
+import {IonIcon,IonImg, IonPage,IonInfiniteScroll,IonInfiniteScrollContent, IonHeader, IonContent, IonGrid, IonRow, IonCol } from '@ionic/vue';
 import { defineComponent } from 'vue';
 import axios from "axios";
 import { ip_server } from "@/ip-config.js";
@@ -133,7 +127,7 @@ export default defineComponent({
         IonContent,
         IonGrid,
         IonRow,
-        IonCol,IonRefresher,IonRefresherContent
+        IonCol,IonInfiniteScroll,IonInfiniteScrollContent
     },
     setup() {
         return { arrowBackCircleOutline ,chevronDownCircleOutline};
@@ -144,7 +138,7 @@ export default defineComponent({
             jenis:this.$route.params.jenis,
             limit:6,
             offset:0,
-            page:1
+            page:0
         };
     },
     methods: {
@@ -175,11 +169,12 @@ export default defineComponent({
         let lapor = await axios({
         method: "post",
         data:{jenis:this.jenis,limit:vm.limit,offset:vm.offset},
-
             url: ip_server + `sumber_air/list`,
-            data:{limit:vm.limit,offset:vm.offset}
         })
+
             for (let i = 0; i <  lapor.data.data.length; i++) {
+                console.log([ lapor.data.data[i],'lapor',vm.limit,vm.offset]);
+
                 lapor.data.data[i].src = ip_server+'foto/'+  lapor.data.data[i].foto_1
                 vm.data.push(lapor.data.data[i])
             }
