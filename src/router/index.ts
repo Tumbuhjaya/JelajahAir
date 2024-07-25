@@ -2,8 +2,14 @@ import { createRouter, createWebHistory } from '@ionic/vue-router';
 import { RouteRecordRaw } from 'vue-router';
 import TabsPage from '../views/TabsPage.vue'
 import { Preferences } from '@capacitor/preferences';
+import { GoogleAuth } from '@codetrix-studio/capacitor-google-auth';
 import axios from "axios";
 import { ip_server } from "@/ip-config.js";
+GoogleAuth.initialize({
+  clientId: '576386395599-t2e4r1gpivibj70e3tsme3raeavjo4lm.apps.googleusercontent.com',
+  scopes: ['profile', 'email'],
+  grantOfflineAccess: false,
+});
 const routes: Array<RouteRecordRaw> = [
   {
     path: '/',
@@ -85,33 +91,51 @@ router.beforeEach(async (to, from, next) => {
   if (to.name !='Login') {
   if (to.matched.some(record => record.meta.requiresAuth)) {    
     const ret = await Preferences.get({ key: 'token' });
-    if (ret) {
-      if (!ret.value) {
-        next({
-          path: '/login',
-          query: { redirect: to.fullPath }
-        })
-      } else {
-        await axios.post(ip_server+'autentifikasi/decode',{token:ret.value}).then(function (hsl:object) {
-          console.log(hsl);
-          
-          if (hsl.status=='200') {
-                    next()
-          }else{
-            next({
-              path: '/login',
-              query: { redirect: to.fullPath }
-            })
-          }
-        })
-        // next()
+    if(ret){
+      const response = await GoogleAuth.signIn();
+      console.log([response.email,
+      response.familyName,response.givenName,
+      response.imageUrl,response.id,response.name]);
+      let vm = this
+      let post = {
+        email:response.email,
+        familyName:response.familyName,givenName:response.givenName,
+      imageUrl:response.imageUrl,id:response.id,name:response.name
       }
-    } else {
-      next({
-        path: '/login',
-        query: { redirect: to.fullPath }
-      })
+      try {
+      await axios.post(ip_server+'autentifikasi/login_google_mobile',post).then(async function (res) {
+        await Preferences.set({
+                  key: "token",
+                  value: res.data.token,
+              });
+              await Preferences.set({
+                  key: "id_user",
+                  value: String(res.data.id_user),
+              });
+          next()                          
+      })} catch (error) {
+        alert('Data Tidak Sesuai')
+      }
     }
+
+    // if (ret) {
+    //   if (!ret.value) {
+    //     next({path: '/login',query: { redirect: to.fullPath }})
+    //   } else {
+    //     await axios.post(ip_server+'autentifikasi/decode',{token:ret.value}).then(function (hsl:object) {
+    //       console.log(hsl);
+          
+    //       if (hsl.status=='200') {
+    //                 next()
+    //       }else{
+    //         next({path: '/login',query: { redirect: to.fullPath }})
+    //       }
+    //     })
+    //     // next()
+    //   }
+    // } else {
+    //   next({path: '/login',query: { redirect: to.fullPath }})
+    // }
   } else {
     next()
   }
