@@ -166,6 +166,17 @@ export default defineComponent({
 
     async ionViewDidEnter() {
       this.get_kabupaten()
+      let token = await Preferences.get({ key: "token" });
+      let user = await axios({
+              method: "post",
+              headers: {
+                token: token.value,
+              },
+              url: ip_server+'autentifikasi/decode',
+              data: {token: token.value,},
+            })
+            this.email = user.data.user.email
+
       let coordinates = await Geolocation.getCurrentPosition({enableHighAccuracy:true,maximumAge:Infinity});
       this.x = coordinates.coords.longitude
       this.y = coordinates.coords.latitude

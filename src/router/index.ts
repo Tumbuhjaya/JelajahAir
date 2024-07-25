@@ -5,11 +5,13 @@ import { Preferences } from '@capacitor/preferences';
 import { GoogleAuth } from '@codetrix-studio/capacitor-google-auth';
 import axios from "axios";
 import { ip_server } from "@/ip-config.js";
-GoogleAuth.initialize({
-  clientId: '576386395599-t2e4r1gpivibj70e3tsme3raeavjo4lm.apps.googleusercontent.com',
-  scopes: ['profile', 'email'],
-  grantOfflineAccess: false,
-});
+GoogleAuth.initialize();
+// {
+//   // clientId: '576386395599-t2e4r1gpivibj70e3tsme3raeavjo4lm.apps.googleusercontent.com',
+//   clientId: '576386395599-cd3h0q6d10n0nd6loiof5l2vgikej5bn.apps.googleusercontent.com ',
+//   scopes: ['profile', 'email'],
+//   grantOfflineAccess: false,
+// }
 const routes: Array<RouteRecordRaw> = [
   {
     path: '/',
@@ -38,9 +40,9 @@ const routes: Array<RouteRecordRaw> = [
       {
         path: 'lapor_sumber_air',
         component: () => import('@/views/lapor_sumber_air.vue')
-        ,meta: {
-          requiresAuth: true,
-        }
+        // ,meta: {
+        //   requiresAuth: true,
+        // }
       },
       {
         path: 'data_lapor_sumber_air',
@@ -51,7 +53,18 @@ const routes: Array<RouteRecordRaw> = [
         path: 'statistik',
         component: () => import('@/views/statistik.vue')
       },
-
+      {
+        path: 'chart/:kategori',
+        component: () => import('@/views/chart.vue')
+      },
+      {
+        path: 'data_sumber_air/:jenis',
+        component: () => import('@/views/data_sumber_air.vue')
+      },
+      {
+      path: 'detail_lapor_sumber_air/:id',
+      component: () => import('@/views/detail_lapor_sumber_air.vue')
+    },
       {
         path: 'penanganan_air_bersih',
         component: () => import('@/views/penanganan_air_bersih.vue')
@@ -90,13 +103,9 @@ const router = createRouter({
 router.beforeEach(async (to, from, next) => {
   if (to.name !='Login') {
   if (to.matched.some(record => record.meta.requiresAuth)) {    
-    const ret = await Preferences.get({ key: 'token' });
-    if(ret){
+    const ret = await Preferences.get({ key: 'token' });    
+    if(!ret.value){
       const response = await GoogleAuth.signIn();
-      console.log([response.email,
-      response.familyName,response.givenName,
-      response.imageUrl,response.id,response.name]);
-      let vm = this
       let post = {
         email:response.email,
         familyName:response.familyName,givenName:response.givenName,
@@ -104,6 +113,8 @@ router.beforeEach(async (to, from, next) => {
       }
       try {
       await axios.post(ip_server+'autentifikasi/login_google_mobile',post).then(async function (res) {
+        alert(res.data.res)
+
         await Preferences.set({
                   key: "token",
                   value: res.data.token,
@@ -116,6 +127,37 @@ router.beforeEach(async (to, from, next) => {
       })} catch (error) {
         alert('Data Tidak Sesuai')
       }
+    }else{
+              await axios.post(ip_server+'autentifikasi/decode',{token:ret.value}).then(async function (res) {
+                alert(res.data.res)
+
+                if (res.data.res=='200') {
+                  next()
+                        }else{
+                          const response = await GoogleAuth.signIn();
+      let post = {
+        email:response.email,
+        familyName:response.familyName,givenName:response.givenName,
+      imageUrl:response.imageUrl,id:response.id,name:response.name
+      }
+      try {
+      await axios.post(ip_server+'autentifikasi/login_google_mobile',post).then(async function (res) {
+        alert(res.data.token)
+
+        await Preferences.set({
+                  key: "token",
+                  value: res.data.token,
+              });
+              await Preferences.set({
+                  key: "id_user",
+                  value: String(res.data.id_user),
+              });
+          next()                          
+      })} catch (error) {
+        alert(error)
+      }
+                        }
+                      })
     }
 
     // if (ret) {
@@ -125,7 +167,7 @@ router.beforeEach(async (to, from, next) => {
     //     await axios.post(ip_server+'autentifikasi/decode',{token:ret.value}).then(function (hsl:object) {
     //       console.log(hsl);
           
-    //       if (hsl.status=='200') {
+    //       if (hsl.res=='200') {
     //                 next()
     //       }else{
     //         next({path: '/login',query: { redirect: to.fullPath }})

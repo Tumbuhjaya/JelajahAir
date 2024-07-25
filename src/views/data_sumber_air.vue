@@ -16,7 +16,7 @@
     <ion-content >
       <ion-grid style="padding: 0 20px 15px 20px;">
         <ion-row style="margin-top: 15px;"   v-for="(list, i) in data" :key="i" >
-            <ion-col size="12"  @click="$router.push('/tabs/detail_lapor_sumber_air/'+list.laporan_id)" >
+            <ion-col size="12">
                 <div style="width: 100%;box-shadow: 0px 4px 4px 0px #00000040;padding: 20px 15px;border-radius: 8px;background-color: #eefafd;display: flex;">
                     <div style="width: 40%;">
                         <ion-img v-if="list.foto_1" :src="list.src" style="width:100%;height:140px;object-fit: cover;"></ion-img>
@@ -35,7 +35,7 @@
                                 </div>
 
                                 <div style="display: table-cell;">
-                                    <h6 style="font-size: 12px;">{{ list.kab_kot }}  {{ list.kecamatan }}  {{ list.alamat }}</h6>
+                                    <h6 style="font-size: 12px;">{{ list.alamat }}</h6>
                                 </div>
                             </div>
 
@@ -49,7 +49,7 @@
                                 </div>
 
                                 <div style="display: table-cell;">
-                                    <h6 style="font-size: 12px;">{{ list.desa_kel }}</h6>
+                                    <h6 style="font-size: 12px;">{{ list.desa }}</h6>
                                 </div>
                             </div>
 
@@ -63,12 +63,12 @@
                                 </div>
 
                                 <div style="display: table-cell;">
-                                    <h6 style="font-size: 12px;">{{ list.nama }}</h6>
+                                    <h6 style="font-size: 12px;">{{ list.pengelola }}</h6>
                                 </div>
                             </div>
 
                             <div style="display: table-row;">
-                                <!-- <div style="display: table-cell;width: 80px;">
+                                <div style="display: table-cell;width: 80px;">
                                     <h6 style="font-size: 12px;">Debit</h6>
                                 </div>
 
@@ -78,10 +78,10 @@
 
                                 <div style="display: table-cell;">
                                     <h6 style="font-size: 12px;">{{ list.debit }}</h6>
-                                </div> -->
+                                </div>
                             </div>
 
-                            <!-- <div style="display: table-row;">
+                            <div style="display: table-row;">
                                 <div style="display: table-cell;width: 80px;">
                                     <h6 style="font-size: 12px;">Jumlah KK Terlayani</h6>
                                 </div>
@@ -93,7 +93,7 @@
                                 <div style="display: table-cell;">
                                     <h6 style="font-size: 12px;">{{ list.jumlah_KK_terlayani }}</h6>
                                 </div>
-                            </div>  -->
+                            </div> 
                         </div>
                     </div>
                 </div>
@@ -104,8 +104,6 @@
             
             </ion-infinite-scroll-content>
       </ion-infinite-scroll>
-
-      
       </ion-grid>
     </ion-content>
   </ion-page>
@@ -137,6 +135,7 @@ export default defineComponent({
     data() {
         return {
             data:[],
+            jenis:this.$route.params.jenis,
             limit:6,
             offset:0,
             page:0
@@ -145,17 +144,15 @@ export default defineComponent({
     methods: {
         async  get_laporan(){
         let vm = this
+
         let lapor = await axios({
         method: "post",
-        data:{limit:vm.limit,offset:vm.offset},
-
-            url: ip_server + `laporan/list`,
+        data:{jenis:this.jenis,limit:vm.limit,offset:vm.offset},
+            url: ip_server + `sumber_air/list`,
         })
             vm.data = []
             vm.data = lapor.data.data
-
             for (let i = 0; i <  vm.data.length; i++) {
-                console.log([ lapor.data.data[i],'lapor',vm.limit,vm.offset]);
                 if(vm.data[i].foto_1){
                 if(vm.data[i].foto_1.substring(0,4) == 'http' ){
                     vm.data[i].src =  vm.data[i].foto_1 
@@ -169,12 +166,10 @@ export default defineComponent({
             let vm = this
             this.page++
             this.offset = this.page*this.limit
-            console.log(['lapor',vm.limit,vm.offset]);
-
         let lapor = await axios({
         method: "post",
-            url: ip_server + `laporan/list`,
-            data:{limit:vm.limit,offset:vm.offset}
+        data:{jenis:this.jenis,limit:vm.limit,offset:vm.offset},
+            url: ip_server + `sumber_air/list`,
         })
 
             for (let i = 0; i <  lapor.data.data.length; i++) {
