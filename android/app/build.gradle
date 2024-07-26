@@ -2,7 +2,7 @@ apply plugin: 'com.android.application'
 
 android {
     namespace "id.survplus.jelajahair"
-    compileSdk rootProject.ext.compileSdkVersion
+    compileSdk 34
     defaultConfig {
         applicationId "id.survplus.jelajahair"
         minSdkVersion rootProject.ext.minSdkVersion

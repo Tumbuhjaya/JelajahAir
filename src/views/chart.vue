@@ -27,7 +27,7 @@
             <ion-row>
                 <ion-col size="12">
                     <ion-text class="ion-text-center">
-                        <h6 class="fz-18" style="color: #2770DE;"><strong>NAMA KATEGORI CHART</strong></h6>
+                        <h6 class="fz-18" style="color: #2770DE;"><strong>{{ kategori.toUpperCase() }}</strong></h6>
                     </ion-text>
                     
                 </ion-col>
@@ -93,9 +93,9 @@ export default defineComponent({
         let vm = this
         vm.loading = true
         let url =ip_server + 'sumber_air/mata_air_by_kab'
-        if (this.kategori == 'sumber_air') {
+        if (this.kategori == 'sumber air') {
             url= ip_server + 'sumber_air/sumber_air_by_kab'
-        }else if (this.kategori == 'mata_air') {
+        }else if (this.kategori == 'mata air') {
              url =ip_server + 'sumber_air/mata_air_by_kab'
         }
         let sumber_air = await axios({

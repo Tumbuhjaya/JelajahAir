@@ -53,7 +53,7 @@
 
                                 <div style="display: table-cell;">
                                     <ion-text>
-                                        <h6 style="font-size: 12px;" class="fc-black"></h6>
+                                        <h6 style="font-size: 12px;" class="fc-black">{{ list.jenis }}</h6>
                                     </ion-text>
                                 </div>
                             </div>
@@ -74,7 +74,7 @@
 
                                 <div style="display: table-cell;">
                                     <ion-text>
-                                        <h6 style="font-size: 12px;" class="fc-black">-</h6>
+                                        <h6 style="font-size: 12px;" class="fc-black">{{ list.kab_kot }}</h6>
                                     </ion-text>
                                     
                                 </div>
@@ -96,7 +96,7 @@
 
                                 <div style="display: table-cell;">
                                     <ion-text>
-                                        <h6 style="font-size: 12px;" class="fc-black">-</h6>
+                                        <h6 style="font-size: 12px;" class="fc-black">{{ list.kecamatan }}</h6>
                                     </ion-text>
                                     
                                 </div>
@@ -118,7 +118,7 @@
 
                                 <div style="display: table-cell;">
                                     <ion-text>
-                                        <h6 style="font-size: 12px;" class="fc-black">-</h6>
+                                        <h6 style="font-size: 12px;" class="fc-black">  {{ list.kab_kot }}</h6>
                                     </ion-text>
                                     
                                 </div>
@@ -140,7 +140,7 @@
 
                                 <div style="display: table-cell;">
                                     <ion-text>
-                                        <h6 style="font-size: 12px;" class="fc-black">-</h6>
+                                        <h6 style="font-size: 12px;" class="fc-black">(  {{ list.x }} ,   {{ list.y }})</h6>
                                     </ion-text>
                                     
                                 </div>
@@ -162,7 +162,7 @@
 
                                 <div style="display: table-cell;">
                                     <ion-text>
-                                        <h6 style="font-size: 12px;" class="fc-black">-</h6>
+                                        <h6 style="font-size: 12px;" class="fc-black">  {{ list.nama }}</h6>
                                     </ion-text>
                                     
                                 </div>

@@ -12,7 +12,7 @@
                     <ion-col size="8">
                         <div style="width: 100%;height: 30px;background-color: ;display: flex;justify-content: center;align-items: center;">
                             <ion-text class="ion-text-center">
-                                <h6 class="fz-16 fc-white">DATA NAMA KATEGORINYA</h6>
+                                <h6 class="fz-16 fc-white">DATA {{jenis.toUpperCase()}}</h6>
                             </ion-text>
                         </div>
                         
@@ -52,7 +52,7 @@
 
                                 <div style="display: table-cell;">
                                     <ion-text>
-                                        <h6 style="font-size: 12px;" class="fc-black">-</h6>
+                                        <h6 style="font-size: 12px;" class="fc-black">{{ list.kab_kot }}</h6>
                                     </ion-text>
                                     
                                 </div>
@@ -74,7 +74,7 @@
 
                                 <div style="display: table-cell;">
                                     <ion-text>
-                                        <h6 style="font-size: 12px;" class="fc-black">-</h6>
+                                        <h6 style="font-size: 12px;" class="fc-black">{{ list.kecamatan }}</h6>
                                     </ion-text>
                                     
                                 </div>
@@ -96,7 +96,7 @@
 
                                 <div style="display: table-cell;">
                                     <ion-text>
-                                        <h6 style="font-size: 12px;" class="fc-black">-</h6>
+                                        <h6 style="font-size: 12px;" class="fc-black">{{ list.desa_kel }}</h6>
                                     </ion-text>
                                     
                                 </div>
@@ -105,7 +105,7 @@
                             <div style="display: table-row;">
                                 <div style="display: table-cell;">
                                     <ion-text>
-                                        <h6 style="font-size: 12px;" class="fc-black">Air Baku (ltr/dtk)</h6>
+                                        <h6 style="font-size: 12px;" class="fc-black">Pemanfaatan Air Baku (ltr/dtk)</h6>
                                     </ion-text>
                                 </div>
 
@@ -118,7 +118,7 @@
 
                                 <div style="display: table-cell;">
                                     <ion-text>
-                                        <h6 style="font-size: 12px;" class="fc-black">-</h6>
+                                        <h6 style="font-size: 12px;" class="fc-black">{{ list.sumber_penyediaan_air_baku }}</h6>
                                     </ion-text>
                                     
                                 </div>
@@ -140,7 +140,7 @@
 
                                 <div style="display: table-cell;">
                                     <ion-text>
-                                        <h6 style="font-size: 12px;" class="fc-black">-</h6>
+                                        <h6 style="font-size: 12px;" class="fc-black">{{ list.kapasitas_tampungan }}</h6>
                                     </ion-text>
                                     
                                 </div>
@@ -162,7 +162,7 @@
 
                                 <div style="display: table-cell;">
                                     <ion-text>
-                                        <h6 style="font-size: 12px;" class="fc-black">-</h6>
+                                        <h6 style="font-size: 12px;" class="fc-black">{{ list.luas_genangan }}</h6>
                                     </ion-text>
                                     
                                 </div>
@@ -340,11 +340,12 @@ export default defineComponent({
 
         let lapor = await axios({
         method: "post",
-        data:{jenis:this.jenis,limit:vm.limit,offset:vm.offset},
+        data:{jenis:this.jenis,limit:vm.limit,offset:vm.offset,desa:1},
             url: ip_server + `sumber_air/list`,
         })
             vm.data = []
             vm.data = lapor.data.data
+            console.log(vm.data);
             for (let i = 0; i <  vm.data.length; i++) {
                 if(vm.data[i].foto_1){
                 if(vm.data[i].foto_1.substring(0,4) == 'http' ){
@@ -354,6 +355,7 @@ export default defineComponent({
                 }
                 }
             }
+
         },
         async getList(e){
             let vm = this
@@ -361,7 +363,7 @@ export default defineComponent({
             this.offset = this.page*this.limit
         let lapor = await axios({
         method: "post",
-        data:{jenis:this.jenis,limit:vm.limit,offset:vm.offset},
+        data:{jenis:this.jenis,limit:vm.limit,offset:vm.offset,desa:1},
             url: ip_server + `sumber_air/list`,
         })
 

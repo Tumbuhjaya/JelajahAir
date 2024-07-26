@@ -21,7 +21,7 @@
 
                         <ion-col size="2">
                             <div style="width:100%;height:40px;background-color:;display: flex;justify-content: flex-end;align-items: center">
-                                <ion-icon :icon="logInOutline" style="font-size: 40px;" class="fc-white"></ion-icon>
+                                <ion-icon :icon="logInOutline" style="font-size: 40px;"  @click="logout" class="fc-white"></ion-icon>
                             </div>
                         </ion-col>
                     </ion-row>
@@ -273,7 +273,6 @@
   import 'swiper/css/pagination';
     import 'swiper/css/navigation';
   import '@ionic/vue/css/ionic-swiper.css';
-  
     import 'mapbox-gl/dist/mapbox-gl.css';
   export default defineComponent({
       components: {
@@ -317,6 +316,12 @@
        
       },
       methods: {
+
+async logout() {
+  await Preferences.remove({ key: 'token' });
+  await Preferences.remove({ key: 'id_user' });
+
+},
           async peta(){
     
         let vm = this;

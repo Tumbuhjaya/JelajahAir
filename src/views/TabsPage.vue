@@ -32,11 +32,5 @@
 <script setup lang="ts">
 import { IonTabBar, IonTabButton, IonTabs, IonLabel, IonIcon, IonPage, IonRouterOutlet } from '@ionic/vue';
 import { homeOutline, statsChartOutline, chatbubblesOutline, navigateOutline } from 'ionicons/icons';
-import { Preferences } from '@capacitor/preferences';
 
-async function logout() {
-  await Preferences.remove({ key: 'token' });
-  await Preferences.remove({ key: 'id_user' });
-
-}
 </script>
