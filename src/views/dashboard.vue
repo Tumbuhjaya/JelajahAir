@@ -226,21 +226,7 @@
             </ion-row>
         </ion-grid>
 
-        <ion-grid style="padding:0 10px;margin-top:15px;">
-          <ion-row>
-              <ion-col size="12">
-                  <ion-text class="ion-text-center">
-                      <h6 class="fz-16" style="color:#000;"><strong>Sumber Air Di sekitarmu</strong></h6>
-                  </ion-text>
-              </ion-col>
-          </ion-row>
-  
-          <ion-row>
-              <ion-col size="12" style="padding:0">
-                  <div style="width:100%;height:300px;position: relative;background-color: wheat;" id='map' ref="map"></div>
-              </ion-col>
-          </ion-row>
-        </ion-grid>
+ 
 
 
   
@@ -273,7 +259,6 @@
   import 'swiper/css/pagination';
     import 'swiper/css/navigation';
   import '@ionic/vue/css/ionic-swiper.css';
-    import 'mapbox-gl/dist/mapbox-gl.css';
   export default defineComponent({
       components: {
           IonPage,IonLoading,
