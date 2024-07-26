@@ -12,7 +12,7 @@
                     <ion-col size="8">
                     <div style="width: 100%;height: 30px;background-color: ;display: flex;justify-content: center;align-items: center;">
                         <ion-text class="ion-text-center">
-                        <h6 class="fz-18 fc-white">Detail Sumber Air</h6>
+                        <h6 class="fz-16 fc-white">DETAIL SUMBER AIR</h6>
                         </ion-text>
                     </div>
                     </ion-col>
@@ -26,7 +26,8 @@
         <ion-row>
             <ion-col size="12">
                 <ion-text class="ion-text-center">
-                    <h6 class="fz-20"><strong>{{  sumber_air.nama }}</strong></h6>
+                    <h6 class="fz-14" style="text-transform: uppercase">SUMBER AIR </h6>
+                    <h6 class="fz-18" style="text-transform: uppercase; color:#1c47bc"><strong>{{  sumber_air.nama }}</strong></h6>
                 </ion-text>
             </ion-col>
         </ion-row>

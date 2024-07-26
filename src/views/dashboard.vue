@@ -1,55 +1,231 @@
 <template>
     <ion-page >
-      <ion-header>
-          <ion-toolbar>
-              <ion-grid style="padding-left:10px;padding-right: 10px;">
-                  
-                  <ion-row>
-                      <ion-col size="12">
-                          <div style="width:100%;height:40px;background-color:;display: flex;justify-content: center;align-items: flex-start">
-                              <ion-img src="/assets/logo_prov_jateng.png" style="width:35px;"></ion-img>
-                              <div style="display: flex;flex-direction: column;margin-left: 10px">
-                                  <ion-text>
-                                      <h6 class="fc-white fz-20" style="letter-spacing: 1.5px;"><strong>JELAJAH AIR</strong></h6>
-                                  </ion-text>
-  
-                                  <ion-text>
-                                      <h6 class="fc-white fz-12">PROVINSI JAWA TENGAH</h6>
-                                  </ion-text>
-                              </div>
-                          </div>
-                      </ion-col>
-                  </ion-row>
-              </ion-grid>
-          </ion-toolbar>
-      </ion-header>
+        <ion-header>
+            <ion-toolbar>
+                <ion-grid style="padding-left:10px;padding-right: 10px;">
+                    <ion-row>
+                        <ion-col size="10">
+                            <div style="width:100%;height:40px;background-color:;display: flex;justify-content: flex-start;align-items: flex-start">
+                                <ion-img src="/assets/logo_prov_jateng.png" style="width:35px;"></ion-img>
+                                <div style="display: flex;flex-direction: column;margin-left: 10px">
+                                    <ion-text>
+                                        <h6 class="fc-white fz-18" style="letter-spacing:2.8px;"><strong>JELAJAH AIR</strong></h6>
+                                    </ion-text>
+    
+                                    <ion-text>
+                                        <h6 class="fc-white fz-12">PROVINSI JAWA TENGAH</h6>
+                                    </ion-text>
+                                </div>
+                            </div>
+                        </ion-col>
+
+                        <ion-col size="2">
+                            <div style="width:100%;height:40px;background-color:;display: flex;justify-content: flex-end;align-items: center">
+                                <ion-icon :icon="logInOutline" style="font-size: 40px;" class="fc-white"></ion-icon>
+                            </div>
+                        </ion-col>
+                    </ion-row>
+                </ion-grid>
+            </ion-toolbar>
+        </ion-header>
     
       
       <ion-content :fullscreen="true">
         <ion-grid style="padding: 0;">
-          
-          <ion-row>
-            <ion-col size="12" style="padding:0">
-              <swiper 
-                  :autoplay="{
-                  delay: 2500,
-                  disableOnInteraction: false,
-                  }"
-                  :pagination="{
-                  clickable: true,
-                  }"
-                  :navigation="true"
-                  :modules="modules"
-                  class="mySwiper"
-                  >
-                  <swiper-slide  v-for="(banner, i) in banner" :key="i">
-                      <ion-img  :src="banner.src" style="width: 100%;height: 200px;object-fit: fill"></ion-img>
-                  </swiper-slide>
-              </swiper>
-            </ion-col>
+            <ion-row>
+                <ion-col size="12" style="padding:0">
+                <swiper 
+                    :autoplay="{
+                    delay: 2500,
+                    disableOnInteraction: false,
+                    }"
+                    :pagination="{
+                    clickable: true,
+                    }"
+                    :navigation="true"
+                    :modules="modules"
+                    class="mySwiper"
+                    >
+                    <swiper-slide  v-for="(banner, i) in banner" :key="i">
+                        <ion-img  :src="banner.src" style="width: 100%;height: 200px;object-fit: fill"></ion-img>
+                    </swiper-slide>
+                </swiper>
+                </ion-col>
           </ion-row>
         </ion-grid>
+
+        <ion-grid style="padding:0 10px;margin-top:15px;">
+            <ion-row>
+                <ion-col size="12">
+                    <ion-text>
+                        <h6 class="fz-18" style="color:#163891"><strong>SEKILAS JELAJAH AIR</strong></h6>
+                        <h6 class="fz-14 fc-black">PROVINSI JAWA TENGAH</h6>
+                    </ion-text>
+                </ion-col>
+                <ion-col size="12">
+                    <ion-text>
+                        <h6 class="fz-14">
+                            Jelajah Air adalah sebuah sistem informasi berbasis web dan Android yang dibuat oleh Dinas Pekerjaan Umum, Bina Marga dan Cipta Karya Provinsi Jawa Tengah mengenai sebaran dan ketersediaan air minum di Provinsi Jawa Tengah dalam rangka meningkatkan salah satu pelayanan bidang keciptakaryaan yaitu Air Minum. Jelajah Air menyediakan akses terhadap data, statistik, dan peta mengenai profil penyediaan air minum di seluruh Jawa Tengah. Informasi yang tersedia mencakup sumber air baku, sistem jaringan air minum, dan daerah-daerah yang telah terlayani jaringan air minum. Data dan informasi ditampilkan secara tabular, infografik, serta spasial, memberikan gambaran detail tentang kondisi layanan air minum di Provinsi Jawa Tengah.
+                        </h6>
+                    </ion-text>
+                </ion-col>
+
+                <ion-col size="12">
+                    <ion-text>
+                        <h6 class="fz-14">
+                            Jelajah Air memberikan kemudahan bagi masyarakat untuk berpartisipasi dalam pendataan kondisi sumber air di sekitar mereka, sehingga data yang dikumpulkan lebih akurat dan real-time. Dengan adanya Jelajah Air, kolaborasi antara masyarakat dan pemerintah dapat terjalin lebih erat. Masyarakat dapat berperan aktif dalam menjaga dan melestarikan sumber air bersih dengan melaporkan sumber air baku di sekitar mereka, sementara pemerintah dapat mengoptimalkan perencanaan dan pelaksanaan program pengelolaan air berdasarkan data yang valid dan terkini. Jelajah Air adalah langkah maju dalam memastikan akses air minum yang berkelanjutan bagi seluruh warga Provinsi Jawa Tengah. Mari berpartisipasi mewujudkan tercukupinya air minum di Jawa Tengah melalui Jelajah Air. Bersama-sama, kita bisa memastikan masa depan yang lebih baik untuk Provinsi Jawa Tengah.
+                        </h6>
+                    </ion-text>
+                </ion-col>
+            </ion-row>
+        </ion-grid>
+
+        <ion-grid>
+            <ion-row>
+                <ion-col size="12">
+                    <ion-text>
+                        <h6 class="fz-18" style="color:#163891"><strong>VIDEO PEMAHAMAN</strong></h6>
+                        <h6 class="fz-14 fc-black">JELAJAH AIR</h6>
+                    </ion-text>
+                </ion-col>
+            </ion-row>
+
+            <ion-row>
+                <ion-col size="12">
+                    <swiper 
+                        :autoplay="{
+                        delay: 2500,
+                        disableOnInteraction: false,
+                        }"
+                        :pagination="{
+                        clickable: true,
+                        }"
+                        :navigation="true"
+                        :modules="modules"
+                        :slidesPerView="1.5"
+                        :spaceBetween="15"
+                        class="mySwiper"
+                        >
+                        <swiper-slide  v-for="(banner, i) in banner" :key="i">
+                            <ion-img  :src="banner.src" style="width: 100%;height: 160px;object-fit: fill"></ion-img>
+                        </swiper-slide>
+                    </swiper>
+                </ion-col>
+            </ion-row>
+        </ion-grid>
+
+        <ion-grid style="padding:0 10px;margin-top:15px;">
+            <ion-row>
+                <ion-col size="8">
+                    <ion-text>
+                        <h6 class="fz-18" style="color:#163891"><strong>SUMBER AIR</strong></h6>
+                        <h6 class="fz-14 fc-black" >PROVINSI JAWA TENGAH</h6>
+                    </ion-text>
+                </ion-col>
+                <ion-col size="4">
+                    <ion-text class="ion-text-end">
+                        <h6 class="fz-16" style="color:grey" @click="$router.push('/tabs/sumber_air_sekitar')">Lainnya</h6>
+                    </ion-text>
+                </ion-col>
+            </ion-row>
   
+            <ion-row>
+                <ion-col size="12">
+                    <swiper 
+                        :pagination="{
+                            clickable: true,
+                        }"
+                        :navigation="true"
+                        :modules="modules"
+                        :slidesPerView="2"
+                        :spaceBetween="15"
+                        class="mySwiper"
+                    >
+                        <swiper-slide  v-for="(sumber_air, i) in sumber_air" :key="i">
+                            <div style="width: 100%;position: relative;border-radius: 10px;overflow: hidden;" @click="$router.push('/tabs/sumber_air_sekitar/detail/'+sumber_air.OGR_FID)">
+                                <ion-img v-if="sumber_air.foto_1" :src="sumber_air.src" style="width: 100%;height: 200px;object-fit: cover;"></ion-img>
+                                <ion-img v-else src="https://via.placeholder.com/240" style="width: 100%;height: 200px;object-fit: cover;"></ion-img>
+    
+                                <div style="width:100%;padding:20px 10px;background-color: rgba(0, 0, 0, 0.8);position: absolute;left:0;right:0;bottom:0;">
+                                    <ion-text>
+                                        <h5 style="color: #fff;font-weight: bold;font-size: 14px;">{{sumber_air.nama?sumber_air.nama:''}}</h5>
+                                    </ion-text>
+            
+                                    <div style="width:100%;height:1px;background-color:#fff;margin:5px 0;"></div>
+            
+                                    <ion-text>
+                                        <h6 class="fz-10 fc-white" style="font-weight:normal;">Kec. {{sumber_air.kecamatan}} Kel. {{sumber_air.desa_kel}}</h6>
+                                    </ion-text>
+                                </div>
+            
+                                <ion-badge color="primary" style="position: absolute;top:10px;right:10px;">
+                                    <ion-text>
+                                        <h6 class="fz-10 fc-white" style="font-weight:bold;">{{sumber_air.kab_kot}}</h6>
+                                    </ion-text>
+                                </ion-badge>
+                            </div>
+                        </swiper-slide>
+                    </swiper>
+                </ion-col>
+            </ion-row>
+        </ion-grid>
+
+        <ion-grid style="padding:0 10px;margin-top:15px;">
+            <ion-row>
+                <ion-col size="8">
+                    <ion-text>
+                        <h6 class="fz-18" style="color:#163891"><strong>SPAM PROVINSI</strong></h6>
+                        <h6 class="fz-14 fc-black" >JAWA TENGAH</h6>
+                    </ion-text>
+                </ion-col>
+                <ion-col size="4">
+                    <ion-text class="ion-text-end">
+                        <h6 class="fz-16" style="color:grey" @click="$router.push('/tabs/spam_provinsi')">Lainnya</h6>
+                    </ion-text>
+                </ion-col>
+            </ion-row>
+  
+            <ion-row>
+                <ion-col size="12">
+                    <swiper 
+                        :pagination="{
+                            clickable: true,
+                        }"
+                        :navigation="true"
+                        :modules="modules"
+                        :slidesPerView="2"
+                        :spaceBetween="15"
+                        class="mySwiper"
+                    >
+                        <swiper-slide v-for="(spam_desa, i) in spam_desa" :key="i">
+                            <div style="width: 100%;position: relative;border-radius: 10px;overflow: hidden;" @click="$router.push('/tabs/spam_desa/detail/'+spam_desa.spam_desa_id+'/1')">                      <ion-img v-if="spam_desa.foto_1" :src="spam_desa.src" style="width: 100%;height: 200px;object-fit: cover;"></ion-img>
+                                <ion-img v-else src="https://via.placeholder.com/240" style="width: 100%;height: 200px;object-fit: cover;"></ion-img>
+            
+                                <div style="width:100%;padding:20px 10px;background-color: rgba(0, 0, 0, 0.8);position: absolute;left:0;right:0;bottom:0;">
+                                    <ion-text>
+                                        <h5 style="color: #fff;font-weight: bold;font-size: 14px;">{{spam_desa.nama?spam_desa.nama:''}}</h5>
+                                    </ion-text>
+            
+                                    <div style="width:100%;height:1px;background-color:#fff;margin:5px 0;"></div>
+                                        
+                                    <ion-text>
+                                        <h6 class="fz-10 fc-white" style="font-weight:normal;">Kec. {{spam_desa.kecamatan?spam_desa.kecamatan:''}} Kel. {{spam_desa.desa_kel?spam_desa.desa_kel:''}}</h6>
+                                    </ion-text>
+                                        
+                                </div>
+            
+                                <ion-badge color="primary" style="position: absolute;top:10px;right:10px;">
+                                    <ion-text>
+                                        <h6 class="fz-10 fc-white" style="font-weight:bold;">{{spam_desa.kab_kot?spam_desa.kab_kot:''}}</h6>
+                                    </ion-text>
+                                </ion-badge>
+                            </div>
+                        </swiper-slide>
+                    </swiper>
+                </ion-col>
+            </ion-row>
+        </ion-grid>
+
         <ion-grid style="padding:0 10px;margin-top:15px;">
           <ion-row>
               <ion-col size="12">
@@ -65,90 +241,8 @@
               </ion-col>
           </ion-row>
         </ion-grid>
-  
-        <ion-grid style="padding:0 10px;margin-top:15px;">
-          <ion-row>
-              <ion-col size="8">
-                  <ion-text>
-                      <h6 class="fz-16" style="color:#000;"><strong>Data Spam Provinsi</strong></h6>
-                  </ion-text>
-              </ion-col>
-              <ion-col size="4">
-                  <ion-text class="ion-text-end">
-                      <h6 class="fz-16" style="color:grey" @click="$router.push('/tabs/spam_provinsi')">Lainnya</h6>
-                  </ion-text>
-              </ion-col>
-          </ion-row>
-  
-          <ion-row>
-              <ion-col size="6" v-for="(spam_desa, i) in spam_desa" :key="i">
-                <div style="width: 100%;position: relative;border-radius: 10px;overflow: hidden;" @click="$router.push('/tabs/spam_desa/detail/'+spam_desa.spam_desa_id+'/1')">                      <ion-img v-if="spam_desa.foto_1" :src="spam_desa.src" style="width: 100%;height: 200px;object-fit: cover;"></ion-img>
-                      <ion-img v-else src="https://via.placeholder.com/240" style="width: 100%;height: 200px;object-fit: cover;"></ion-img>
-  
-                      <div style="width:100%;padding:20px 10px;background-color: rgba(0, 0, 0, 0.8);position: absolute;left:0;right:0;bottom:0;">
-                          <ion-text>
-                              <h5 style="color: #fff;font-weight: bold;font-size: 14px;">{{spam_desa.nama?spam_desa.nama:''}}</h5>
-                          </ion-text>
-  
-                          <div style="width:100%;height:1px;background-color:#fff;margin:5px 0;"></div>
-                              
-                          <ion-text>
-                              <h6 class="fz-10 fc-white" style="font-weight:normal;">Kec. {{spam_desa.kecamatan?spam_desa.kecamatan:''}} Kel. {{spam_desa.desa_kel?spam_desa.desa_kel:''}}</h6>
-                          </ion-text>
-                              
-                      </div>
-  
-                      <ion-badge color="primary" style="position: absolute;top:10px;right:10px;">
-                          <ion-text>
-                              <h6 class="fz-10 fc-white" style="font-weight:bold;">{{spam_desa.kab_kot?spam_desa.kab_kot:''}}</h6>
-                          </ion-text>
-                      </ion-badge>
-                  </div>
-              </ion-col>
-          </ion-row>
-        </ion-grid>
-  
-        <ion-grid style="padding:0 10px;margin-top:15px;">
-          <ion-row>
-              <ion-col size="8">
-                  <ion-text>
-                      <h6 class="fz-16" style="color:#000;"><strong>Data Sumber Air</strong></h6>
-                  </ion-text>
-              </ion-col>
-              <ion-col size="4">
-                  <ion-text class="ion-text-end">
-                      <h6 class="fz-16" style="color:grey" @click="$router.push('/tabs/sumber_air_sekitar')">Lainnya</h6>
-                  </ion-text>
-              </ion-col>
-          </ion-row>
-  
-          <ion-row>
-              <ion-col size="6"  v-for="(sumber_air, i) in sumber_air" :key="i">
-                  <div style="width: 100%;position: relative;border-radius: 10px;overflow: hidden;" @click="$router.push('/tabs/sumber_air_sekitar/detail/'+sumber_air.OGR_FID)">
-                      <ion-img v-if="sumber_air.foto_1" :src="sumber_air.src" style="width: 100%;height: 200px;object-fit: cover;"></ion-img>
-                      <ion-img v-else src="https://via.placeholder.com/240" style="width: 100%;height: 200px;object-fit: cover;"></ion-img>
-  
-                      <div style="width:100%;padding:20px 10px;background-color: rgba(0, 0, 0, 0.8);position: absolute;left:0;right:0;bottom:0;">
-                          <ion-text>
-                              <h5 style="color: #fff;font-weight: bold;font-size: 14px;">{{sumber_air.nama?sumber_air.nama:''}}</h5>
-                          </ion-text>
-  
-                          <div style="width:100%;height:1px;background-color:#fff;margin:5px 0;"></div>
-  
-                          <ion-text>
-                              <h6 class="fz-10 fc-white" style="font-weight:normal;">Kec. {{sumber_air.kecamatan}} Kel. {{sumber_air.desa_kel}}</h6>
-                          </ion-text>
-                      </div>
-  
-                      <ion-badge color="primary" style="position: absolute;top:10px;right:10px;">
-                          <ion-text>
-                              <h6 class="fz-10 fc-white" style="font-weight:bold;">{{sumber_air.kab_kot}}</h6>
-                          </ion-text>
-                      </ion-badge>
-                  </div>
-              </ion-col>
-          </ion-row>
-        </ion-grid>
+
+
   
         
         <ion-fab slot="fixed" vertical="bottom" horizontal="end">
@@ -169,7 +263,7 @@
   import { ip_server } from "@/ip-config.js";
   import moment from "moment";
   moment.locale("id");
-  import { addCircleOutline, peopleCircleOutline  } from 'ionicons/icons';
+  import { addCircleOutline, logInOutline  } from 'ionicons/icons';
   import { Swiper, SwiperSlide } from 'swiper/vue';
   import { Autoplay, Pagination, Navigation } from 'swiper/modules';
   import mapboxgl from 'mapbox-gl';
@@ -201,7 +295,7 @@
           SwiperSlide
       },
       setup() {
-          return { modules: [Autoplay, Pagination, Navigation], addCircleOutline, peopleCircleOutline };
+          return { modules: [Autoplay, Pagination, Navigation], addCircleOutline, logInOutline };
       },
       
       data() {

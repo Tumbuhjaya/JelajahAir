@@ -12,7 +12,7 @@
                     <ion-col size="8">
                         <div style="width: 100%;height: 30px;background-color: ;display: flex;justify-content: center;align-items: center;">
                             <ion-text class="ion-text-center">
-                            <h6 class="fz-18 fc-white">Detail Spam Provinsi</h6>
+                            <h6 class="fz-16 fc-white">DETAIL SPAM PROVINSI</h6>
                             </ion-text>
                         </div>
                     </ion-col>
@@ -26,7 +26,8 @@
         <ion-row>
             <ion-col size="12">
                 <ion-text class="ion-text-center">
-                    <h6 class="fz-20 fc-black"><strong>{{  spam_desa.nama_sumber_air }}</strong></h6>
+                    <h6 class="fz-14" style="text-transform: uppercase">SPAM PROVINSI </h6>
+                    <h6 class="fz-18" style="text-transform: uppercase; color:#1c47bc"><strong>{{  spam_desa.nama_sumber_air }}</strong></h6>
                 </ion-text>
             </ion-col>
         </ion-row>

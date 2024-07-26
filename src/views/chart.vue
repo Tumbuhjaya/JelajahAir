@@ -6,13 +6,13 @@
                 <ion-row>
                     <ion-col size="2">
                         <div style="width: 100%;height: 30px;background-color: ;display: flex;justify-content: flex-start;align-items: center;">
-                            <ion-icon :icon="arrowBackCircleOutline" @click="$router.push('/tabs/dashboard')" style="font-size: 26px;color:#fff"></ion-icon>
+                            <ion-icon :icon="arrowBackCircleOutline" @click="$router.push('/tabs/statistik')" style="font-size: 26px;color:#fff"></ion-icon>
                         </div>
                     </ion-col>
                     <ion-col size="8">
                         <div style="width: 100%;height: 30px;background-color: ;display: flex;justify-content: center;align-items: center;">
                             <ion-text class="ion-text-center">
-                                <h6 class="fz-18 fc-white">Statistik</h6>
+                                <h6 class="fz-16 fc-white">DETAIL STATISTIK</h6>
                             </ion-text>
                         </div>
                         
@@ -23,7 +23,20 @@
         </ion-toolbar>
     </ion-header>
     <ion-content :fullscreen="true">
-        <apexchart type="line" height="350" :options="chartOptions" :series="series"></apexchart>
+        <ion-grid style="padding:0 10px;margin-top: 15px">
+            <ion-row>
+                <ion-col size="12">
+                    <ion-text class="ion-text-center">
+                        <h6 class="fz-18" style="color: #2770DE;"><strong>NAMA KATEGORI CHART</strong></h6>
+                    </ion-text>
+                    
+                </ion-col>
+                <ion-col size="12">
+                    <apexchart type="line" height="350" :options="chartOptions" :series="series"></apexchart>
+                </ion-col>
+            </ion-row>
+        </ion-grid>
+        
 
     </ion-content>
   </ion-page>
@@ -104,7 +117,7 @@ export default defineComponent({
       this.chartOptions={
         chart: {
           height: 350,
-          type: 'line'
+          type: 'bar'
         },
         xaxis: {
           categories:a

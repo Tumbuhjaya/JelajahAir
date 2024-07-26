@@ -50,6 +50,11 @@ const routes: Array<RouteRecordRaw> = [
       },
 
       {
+        path: 'lokasi_sekitar',
+        component: () => import('@/views/lokasi_sekitar.vue')
+      },
+
+      {
         path: 'statistik',
         component: () => import('@/views/statistik.vue')
       },

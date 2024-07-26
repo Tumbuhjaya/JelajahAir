@@ -13,15 +13,17 @@
           <ion-label>Data Lapor</ion-label>
         </ion-tab-button>
 
+        <ion-tab-button tab="tab4" href="/tabs/lokasi_sekitar">
+          <ion-icon aria-hidden="true" :icon="navigateOutline" />
+          <ion-label>Lokasi Sekitar</ion-label>
+        </ion-tab-button>
+
         <ion-tab-button tab="tab3" href="/tabs/statistik">
           <ion-icon aria-hidden="true" :icon="statsChartOutline" />
           <ion-label>Statistik</ion-label>
         </ion-tab-button>
 
-        <ion-tab-button tab="tab4" href="/tabs/tab4" @click="logout">
-          <ion-icon aria-hidden="true" :icon="personCircleOutline" />
-          <ion-label>Logout</ion-label>
-        </ion-tab-button>
+        
       </ion-tab-bar>
     </ion-tabs>
   </ion-page>
@@ -29,7 +31,7 @@
 
 <script setup lang="ts">
 import { IonTabBar, IonTabButton, IonTabs, IonLabel, IonIcon, IonPage, IonRouterOutlet } from '@ionic/vue';
-import { homeOutline, statsChartOutline, personCircleOutline, chatbubblesOutline } from 'ionicons/icons';
+import { homeOutline, statsChartOutline, chatbubblesOutline, navigateOutline } from 'ionicons/icons';
 import { Preferences } from '@capacitor/preferences';
 
 async function logout() {

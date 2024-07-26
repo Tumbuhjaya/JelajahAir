@@ -6,13 +6,13 @@
                 <ion-row>
                     <ion-col size="2">
                     <div style="width: 100%;height: 30px;background-color: ;display: flex;justify-content: flex-start;align-items: center;">
-                        <ion-icon :icon="arrowBackCircleOutline" @click="$router.push('/tabs/dashboard')" style="font-size: 26px;color:#fff"></ion-icon>
+                        <ion-icon :icon="arrowBackCircleOutline" @click="$router.push('/tabs/data_lapor_sumber_air')" style="font-size: 26px;color:#fff"></ion-icon>
                     </div>
                     </ion-col>
                     <ion-col size="8">
                     <div style="width: 100%;height: 30px;background-color: ;display: flex;justify-content: center;align-items: center;">
                         <ion-text class="ion-text-center">
-                        <h6 class="fz-18 fc-white">Detail Lapor Sumber Air</h6>
+                        <h6 class="fz-16 fc-white">DETAIL LAPOR SUMBER AIR</h6>
                         </ion-text>
                     </div>
                     </ion-col>
@@ -22,11 +22,12 @@
         </ion-toolbar>
     </ion-header>
     <ion-content :fullscreen="true">
-      <ion-grid style="padding: 0 10px;margin-top:15px;">
+      <ion-grid style="padding: 0 10px;margin:15px 0;">
         <ion-row>
             <ion-col size="12">
                 <ion-text class="ion-text-center">
-                    <h6 class="fz-20"><strong>{{ sumber_air.nama_sumber_air }}</strong></h6>
+                    <h6 class="fz-14" style="text-transform: uppercase">Sumber Air </h6>
+                    <h6 class="fz-18" style="text-transform: uppercase; color:#1c47bc"><strong>{{ sumber_air.nama_sumber_air }}</strong></h6>
                 </ion-text>
             </ion-col>
         </ion-row>
@@ -41,10 +42,15 @@
         <ion-row>
             <ion-col size="12">
                 <ion-text>
+                    <h6 class="fz-18" style="color:#1c47bc"><strong>INFORMASI SUMBER AIR</strong></h6>
+                </ion-text>
+            </ion-col>
+            <ion-col size="12">
+                <ion-text>
                     <h6 class="fz-16 fc-black"><strong>Jenis</strong></h6>
                 </ion-text>
                 <ion-text>
-                    <h6 class="fz-14 ">{{ sumber_air.jenis }}</h6>
+                    <h6 class="fz-14">{{ sumber_air.jenis }}</h6>
                 </ion-text>
             </ion-col>
 
@@ -53,7 +59,7 @@
                     <h6 class="fz-16 fc-black"><strong>Kabupaten/Kota</strong></h6>
                 </ion-text>
                 <ion-text>
-                    <h6 class="fz-14 fc-black">{{ sumber_air.kab_kot }}</h6>
+                    <h6 class="fz-14">{{ sumber_air.kab_kot }}</h6>
                 </ion-text>
             </ion-col>
 
@@ -62,7 +68,7 @@
                     <h6 class="fz-16 fc-black"><strong>Kecamatan</strong></h6>
                 </ion-text>
                 <ion-text>
-                    <h6 class="fz-14 fc-black">{{ sumber_air.kecamatan }}</h6>
+                    <h6 class="fz-14">{{ sumber_air.kecamatan }}</h6>
                 </ion-text>
             </ion-col>
 
@@ -71,47 +77,48 @@
                     <h6 class="fz-16 fc-black"><strong>Kelurahan/Desa</strong></h6>
                 </ion-text>
                 <ion-text>
-                    <h6 class="fz-14 fc-black">{{ sumber_air.desa_kel }}</h6>
+                    <h6 class="fz-14">{{ sumber_air.desa_kel }}</h6>
                 </ion-text>
             </ion-col>
+
+            <ion-col size="12">
+                <ion-text>
+                    <h6 class="fz-16 fc-black"><strong>Koordinat Lokasi</strong></h6>
+                </ion-text>
+                <ion-text>
+                    <h6 class="fz-14">{{ sumber_air.x }}, {{ sumber_air.y }}</h6>
+                </ion-text>
+            </ion-col>
+
             <ion-col size="12">
                 <ion-text>
                     <h6 class="fz-16 fc-black"><strong>Deskripsi</strong></h6>
                 </ion-text>
                 <ion-text>
-                    <h6 class="fz-14 fc-black">{{ sumber_air.deskripsi }}</h6>
+                    <h6 class="fz-14">{{ sumber_air.deskripsi }}</h6>
+                </ion-text>
+            </ion-col>
+
+            <ion-col size="12" style="margin-top: 30px">
+                <ion-text>
+                    <h6 class="fz-18" style="color:#1c47bc"><strong>INFORMASI LAPORAN</strong></h6>
+                </ion-text>
+            </ion-col>
+
+            <ion-col size="12">
+                <ion-text>
+                    <h6 class="fz-16 fc-black"><strong>Pelapor</strong></h6>
+                </ion-text>
+                <ion-text>
+                    <h6 class="fz-14">{{ sumber_air.nama }}</h6>
                 </ion-text>
             </ion-col>
             <ion-col size="12">
                 <ion-text>
-                    <h6 class="fz-16 fc-black"><strong>Pengelola</strong></h6>
+                    <h6 class="fz-16 fc-black"><strong>Status Laporan</strong></h6>
                 </ion-text>
                 <ion-text>
-                    <h6 class="fz-14 fc-black">{{ sumber_air.nama }}</h6>
-                </ion-text>
-            </ion-col>
-            <ion-col size="12">
-                <ion-text>
-                    <h6 class="fz-16 fc-black"><strong>X</strong></h6>
-                </ion-text>
-                <ion-text>
-                    <h6 class="fz-14 fc-black">{{ sumber_air.x }}</h6>
-                </ion-text>
-            </ion-col>
-            <ion-col size="12">
-                <ion-text>
-                    <h6 class="fz-16 fc-black"><strong>Y</strong></h6>
-                </ion-text>
-                <ion-text>
-                    <h6 class="fz-14 fc-black">{{ sumber_air.y }}</h6>
-                </ion-text>
-            </ion-col>
-            <ion-col size="12">
-                <ion-text>
-                    <h6 class="fz-16 fc-black"><strong>Verifikasi</strong></h6>
-                </ion-text>
-                <ion-text>
-                    <h6 class="fz-14 fc-black">{{ sumber_air.verifikasi==0?'Belum Diverifikasi':sumber_air.verifikasi==1?'Sudah Diverifikasi':sumber_air.verifikasi==2?'Di Tolak':'' }}</h6>
+                    <h6 class="fz-14">{{ sumber_air.verifikasi==0?'Belum Diverifikasi':sumber_air.verifikasi==1?'Sudah Diverifikasi':sumber_air.verifikasi==2?'Di Tolak':'' }}</h6>
                 </ion-text>
             </ion-col>
         </ion-row>

@@ -12,7 +12,7 @@
             <ion-col size="8">
               <div style="width: 100%;height: 30px;background-color: ;display: flex;justify-content: center;align-items: center;">
                 <ion-text class="ion-text-center">
-                  <h6 class="fz-18 fc-white">Sumber Air</h6>
+                  <h6 class="fz-16 fc-white">SUMBER AIR</h6>
                 </ion-text>
               </div>
             </ion-col>

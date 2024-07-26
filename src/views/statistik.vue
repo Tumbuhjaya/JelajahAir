@@ -12,7 +12,7 @@
                     <ion-col size="8">
                         <div style="width: 100%;height: 30px;background-color: ;display: flex;justify-content: center;align-items: center;">
                             <ion-text class="ion-text-center">
-                                <h6 class="fz-18 fc-white">Statistik</h6>
+                                <h6 class="fz-16 fc-white">STATISTIK</h6>
                             </ion-text>
                         </div>
                         
@@ -26,11 +26,11 @@
         <ion-grid style="padding: 0 10px;margin-top:15px;">
             <ion-row>
                 <ion-col size="12">
-                    <ion-text class="ion-text-center">
-                        <h6 class="fz-16 fc-black"><strong>Informasi Sumber Air Baku</strong></h6>
+                    <ion-text>
+                        <h6 class="fz-18" style="color: #163891;"><strong>SUMBER AIR BAKU</strong></h6>
                     </ion-text>
-                    <ion-text class="ion-text-center">
-                        <h6 class="fz-16 fc-black">Provinsi Jawa Tengah</h6>
+                    <ion-text>
+                        <h6 class="fz-14">PROVINSI JAWA TENGAH</h6>
                     </ion-text>
                 </ion-col>
             </ion-row>
@@ -102,11 +102,11 @@
         <ion-grid style="padding: 0 10px;margin-top:15px;">
             <ion-row>
                 <ion-col size="12">
-                    <ion-text class="ion-text-center">
-                        <h6 class="fz-16 fc-black"><strong>Informasi Profil SPAM</strong></h6>
+                    <ion-text>
+                        <h6 class="fz-18" style="color: #163891;"><strong>PROFIL SPAM</strong></h6>
                     </ion-text>
-                    <ion-text class="ion-text-center">
-                        <h6 class="fz-16 fc-black">Provinsi Jawa Tengah</h6>
+                    <ion-text>
+                        <h6 class="fz-14">PROVINSI JAWA TENGAH</h6>
                     </ion-text>
                 </ion-col>
             </ion-row>
