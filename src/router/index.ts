@@ -7,8 +7,8 @@ import axios from "axios";
 import { ip_server } from "@/ip-config.js";
 GoogleAuth.initialize(
 {
-  clientId: '576386395599-t2e4r1gpivibj70e3tsme3raeavjo4lm.apps.googleusercontent.com',
-  // clientId: '576386395599-cd3h0q6d10n0nd6loiof5l2vgikej5bn.apps.googleusercontent.com ',
+  // clientId: '576386395599-t2e4r1gpivibj70e3tsme3raeavjo4lm.apps.googleusercontent.com',
+  clientId: '576386395599-cd3h0q6d10n0nd6loiof5l2vgikej5bn.apps.googleusercontent.com ',
   scopes: ['profile', 'email'],
   grantOfflineAccess: false,
 });

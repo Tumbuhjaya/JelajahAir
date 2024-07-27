@@ -15,16 +15,7 @@
                                 <h6 class="fz-16 fc-white">LOKASI SEKITAR</h6>
                             </ion-text>
                         </div>
-                        <ion-grid style="padding:0 10px;margin-top:15px;">
-          <ion-row>
-              <ion-col size="12">
-                  <ion-text class="ion-text-center">
-                      <!-- <h6 class="fz-16" style="color:#000;"><strong>Sumber Air Di sekitarmu</strong></h6> -->
-                  </ion-text>
-              </ion-col>
-          </ion-row>
-  
-        </ion-grid>
+                     
                     </ion-col>
                     <ion-col size="2"></ion-col>
                 </ion-row>
@@ -34,15 +25,10 @@
     <ion-content :fullscreen="true">
         <ion-grid style="padding: 0 10px;margin-top:15px;">
             <ion-row>
-                <ion-col size="12">
-                    
-          <ion-row>
               <ion-col size="12" style="padding:0">
                   <div style="width:100%;height:300px;position: relative;background-color: wheat;" id='map' ref="map"></div>
               </ion-col>
           </ion-row>
-                </ion-col>
-            </ion-row>
         </ion-grid>
     </ion-content>
   </ion-page>
@@ -229,6 +215,10 @@ let geolocate =  new mapboxgl.GeolocateControl({
               let data = await  axios.post(`${ip_server}peta/sumber_air_radius?jarak=${vm.radius}&long=${e.coords.longitude}&lat=${e.coords.latitude}`,{
                 geojsonpoint: buffered
   });
+  // let poly = `${buffered.geometry.coordinates}`.replace(/[\[\],]/g, ' ').replace(/110./g, ',110.')
+  //             let data = await  axios.post(`${ip_server}peta/jaringan_pdam?jarak=${vm.radius}&long=${e.coords.longitude}&lat=${e.coords.latitude}`,{
+  //               // geojsonpoint: buffered
+  //               polygon:poly.substring(1,poly.length)
             if(data){
               console.log([data,'ini data']);
               vm.map.getSource('points').setData(data.data);

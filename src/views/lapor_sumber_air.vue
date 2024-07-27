@@ -84,6 +84,9 @@
             <ion-col size="12">
                 <ion-input label="Koordinat Y Sumber Air" v-model="y" disabled labelPlacement="stacked" placeholder="-6.xxx"></ion-input>
             </ion-col>
+            <ion-col size="12">
+              <ion-button color="primary" @click="get_coordinates">Ambil Lokasi</ion-button>
+            </ion-col>
 
             <ion-col size="12">
               <ion-textarea label="Deskripsi" v-model="deskripsi" labelPlacement="stacked" placeholder=""></ion-textarea>
@@ -124,7 +127,7 @@
 </template>
 
 <script>
-import {  IonLoading,alertController ,loadingController,IonSelect ,IonSelectOption  , IonPage, IonHeader, IonToolbar, IonContent, IonGrid, IonRow, IonCol, IonIcon, IonButton, IonImg, IonInput, IonTextarea, IonText  } from '@ionic/vue';
+import {  IonLoading,alertController ,loadingController,IonSelect ,IonSelectOption,IonButton  , IonPage, IonHeader, IonToolbar, IonContent, IonGrid, IonRow, IonCol, IonIcon, IonImg, IonInput, IonTextarea, IonText  } from '@ionic/vue';
 import { defineComponent ,watch } from 'vue';
 import axios from "axios";
 import { ip_server } from "@/ip-config.js";
@@ -166,6 +169,7 @@ export default defineComponent({
           kecamatan :[],
           kec_id:0,
           kelurahan :[],
+          desa:{},
           desa_id:0,
             nama_sumber_air:'',
             nama:'',
@@ -185,20 +189,20 @@ export default defineComponent({
 
     async ionViewDidEnter() {
       this.get_kabupaten()
-      let token = await Preferences.get({ key: "token" });
-      let user = await axios({
-              method: "post",
-              headers: {
-                token: token.value,
-              },
-              url: ip_server+'autentifikasi/decode',
-              data: {token: token.value,},
-            })
-            this.email = user.data.user.email
+      // let token = await Preferences.get({ key: "token" });
+      // let user = await axios({
+      //         method: "post",
+      //         headers: {
+      //           token: token.value,
+      //         },
+      //         url: ip_server+'autentifikasi/decode',
+      //         data: {token: token.value,},
+      //       })
+      //       this.email = user.data.user.email
 
-      let coordinates = await Geolocation.getCurrentPosition({enableHighAccuracy:true,maximumAge:Infinity});
-      this.x = coordinates.coords.longitude
-      this.y = coordinates.coords.latitude
+      // let coordinates = await Geolocation.getCurrentPosition({enableHighAccuracy:true,maximumAge:Infinity});
+      // this.x = coordinates.coords.longitude
+      // this.y = coordinates.coords.latitude
     },
     methods: {
       async takePicture(nama) {
@@ -233,10 +237,33 @@ export default defineComponent({
           }
       }
       },
+      async get_coordinates(){
+        let coordinates = await Geolocation.getCurrentPosition({enableHighAccuracy:true,maximumAge:Infinity});
+      this.x = coordinates.coords.longitude
+      this.y = coordinates.coords.latitude
+      let   data = await axios({
+              method: "post",
+              url: ip_server+'peta/get_desa_by_xy',
+              data: {long :coordinates.coords.longitude,lat :coordinates.coords.latitude},
+            // }).then( function (data) {
+            //   console.log(data.data.data[0]);
+
+            //    this.desa = data.data.data[0]
+            //    console.log(this.desa);
+
+            })
+            
+              this.kab_id=data.data.data[0].id_kab
+             await this.get_kecamatan()
+              this.kec_id=data.data.data[0].id_kec
+              await this.get_kelurahan()
+              this.desa_id=data.data.data[0].id_desakel
+      },
 
       async submitForm() {
             let vm = this
             vm.check=false
+ 
             let formData = new FormData()
             let token = await Preferences.get({ key: "token" });
             let header =''
@@ -268,7 +295,7 @@ export default defineComponent({
               method: "post",
               headers: {
                 "Content-Type": "multipart/form-data",
-                token: token.value,
+                // token: token.value,
               },
               url: ip_server+'laporan/insert_mobile',
               data: formData,
@@ -282,7 +309,7 @@ export default defineComponent({
             }).catch(async function(Gagal) {
               console.log(Gagal);
               header ='Gagal'
-              message = data.message=='gagal'?data.message:'Gagal'
+              message = Gagal
             })
           }
             const alert = await alertController.create({

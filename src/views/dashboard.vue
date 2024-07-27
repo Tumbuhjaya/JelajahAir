@@ -21,7 +21,7 @@
 
                         <ion-col size="2">
                             <div style="width:100%;height:40px;background-color:;display: flex;justify-content: flex-end;align-items: center">
-                                <ion-icon :icon="logInOutline" style="font-size: 40px;"  @click="logout" class="fc-white"></ion-icon>
+                                <ion-icon v-if="login" :icon="logInOutline" style="font-size: 40px;"  @click="logout" class="fc-white"></ion-icon>
                             </div>
                         </ion-col>
                     </ion-row>
@@ -80,7 +80,7 @@
             </ion-row>
         </ion-grid>
 
-        <ion-grid>
+        <!-- <ion-grid>
             <ion-row>
                 <ion-col size="12">
                     <ion-text>
@@ -112,7 +112,7 @@
                     </swiper>
                 </ion-col>
             </ion-row>
-        </ion-grid>
+        </ion-grid> -->
 
         <ion-grid style="padding:0 10px;margin-top:15px;">
             <ion-row>
@@ -524,7 +524,7 @@ async logout() {
       },
       async ionViewWillEnter() {
           const ret = await Preferences.get({ key: 'token' });
-          if (ret) {
+          if (ret.value) {
               this.login = 1
           }else{
               this.login = 0

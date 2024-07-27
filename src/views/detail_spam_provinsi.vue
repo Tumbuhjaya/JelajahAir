@@ -93,6 +93,14 @@
                     <h6 class="fz-14 fc-black">{{ spam_desa.desa_kel }}</h6>
                 </ion-text>
             </ion-col>
+            <ion-col size="12">
+                <ion-text>
+                    <h6 class="fz-16 fc-black"><strong>Koordinat Lokasi</strong></h6>
+                </ion-text>
+                <ion-text>
+                    <h6 class="fz-14">{{ spam_desa.x }}, {{ spam_desa.y }}</h6>
+                </ion-text>
+            </ion-col>
         </ion-row>
       </ion-grid>
     </ion-content>
@@ -159,6 +167,10 @@ export default defineComponent({
                     vm.spam_desa.src=ip_server+'foto/'+  vm.spam_desa.foto_1 
 
                 }
+                vm.spam_desa.kab= vm.spam_desa.kab_kot
+                vm.spam_desa.kec= vm.spam_desa.kecamatan
+                vm.spam_desa.desa_kel= vm.spam_desa.desa_kel
+
             }else  if (vm.route.params.table ==2){
                 let url =  `bpksp_spam/list`
                 let data = {bpksp_spam_id:vm.id}
