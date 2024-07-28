@@ -26,7 +26,7 @@
         <ion-grid style="padding: 0 10px;margin-top:15px;">
             <ion-row>
               <ion-col size="12" style="padding:0">
-                  <div style="width:100%;height:300px;position: relative;background-color: wheat;" id='map' ref="map"></div>
+                  <div style="width:100%;height:100vh;position: relative;background-color: wheat;" id='map' ref="map"></div>
               </ion-col>
           </ion-row>
         </ion-grid>

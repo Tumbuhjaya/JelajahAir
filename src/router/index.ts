@@ -58,6 +58,12 @@ const routes: Array<RouteRecordRaw> = [
         path: 'statistik',
         component: () => import('@/views/statistik.vue')
       },
+
+      {
+        path: 'sekilas',
+        component: () => import('@/views/sekilas.vue')
+      },
+
       {
         path: 'chart/:kategori',
         component: () => import('@/views/chart.vue')
