@@ -59,26 +59,26 @@
         <ion-grid style="padding:0 10px;margin-top:15px;">
             <ion-row>
                 <ion-col size="6">
-                    <div style="width:100%;height: 80px;background-color: #fff;border-radius: 10px;box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;display: flex;justify-content: center;align-items: center;padding:0 15px;position: relative;overflow-x: hidden;" @click="$router.push('/tabs/lokasi_sekitar')">
+                    <div style="width:100%;height: 80px;background-color: #fff;border-radius: 10px;box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;display: flex;justify-content: center;align-items: center;padding:0 10px;position: relative;overflow-x: hidden;" @click="$router.push('/tabs/lokasi_sekitar')">
                         <ion-img src="/assets/wave-4.png" style="position: absolute;left:0;right:0;bottom:0;width: 100%;z-index: 1;"></ion-img>
                         <div style="width: 40%;height: 80px;background-color: ;display: flex;justify-content: center;align-items: center">
                             <ion-img src="/assets/003-street-view.png" style="width: 50px;position: relative;z-index: 1;"></ion-img>
                         </div>
                         <div style="width:60%;height: 80px;background-color: ; display: flex;justify-content: center;align-items: flex-start;flex-direction: column;">
-                            <h6 class="fz-14 fc-black" style="position: relative;z-index: 1;"><strong>JELAJAH AIR</strong></h6>
-                            <h6 class="fz-14 fc-black" style="position: relative;z-index: 1;color:#fff"><strong>SEKITAR</strong></h6>
+                            <h6 class="fz-14 fc-black" style="position: relative;z-index: 1;text-shadow: 2px 2px 2px rgba(255,255,255,0.8);"><strong>JELAJAH AIR</strong></h6>
+                            <h6 class="fz-14 fc-black" style="position: relative;z-index: 1;color:#000;text-shadow: 2px 2px 2px rgba(255,255,255,0.8);"><strong>SEKITAR</strong></h6>
                         </div>
                     </div>
                 </ion-col>
                 <ion-col size="6">
-                    <div style="width:100%;height: 80px;background-color: #fff;border-radius: 10px;box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;display: flex;justify-content: center;align-items: center;padding:0 15px;position: relative;overflow-x: hidden;" @click="$router.push('/tabs/data_lapor_sumber_air')">
+                    <div style="width:100%;height: 80px;background-color: #fff;border-radius: 10px;box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;display: flex;justify-content: center;align-items: center;padding:0 10px;position: relative;overflow-x: hidden;" @click="$router.push('/tabs/data_lapor_sumber_air')">
                         <ion-img src="/assets/wave-4.png" style="position: absolute;left:0;right:0;bottom:0;width: 100%;z-index: 1;"></ion-img>
                         <div style="width: 40%;height: 80px;background-color: ;display: flex;justify-content: center;align-items: center">
                             <ion-img src="/assets/002-blogger.png" style="width: 50px;position: relative;z-index: 1;"></ion-img>
                         </div>
                         <div style="width:60%;height: 80px;background-color: ; display: flex;justify-content: center;align-items: flex-start;flex-direction: column;">
-                            <h6 class="fz-14 fc-black" style="position: relative;z-index: 1;"><strong>LAPOR  </strong></h6>
-                            <h6 class="fz-14 fc-black" style="position: relative;z-index: 1;color:#fff;"><strong>SUMBER AIR</strong></h6>
+                            <h6 class="fz-14 fc-black" style="position: relative;z-index: 1;text-shadow: 2px 2px 2px rgba(255,255,255,0.8);"><strong>LAPOR  </strong></h6>
+                            <h6 class="fz-14 fc-black" style="position: relative;z-index: 1;text-shadow: 2px 2px 2px rgba(255,255,255,0.8);color:#000;"><strong>SUMBER AIR</strong></h6>
                         </div>
                     </div>
                 </ion-col>
@@ -87,29 +87,29 @@
             <ion-row style="margin-top: 10px;">
                 <ion-col size="4">
                     <div style="width:100%;height: 85px;background-color: #fff;border-radius: 10px;box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;display: flex;justify-content: center;align-items: center;flex-direction: column;position: relative;overflow-x: hidden;" @click="$router.push('/tabs/spam_provinsi')">
-                        <ion-img src="/assets/wave-4.png" style="position: absolute;left:0;right:0;bottom:0;width: 100%;z-index: 1;"></ion-img>
+                        <ion-img src="/assets/wave-3.png" style="position: absolute;left:0;right:0;bottom:0;width: 100%;z-index: 1;"></ion-img>
                         
-                        <ion-img src="/assets/001-lake.png" style="width: 50px;"></ion-img>
-                        <h6 class="fz-12 fc-black" style="margin-top: 5px;position: relative;z-index: 1;color: #fff;"><strong>SPAM PROV</strong></h6>
+                        <ion-img src="/assets/001-lake.png" style="width: 50px;position: relative;z-index: 1;"></ion-img>
+                        <h6 class="fz-12 fc-black" style="margin-top: 5px;position: relative;z-index: 1;color: #fff;text-shadow: 2px 2px 2px rgba(0,0,0,0.8);"><strong>SPAM PROV</strong></h6>
                     </div>
                 </ion-col>
 
                 <ion-col size="4">
                     <div style="width:100%;height: 85px;background-color: #fff;border-radius: 10px;box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;display: flex;justify-content: center;align-items: center;flex-direction: column;position: relative;overflow-x: hidden;" @click="$router.push('/tabs/statistik')">
-                        <ion-img src="/assets/wave-4.png" style="position: absolute;left:0;right:0;bottom:0;width: 100%;z-index: 1;"></ion-img>
+                        <ion-img src="/assets/wave-3.png" style="position: absolute;left:0;right:0;bottom:0;width: 100%;z-index: 1;"></ion-img>
                         
-                        <ion-img src="/assets/005-bar-chart.png" style="width: 50px;"></ion-img>
-                        <h6 class="fz-12 fc-black" style="margin-top: 5px;position: relative;z-index: 1;color: #fff;"><strong>STATISTIK</strong></h6>
+                        <ion-img src="/assets/005-bar-chart.png" style="width: 50px;position: relative;z-index: 1;"></ion-img>
+                        <h6 class="fz-12 fc-black" style="margin-top: 5px;position: relative;z-index: 1;color: #fff;text-shadow: 2px 2px 2px rgba(0,0,0,0.8);"><strong>STATISTIK</strong></h6>
                     </div>
                 </ion-col>
 
                 <ion-col size="4">
                     <div style="width:100%;height: 85px;background-color: #fff;border-radius: 10px;box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;display: flex;justify-content: center;align-items: center;flex-direction: column;position: relative;overflow-x: hidden;" @click="$router.push('/tabs/sumber_air_sekitar')">
-                        <ion-img src="/assets/wave-4.png" style="position: absolute;left:0;right:0;bottom:0;width: 100%;z-index: 1;"></ion-img>
+                        <ion-img src="/assets/wave-3.png" style="position: absolute;left:0;right:0;bottom:0;width: 100%;z-index: 1;"></ion-img>
                         
 
-                        <ion-img src="/assets/004-rivers.png" style="width: 50px;"></ion-img>
-                        <h6 class="fz-12 fc-black" style="margin-top: 5px;position: relative;z-index: 1;color: #fff;"><strong>SUMBER AIR</strong></h6>
+                        <ion-img src="/assets/004-rivers.png" style="width: 50px;position: relative;z-index: 1;"></ion-img>
+                        <h6 class="fz-12 fc-black" style="margin-top: 5px;position: relative;z-index: 1;color: #fff;text-shadow: 2px 2px 2px rgba(0,0,0,0.8);"><strong>SUMBER AIR</strong></h6>
                     </div>
                 </ion-col>
             </ion-row>

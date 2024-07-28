@@ -26,18 +26,18 @@
       <ion-grid style="padding: 0 10px;margin-top:15px">
         <ion-row>
             <ion-col size="12">
-                <ion-input label="Nama Pelapor" v-model="nama" labelPlacement="stacked" placeholder=""></ion-input>
+                <ion-input label="Nama Pelapor" v-model="nama" labelPlacement="stacked" placeholder="" style="border-bottom: 1px solid black;"></ion-input>
             </ion-col>
 
             <ion-col size="12">
-                <ion-input label="Alamat Pelapor" v-model="alamat"  labelPlacement="stacked" placeholder=""></ion-input>
+                <ion-input label="Alamat Pelapor" v-model="alamat"  labelPlacement="stacked" placeholder="" style="border-bottom: 1px solid black;"></ion-input>
             </ion-col>
 
             <ion-col size="12">
-                <ion-input type="email" label="Email Pelapor" v-model="email" labelPlacement="stacked" placeholder=""></ion-input>
+                <ion-input type="email" label="Email Pelapor" v-model="email" labelPlacement="stacked" placeholder="" style="border-bottom: 1px solid black;"></ion-input>
             </ion-col>
             <ion-col size="12">
-                <ion-input  label="No Telp Pelapor" v-model="telp" labelPlacement="stacked" placeholder=""></ion-input>
+                <ion-input  label="No Telp Pelapor" v-model="telp" labelPlacement="stacked" placeholder="" style="border-bottom: 1px solid black;"></ion-input>
             </ion-col>
             <ion-col size="12" style="margin-top: 30px;">
               <h4 class="fz-18" style="color:#163891"><strong>INFO SUMBER AIR</strong></h4>
