@@ -35,7 +35,7 @@
 </template>
 
 <script>
-import { IonPage, IonHeader, IonToolbar, IonContent, IonGrid, IonRow, IonCol, IonIcon, IonText, } from '@ionic/vue';
+import { IonPage, IonHeader, IonToolbar, IonContent, IonGrid, IonRow, IonCol, IonIcon, IonText, toastController} from '@ionic/vue';
 import { defineComponent } from 'vue';
 import { arrowBackCircleOutline  } from 'ionicons/icons';
 import axios from "axios";
@@ -115,9 +115,11 @@ let geolocate =  new mapboxgl.GeolocateControl({
                     "type": "FeatureCollection",
                     "features": []
                     },
-                    "attribution": "Pemerintah Kota Semarang",
+                    "attribution": "Pemerintah Provinsi Jawa Tengah",
               'generateId': true
           });
+
+         
           vm.map.addLayer({
                 'id': 'points',
                 'type': 'symbol',
@@ -134,6 +136,49 @@ let geolocate =  new mapboxgl.GeolocateControl({
                     'text-anchor': 'top'
                 }
             });
+            vm.map.addSource('garis', {
+            'type': 'geojson',
+                'data': {
+                    "type": "FeatureCollection",
+                    "features": []
+                    },
+                    "attribution": "Pemerintah Provinsi Jawa Tengah",
+              'generateId': true
+          });
+          vm.map.addLayer({
+              'id': 'route',
+              'type': 'line',
+              'source': 'garis',
+              'paint': {
+                  'line-width': 8,
+                  // Use a get expression (https://docs.mapbox.com/mapbox-gl-js/style-spec/#expressions-get)
+                  // to set the line-color to a feature property value.
+                  'line-color': [
+                    'case',
+                    ['boolean',['feature-state', 'clicked'], false],
+                    'purple',
+                    'cyan'
+                  ]
+                  },
+                  'filter': ['==', '$type', 'LineString']
+              });
+            vm.map.addLayer({
+                  "id": "symbols",
+                  "type": "symbol",
+                  "source": "garis",
+                  "layout": {
+                    "symbol-placement": "line",
+                    "text-font": ["Open Sans Semibold"],
+                    // "text-field": ['get', 'nm_ruas'],
+                    "text-field": ['get', 'kabkot'],
+                    "text-size": 8,
+                    "text-ignore-placement": true,
+                    "text-allow-overlap": true,
+                  },
+                  "paint":{
+                    "text-color": 'black'
+                  }
+                });
               let id_jalan =null;
 //                   vm.map.on('moveend', async () => {
 //   // console.log(vm.map.getCenter());
@@ -152,25 +197,35 @@ let geolocate =  new mapboxgl.GeolocateControl({
 //                   vm.map.getSource('route').setData(data.data);
 //                 }
 //   });
-        vm.map.on('click', 'route', async (e) => {
-          
-          //ganti warna
-          
-        
-          if(e.features[0].properties.status!='JALAN LINGKUNGAN'){
-            const toast = await toastController.create({
-                message: 'Jalan dipilih bukan Jalan Lingkungan',
+vm.map.on('click', 'points', async (e) => {
+console.log(e.features[0].properties);
+   const toast = await toastController.create({
+                message: e.features[0].properties.nama,
                 duration: 2000,
                 position: 'top'
               });
 
               await toast.present();
-          }else{
+})
+        vm.map.on('click', 'route', async (e) => {
+          console.log('ke klik');
+          //ganti warna
+          
+        
+          // if(e.features[0].properties.status!='JALAN LINGKUNGAN'){
+          //   const toast = await toastController.create({
+          //       message: 'Jalan dipilih bukan Jalan Lingkungan',
+          //       duration: 2000,
+          //       position: 'top'
+          //     });
+
+          //     await toast.present();
+          // }else{
             vm.map.getCanvas().style.cursor = 'pointer';
           if(e.features.length>0){
             if(id_jalan!=null){
               vm.map.setFeatureState({
-                source: 'route',
+                source: 'garis',
                 id: id_jalan
               },{
                 clicked: false
@@ -179,17 +234,19 @@ let geolocate =  new mapboxgl.GeolocateControl({
           }
           id_jalan = e.features[0].id;
             vm.map.setFeatureState({
-            source:'route',
+            source:'garis',
             id: id_jalan
               },{
                 clicked: true
               })
-              // console.log(e.features[0]);
-                vm.nama_ruas = e.features[0].properties.nm_ruas;
-                vm.kode_ruas = e.features[0].properties.kd_ruas;
-                vm.id_jalan_dipilih = e.features[0].properties.id_jln;
-                vm.search = e.features[0].properties.nm_ruas;
-          }
+              const toast = await toastController.create({
+                message: "PDAM "+e.features[0].properties.kabkot,
+                duration: 2000,
+                position: 'top'
+              });
+
+              await toast.present();
+          // }
         
 
 
@@ -220,10 +277,22 @@ let geolocate =  new mapboxgl.GeolocateControl({
   //               // geojsonpoint: buffered
   //               polygon:poly.substring(1,poly.length)
             if(data){
-              console.log([data,'ini data']);
+              // console.log([data,'ini data']);
               vm.map.getSource('points').setData(data.data);
             }
             
+
+            let data_jaringan = await  axios.post(`${ip_server}peta/jaringan_pdam?jarak=${vm.radius}&long=${e.coords.longitude}&lat=${e.coords.latitude}`,{
+                geojsonpoint: buffered
+  });
+  // let poly = `${buffered.geometry.coordinates}`.replace(/[\[\],]/g, ' ').replace(/110./g, ',110.')
+  //             let data = await  axios.post(`${ip_server}peta/jaringan_pdam?jarak=${vm.radius}&long=${e.coords.longitude}&lat=${e.coords.latitude}`,{
+  //               // geojsonpoint: buffered
+  //               polygon:poly.substring(1,poly.length)
+            if(data_jaringan){
+              // console.log([data_jaringan,'ini data']);
+              vm.map.getSource('garis').setData(data_jaringan.data);
+            }
         });
         geolocate.trigger();
     })
