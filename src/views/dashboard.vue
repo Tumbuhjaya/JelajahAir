@@ -518,7 +518,7 @@ async logout() {
   
           let list_sumber_air = await axios({
           method: "post",
-          data:{limit:2,desa:1},
+          data:{limit:4,desa:1},
               url: ip_server + `sumber_air/list`,
           })
               vm.sumber_air = []
